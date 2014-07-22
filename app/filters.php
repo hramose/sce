@@ -19,8 +19,12 @@ App::before(function($request)
 
 App::after(function($request, $response)
 {
-	//
+    // prevent browser caching
+    $response->headers->set('Cache-Control','nocache, no-store, max-age=0, must-revalidate');
+    $response->headers->set('Pragma','no-cache');
+    $response->headers->set('Expires','Fri, 01 Jan 1990 00:00:00 GMT');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +46,18 @@ Route::filter('auth', function()
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
+});
+
+/* Logout Admin */
+Route::filter('admin', function()
+{
+	if( !Usuario::isAdmin() ){
+		Session::flush();
+		Cache::flush();
+		return Redirect::to('/', 302)
+			->header('cache-control', 'no-store, no-cache, must-revalidate')
+			->header('pragma', 'no-cache');
+	} 
 });
 
 /*

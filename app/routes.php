@@ -13,5 +13,23 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	Session::flush();
+	Cache::flush();
+	return View::make('login', array('cache-control' => 'no-cache, max-age=0, must-revalidate, no-store'));
+});
+Route::post('/login', array('uses' => 'UsuarioController@login'));
+
+
+/* Rutas solo para administrador */
+Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
+{
+	Route::get('/', function(){
+		return View::make('admin.inicio');
+	});
+	Route::get('logout', array('uses' => 'UsuarioController@logout'));
+
+	/* Rutas para alumnos */
+	Route::get('/alumno/agregar', function(){
+		return View::make('admin.alumno.agregar');
+	});
 });
