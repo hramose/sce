@@ -69,6 +69,7 @@ class UsuarioController extends BaseController
 	public function logout(){
 		Session::flush();
 		Cache::flush();
+		Cookie::forget('sce_session');
 		return Redirect::to('/', 302)
 			->header('cache-control', 'no-store, no-cache, must-revalidate')
 			->header('pragma', 'no-cache');

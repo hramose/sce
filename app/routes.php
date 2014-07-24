@@ -29,7 +29,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::get('logout', array('uses' => 'UsuarioController@logout'));
 
 	/* Rutas para alumnos */
-	Route::get('/alumno/agregar', function(){
+	Route::get('alumno/agregar', function(){
 		return View::make('admin.alumno.agregar');
 	});
+	Route::post('alumno/agregarAlumno', array('uses' => 'AlumnoController@agregarAlumno'));
+	Route::get('alumno/editar', function(){
+		return View::make('admin.alumno.editar');
+	});
+	Route::post('alumno/buscarAlumno', array('uses' => 'AlumnoController@buscarAlumno'));
+	Route::post('alumno/eliminarAlumno', array('uses' => 'AlumnoController@eliminarAlumno'));
 });

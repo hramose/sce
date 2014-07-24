@@ -20,7 +20,7 @@ Agregar alumno | Sistema de Control Escolar
 					<div class="form-group">
 						<label for="txtCurp" class="col-md-3 control-label">CURP</label>
 						<div class="col-md-9">
-							<input type="text" id="txtCurp" class="form-control input-sm" placeholder="CURP" maxlength="18">
+							<input type="text" id="txtCurp" class="form-control input-sm" placeholder="CURP" maxlength="18" autofocus>
 						</div>
 					</div>
 
@@ -80,6 +80,22 @@ Agregar alumno | Sistema de Control Escolar
 						<label for="txtEdad" class="col-md-3 control-label">Edad</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control input-sm" id="txtEdad" placeholder="Edad" maxlength="2">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txtEscuela" class="col-md-3 control-label">Escuela</label>
+						<div class="col-md-9">
+							<select id="txtEscuela" class="form-control input-sm">
+								<option value="1">Escuela registrada</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txtObservacion" class="col-md-3 control-label">Observaciones</label>
+						<div class="col-md-9">
+							<textarea name="" id="txtObservacion" rows="5" class="form-control" placeholder="Observaciones"></textarea>
 						</div>
 					</div>
 

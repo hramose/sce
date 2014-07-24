@@ -22,6 +22,7 @@
   {{ HTML::style('css/pace.css') }}
   @section('css')
   @show
+</head>
 
 	<div class="navbar navbar-fixed-top">
 	  <div class="navbar-header">
