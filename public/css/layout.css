@@ -85,14 +85,6 @@ footer
 .container {
   padding-top: 40px;
 }
-.glyphicon-ok,
-.glyphicon-plus,
-.glyphicon-refresh {
-	color: green;
-}
-.glyphicon-remove {
-	color: red;
-}
 .divisor {
 	border: solid 1px #c9c9c9;
 }
@@ -130,6 +122,17 @@ footer
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.glyphicon-edit,
+.glyphicon-plus {
+  color: #3498db;
+}
+.glyphicon-ok,
+.glyphicon-refresh {
+  color: green;
+}
+.glyphicon-remove {
+  color: red;
+}
 .justificado {
   text-align: justify;
 }
@@ -149,6 +152,12 @@ footer
 .nav-sidebar > li > a {
   cursor: pointer;
   padding: 5px 20px;
+}
+.nav-sidebar > li > a > .glyphicon {
+  color: #446E9B;
+}
+.nav-sidebar > li.active > a > .glyphicon {
+  color: #ffffff;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,

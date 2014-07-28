@@ -36,15 +36,14 @@
 	      <li>{{ HTML::link('/admin', 'Sistema de Control Escolar') }}</li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
-	      <li id="blog">{{ HTML::link('/', 'Otro link') }}</li>
-      	  <li>{{ HTML::link('/admin', Session::get('nombre')) }}</li>
-  	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
-	        <ul class="dropdown-menu">
-	          <li>{{ HTML::link('#', 'Cambiar contraseña', array('id' => 'linkPass', 'data-toggle' => 'modal', 'data-target' => '.pass')) }}</li>
-	          <li class="divider"></li>
-	          <li>{{ HTML::link('admin/logout', 'Cerrar sesión') }}</li>
-	        </ul>
+    	  <li>{{ HTML::link('/admin', Session::get('nombre')) }}</li>
+	      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li>{{ HTML::link('#', 'Cambiar contraseña', array('id' => 'linkPass', 'data-toggle' => 'modal', 'data-target' => '.pass')) }}</li>
+          <li class="divider"></li>
+          <li>{{ HTML::link('admin/logout', 'Cerrar sesión') }}</li>
+        </ul>
 	      </li>
 	    </ul>
 	  </div>
@@ -58,15 +57,20 @@
         	<h5>Alumnos</h5>
         </li>
         <li id="liAgregarAlumno">
-        	{{ HTML::link('admin/alumno/agregar', 'Agregar') }}
+          <a href="{{ URL::to('admin/alumno/agregar') }}">
+            <span class="glyphicon glyphicon-plus"></span> Agregar
+          </a>
         </li>
-        <li><a>Editar</a></li>
+        <li id="liEditarAlumno">
+          <a href="{{ URL::to('admin/alumno/editar') }}">
+            <span class="glyphicon glyphicon-edit"></span> Editar
+          </a>
+        </li>
         <li class="divisor"></li>
       </ul>
       <ul class="nav nav-sidebar">
       	<li class="header">
       		<h5>Profesores</h5>
-<<<<<<< HEAD
         </li>
     		<li id="liAgregarProfesor">
     			<a href="{{ URL::to('admin/profesor/agregar') }}">
@@ -84,15 +88,6 @@
         <li class="header">
           <h5>Escuela</h5>
         </li>
-=======
-      		<li>
-      			<a href="#">Agregar</a>
-      		</li>
-      		<li>
-      			<a href="#">Editar</a>
-      		</li>
-      	</li>
->>>>>>> parent of 2b40185... Se puede agregar alumnos
       </ul>
     </div>
   </div>
@@ -110,6 +105,7 @@
 {{ HTML::script('js/jquery.js') }}
 {{ HTML::script('js/bootstrap.min.js') }}
 {{ HTML::script('js/pace.min.js') }}
+{{ HTML::script('js/layout.js') }}
 @section('js')
 @show
 </body>

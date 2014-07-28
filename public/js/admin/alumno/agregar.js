@@ -1,5 +1,4 @@
 /* Nodos */
-
 var btnAgregar = $('#btnAgregar'),
 	btnCancelar = $('#btnCancelar'),
 	txtCurp = $('#txtCurp'),
@@ -10,14 +9,53 @@ var btnAgregar = $('#btnAgregar'),
 	txtTutor = $('#txtTutor'),
 	txtTelefono = $('#txtTelefono'),
 	txtDireccion = $('#txtDireccion'),
-	txtEdad = $('#txtEdad');
+	txtEdad = $('#txtEdad'),
+	txtEscuela = $('#txtEscuela'),
+	txtObservacion = $('#txtObservacion');
 
 /* Funciones */
 function agregarAlumno(){
 	if ( !validarAlumno() )
 		return false;
 
-	alert('bien');
+	var datos = $.ajax({
+        url:'agregarAlumno',
+        data: {
+        	curp: txtCurp.val(),
+        	apep: txtApep.val(),
+        	apem: txtApem.val(),
+        	nombre: txtNombre.val(),
+        	sexo: txtSexo.val(),
+        	tutor: txtTutor.val(),
+        	telefono: txtTelefono.val(),
+        	direccion: txtDireccion.val(),
+        	edad: txtEdad.val(),
+        	escuela: txtEscuela.val(),
+        	observacion: txtObservacion.val()
+        },
+        type:'post',
+        dataType:'json',
+        async:false
+    }).error(function(e){
+        alert('Ocurrio un error, intente de nuevo');
+    }).responseText;
+	
+    var res;
+    try{
+        res = JSON.parse(datos);
+    }catch (e){
+        messagePoster.html('Error JSON ' + e);
+        boxPoster.show().delay(2000).fadeOut();
+    }
+
+    if ( res.status === 'OK' ){
+    	icon = '<span class="glyphicon glyphicon-ok"></span> ';
+    	limpiarAlumno();
+    }else
+    	icon = '<span class="glyphicon glyphicon-remove"></span> ';
+    
+    messagePoster.html(icon + res.message);
+	boxPoster.show().delay(3000).fadeOut();
 }
 
 function limpiarAlumno(){
@@ -29,6 +67,7 @@ function limpiarAlumno(){
 	txtTelefono.val('');
 	txtDireccion.val('');
 	txtEdad.val('');
+	txtObservacion.val('');
 }
 
 function validarAlumno(){
@@ -57,9 +96,25 @@ function validarAlumno(){
 		txtTutor.focus();
 		return false;
 	}
-	if ( txtEdad.val() === "" ){
+	if ( txtTelefono.val() === "" ){
+		alert('Indique el teléfono del padre o tutor');
+		txtTelefono.focus();
+		return false;
+	}
+	if ( txtDireccion.val() === "" ){
+		alert('Indique la dirección del alumno');
+		txtDireccion.focus();
+		return false;
+	}
+	var patt = new RegExp('^[0-9]{1,2}$');
+	if ( txtEdad.val() === "" || !patt.test(txtEdad.val()) ){
 		alert('Indique la edad del alumno');
 		txtEdad.focus();
+		return false;
+	}
+	if ( txtEscuela.val() === "" ){
+		alert('Indique una escuela donde se inscribirá');
+		txtEscuela.focus();
 		return false;
 	}
 	return true;

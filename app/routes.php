@@ -30,10 +30,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 
 
 	/* Rutas para alumnos */
-	Route::get('/alumno/agregar', function(){
+	Route::get('alumno/agregar', function(){
 		return View::make('admin.alumno.agregar');
 	});
-<<<<<<< HEAD
 	Route::post('alumno/agregarAlumno', array('uses' => 'AlumnoController@agregarAlumno'));
 	Route::get('alumno/editar', function(){
 		return View::make('admin.alumno.editar');
@@ -52,6 +51,4 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	});
 	
 	
-=======
->>>>>>> parent of 2b40185... Se puede agregar alumnos
 });
