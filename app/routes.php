@@ -28,6 +28,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	});
 	Route::get('logout', array('uses' => 'UsuarioController@logout'));
 
+
 	/* Rutas para alumnos */
 	Route::get('alumno/agregar', function(){
 		return View::make('admin.alumno.agregar');
@@ -38,4 +39,16 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	});
 	Route::post('alumno/buscarAlumno', array('uses' => 'AlumnoController@buscarAlumno'));
 	Route::post('alumno/eliminarAlumno', array('uses' => 'AlumnoController@eliminarAlumno'));
+	
+	
+	/*Rutas para profesor*/
+	Route::get('profesor/agregar', function () {
+		return View::make('admin.profesor.agregar');
+	});
+	Route::post('profesor/agregarProfesor', array('uses' => 'ProfesorController@agregarProfesor'));	
+	Route::get('profesor/editar', function () {
+		return View::make('admin.profesor.editar');
+	});
+	
+	
 });

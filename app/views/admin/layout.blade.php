@@ -72,11 +72,15 @@
       	<li class="header">
       		<h5>Profesores</h5>
         </li>
-    		<li>
-    			<a href="#">Agregar</a>
+    		<li id="liAgregarProfesor">
+    			<a href="{{ URL::to('admin/profesor/agregar') }}">
+            	<span class="glyphicon glyphicon-plus"></span> Agregar
+            </a>
     		</li>
-    		<li>
-    			<a href="#">Editar</a>
+    		<li id="liEditarProfesor">
+    			<a href="{{ URL::to('admin/profesor/editar') }}">
+            	<span class="glyphicon glyphicon-edit"></span> Editar
+            </a>
     		</li>
         <li class="divisor"></li>
       </ul>

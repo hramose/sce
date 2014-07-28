@@ -47,11 +47,13 @@ class UsuarioController extends BaseController
 		}
 		/* Tipo usuario: Administrador */
 		elseif ( $datos['tipo'] === '2' ){
+					
 			$admin = Administrador::where('admNombre', $datos['usuario'])
 				->get();
-
+			
 			/* Si se obtuvieron resultados */
 			if ( count( $admin ) > 0 ){
+				
 				/* Si coincide la contraseña */
 				if ( Hash::check($datos['pass'], $admin[0]->admPass) ){
 					Session::put('id', '1');
@@ -59,7 +61,7 @@ class UsuarioController extends BaseController
 					Session::put('nombre', 'Administrador');
 					return Redirect::to('/admin');
 				}else
-					return Redirect::to('/?e=1');
+					return Redirect::to('/?e=10');
 			}else
 				return Redirect::to('/?e=1');
 		}
