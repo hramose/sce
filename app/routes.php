@@ -39,8 +39,15 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	});
 	Route::post('alumno/buscarAlumno', array('uses' => 'AlumnoController@buscarAlumno'));
 	Route::post('alumno/eliminarAlumno', array('uses' => 'AlumnoController@eliminarAlumno'));
-	
-	
+
+	/* Rutas para asignaturas */
+	Route::get('asignatura/agregarAsignatura', function(){
+		return View::make('admin.asignatura.agregarAsignatura');
+	});
+	Route::post('asignatura/agregarAsignatura',array('uses' => 'AsignaturaController@agregarAsignatura'));
+	Route::get('asignatura/editarAsignatura', function(){
+		return View::make('admin.asignatura.editarAsignatura');
+	});	
 	/*Rutas para profesor*/
 	Route::get('profesor/agregar', function () {
 		return View::make('admin.profesor.agregar');

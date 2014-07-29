@@ -5,6 +5,7 @@ Agregar alumno | Sistema de Control Escolar
 @stop
 
 @section('content')
+
 <!-- Encabezado de página -->
 <h1 class="page-header" id="page-header">
 	<span class="glyphicon glyphicon-plus"></span> Agregar alumno
