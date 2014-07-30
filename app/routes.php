@@ -56,6 +56,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::get('profesor/editar', function () {
 		return View::make('admin.profesor.editar');
 	});
-	
-	
+	Route::post('profesor/buscarProfesor', array('uses' => 'ProfesorController@buscarProfesor'));
+		
 });

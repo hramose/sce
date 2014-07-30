@@ -2,18 +2,18 @@
 var btnBuscar = $('#btnBuscar'),
 	txtBuscar = $('#txtBuscar');
 
-	/* Tabla alumnos encontrados */
-var tblAlumnos = $('#tblAlumnos'),
-	tbodyAlumnos = $('#tbodyAlumnos');
+	/* Tabla profesores encontrados */
+var tblProfesor = $('#tblProfesor'),
+	tbodyProfesor = $('#tbodyProfesor');
 
-/* Funciones */
-function buscarAlumno(){
+
+function buscarProfesor(){
 
 	if ( txtBuscar.val() === "" )
 		return;
 
 	var datos = $.ajax({
-		url: 'buscarAlumno',
+		url: 'buscarProfesor',
 		data: {
 			buscar: txtBuscar.val()
 		},
@@ -31,30 +31,30 @@ function buscarAlumno(){
         messagePoster.html('Error JSON ' + e);
         boxPoster.show().delay(2000).fadeOut();
     }
-
-    tbodyAlumnos.html('');
+	
+    tbodyProfesor.html('');
     if ( res.status === 'OK' ){
     	var i = 1;
     	$.each(res.data, function(k,o){
-    		if ( o.aluEstado == 1 )
+    		if ( o.profEstado == 1 )
     			status = '<span class="glyphicon glyphicon-ok" title="Activo"></span>';
     		else
     			status = '<span class="glyphicon glyphicon-remove" title="Inactivo"></span>';
 
-    		tbodyAlumnos.append(
+    		tbodyProfesor.append(
     			'<tr>'+
     				'<td class="center">'+i+'</td>'+
-    				'<td>'+o.aluCurp+'</td>'+
-    				'<td>'+o.aluApep+' '+o.aluApem+' '+o.aluNombre+'</td>'+
-    				'<td>'+o.aluTutor+'</td>'+
-    				'<td class="center">'+o.aluTelefono+'</td>'+
+    				'<td>'+o.profCurp+'</td>'+
+    				'<td>'+o.profNombre+'</td>'+
+    				'<td>'+o.profPerfil+'</td>'+
+    				'<td class="center">'+o.profTelefono+'</td>'+
     				'<td class="center">'+status+'</td>'+
     				'<td class="center">'+
-    					'<span class="glyphicon glyphicon-edit" id="'+o.aluCurp+'" '+
+    					'<span class="glyphicon glyphicon-edit" id="'+o.profCurp+'" '+
     					'style="cursor:pointer" title="Editar"></span>'+
 					'</td>'+
     				'<td class="center">'+
-    					'<span class="glyphicon glyphicon-trash" id="'+o.aluCurp+'" '+
+    					'<span class="glyphicon glyphicon-trash" id="'+o.profCurp+'" '+
     					'style="cursor:pointer" title="Eliminar"></span>'+
 					'</td>'+
     			'</tr>'
@@ -62,11 +62,11 @@ function buscarAlumno(){
 			i++;
     	});
     }else
-    	tbodyAlumnos.html('<tr><td colspan="8" class="center"><h3>'+ res.message +'</h3></td></tr>');
+    	tbodyProfesor.html('<tr><td colspan="8" class="center"><h3>'+ res.message +'</h3></td></tr>');
 
-	tblAlumnos.removeClass('hidden');
+	tblProfesor.removeClass('hidden');
 }
-
+/*
 function eliminarAlumno(){
 	var id = $(this).attr('id');
 	if ( id === "" )
@@ -98,15 +98,15 @@ function eliminarAlumno(){
 
     if ( res.status === 'OK' ){
     	icon = '<span class="glyphicon glyphicon-ok"></span> ';
-    	buscarAlumno();
+    	buscarProfesor();
     }else
     	icon = '<span class="glyphicon glyphicon-remove"></span> ';
     
     messagePoster.html(icon + res.message);
 	boxPoster.show().delay(3000).fadeOut();
 }
-
+*/
 /* Eventos */
-btnBuscar.on('click', buscarAlumno);
-tblAlumnos.delegate('.glyphicon-trash', 'click', eliminarAlumno);
-$('#liEditarAlumno').addClass('active');
+btnBuscar.on('click', buscarProfesor);
+//tblProfesor.delegate('.glyphicon-trash', 'click', eliminarAlumno);
+$('#liEditarProfesor').addClass('active');

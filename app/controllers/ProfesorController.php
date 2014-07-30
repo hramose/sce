@@ -10,7 +10,7 @@ public function agregarProfesor(){
 		$data = Input::all();
 
 		/* Insertar profesor 
-			La clase Hash sirve para encriptar, cuando se agrega un alumno
+			La clase Hash sirve para encriptar, cuando se agrega
 			su pass será su curp por default
 			La función trim elimina espacios en blanco al inicio y al final de la cadena
 		*/
@@ -45,27 +45,25 @@ public function agregarProfesor(){
 		return Response::json( $response );
 		
 	}
-/*
-	public function buscarAlumno(){
 
+	public function buscarProfesor(){
+			/*Si no se autentifica como administrador */
+			
+			
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
 		$data = Input::all();
 		$buscar = trim($data['buscar']);
 
-		$busqueda = Alumno::where('aluApep', 'like', '%'. $buscar .'%')
-			->orWhere('aluApem', 'like', '%'. $buscar .'%')
-			->orWhere('aluNombre', 'like', '%'. $buscar .'%')
-			->orWhere('aluCurp', 'like', '%'. $buscar .'%')
+		$busqueda = Profesor::where('profNombre', 'like', '%'. $buscar .'%')
+			->orWhere('profCurp', 'like', '%'. $buscar .'%')
 			->get(array(
-				'aluCurp',
-				'aluApep',
-				'aluApem',
-				'aluNombre',
-				'aluTutor',
-				'aluTelefono',
-				'aluEstado'
+				'profCurp',
+				'profNombre',
+				'profPerfil',
+				'profTelefono',
+				'profEstado'
 			))
 			->toArray();
 
@@ -83,7 +81,7 @@ public function agregarProfesor(){
 
 		return Response::json( $response );
 	}
-
+/*
 	public function eliminarAlumno(){
 
 		if ( !Usuario::isAdmin() )

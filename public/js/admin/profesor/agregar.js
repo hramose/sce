@@ -46,7 +46,6 @@ function agregarProfesor(){
     
     messagePoster.html(icon + res.message);
 	 boxPoster.show().delay(3000).fadeOut();
-	 alert("funcion agregarProfesor");
 }
 
 function limpiarProfesor(){
