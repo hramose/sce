@@ -31,8 +31,8 @@ Editar Profesor | Sistema de Control Escolar
 <!-- Tabla de profesores encontrados -->
 <div class="row">
 	<div class="col-md-12">
-		<div class="table-responsive hidden" id="tblProfesor">
-			<table class="table table-striped table-hover">
+		<div class="table-responsive hidden" id="tblProfesor"> <!--barra horizontal dispositivos peque;os -->
+			<table class="table table-striped table-hover"> <!--tabla, tabla-cebreada, tbody fila dinamica -->
 				<thead>
 					<tr>
 						<th class="center">#</th>
@@ -54,7 +54,7 @@ Editar Profesor | Sistema de Control Escolar
 <!-- Panel editar profesor -->
 <div class="row">
 	<div class="col-md-12">
-		<div class="well">
+		<div class="well hidden"id="formEditar"> <!--al inicio formulario oculto -->
 			<div class="form-horizontal">
 				<fieldset>
 					<legend>Editar profesor</legend>
@@ -79,7 +79,7 @@ Editar Profesor | Sistema de Control Escolar
 								<input type="text" id="txtPerfilP" class="form-control input-sm" placeholder="Perfil profesional">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="txtTelefonoP" class="col-md-3 control-label">Teléfono</label>
 							<div class="col-md-9">
@@ -100,7 +100,7 @@ Editar Profesor | Sistema de Control Escolar
 						<div class="form-group">
 							<label for="txtActivoP" class="col-md-3 control-label">¿Activo?</label>
 							<div class="col-md-9">
-								<select name="" id="txtActivoP" class="form-control input-sm">
+								<select name="" id="sltActivoP" class="form-control input-sm">
 									<option value="1">Sí</option>
 									<option value="0">No</option>
 								</select>
@@ -110,7 +110,7 @@ Editar Profesor | Sistema de Control Escolar
 						<div class="form-group">
 							<label for="txtOrientadorP" class="col-md-3 control-label">Orientador</label>
 							<div class="col-md-9">
-								<select id="txtOrientaodrP" class="form-control input-sm">
+								<select id="sltOrientaodrP" class="form-control input-sm">
 									<option value="0">No</option>
 									<option value="1">Sí</option>
 								</select>
@@ -122,7 +122,7 @@ Editar Profesor | Sistema de Control Escolar
 								<button class="btn btn-success btn-sm" id="btnGuardarP">Guardar cambios</button>
 								<button class="btn btn-danger btn-sm" id="btnCancelarP">Cancelar</button>
 							</div>
-						</div>						
+						</div>
 					</div>
 				</fieldset>
 			</div>
@@ -131,6 +131,7 @@ Editar Profesor | Sistema de Control Escolar
 </div>
 
 @stop
+
 
 @section('js')
 {{ HTML::script('js/admin/profesor/editar.js') }}

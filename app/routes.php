@@ -47,15 +47,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('asignatura/agregarAsignatura',array('uses' => 'AsignaturaController@agregarAsignatura'));
 	Route::get('asignatura/editarAsignatura', function(){
 		return View::make('admin.asignatura.editarAsignatura');
-	});	
+	});
 	/*Rutas para profesor*/
 	Route::get('profesor/agregar', function () {
 		return View::make('admin.profesor.agregar');
 	});
-	Route::post('profesor/agregarProfesor', array('uses' => 'ProfesorController@agregarProfesor'));	
+	Route::post('profesor/agregarProfesor', array('uses' => 'ProfesorController@agregarProfesor'));
 	Route::get('profesor/editar', function () {
 		return View::make('admin.profesor.editar');
 	});
 	Route::post('profesor/buscarProfesor', array('uses' => 'ProfesorController@buscarProfesor'));
-		
+	Route::post('profesor/eliminarProfesor', array('uses' => 'ProfesorController@eliminarProfesor'));
+	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
+
 });
