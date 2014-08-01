@@ -14,7 +14,9 @@ var formEditar = $('#formEditar'),
 		txtTelefonoP = $('#txtTelefonoP'),
 		txtDireccionP = $('#txtDireccionP'),
 		sltActivoP = $('#sltActivoP'),
-		sltOrientaodrP = $('#sltOrientaodrP');
+		sltOrientaodrP = $('#sltOrientaodrP'),
+		btnCancelarP = $('#btnCancelarP'),
+		btnGuardarP = $('#btnGuardarP');
 
 function buscarProfesor(){
 
@@ -75,6 +77,17 @@ function buscarProfesor(){
 
 	tblProfesor.removeClass('hidden');
 }
+	/************************************************************************************/
+function cancelarEdicion(){
+	txtCurpP.val("");
+	txtNombreP.val("");
+	txtPerfilP.val("");
+	txtTelefonoP.val("");
+	txtDireccionP.val("");
+	sltActivoP.val("");
+	sltOrientaodrP.val("");
+	formEditar.addClass('hidden');
+}
 
 	/***********************************************************************************/
 function eliminarProfesor(){
@@ -116,7 +129,19 @@ function eliminarProfesor(){
 	boxPoster.show().delay(3000).fadeOut();
 }
 
-/*********************************************************************************/
+	/*********************************************************************************/
+function guardarCambios(){
+	var verificar = new ValidarDatos();	/*crea objeto desde ValidarDatos.js*/
+	var validar = verificar.validaInfo(txtCurpP.val(),
+												txtNombreP.val(),
+												txtPerfilP.val(),
+												txtTelefonoP.val(),
+												txtDireccionP.val());
+
+	alert("guardar "+validar);
+
+}
+	/********************************************************************************/
 function seleccionarProfesor() {	/*Al presionar elemento .glyphicon-edit de una fila de la tabla */
 	var id = $(this).attr('id');
 	if ( id === "")
@@ -158,6 +183,8 @@ function seleccionarProfesor() {	/*Al presionar elemento .glyphicon-edit de una 
 
 /* Eventos */
 btnBuscar.on('click', buscarProfesor);
+btnCancelarP.on('click',cancelarEdicion);
+btnGuardarP.on('click',guardarCambios);
 tblProfesor.delegate('.glyphicon-trash', 'click', eliminarProfesor);	/*funcion cuando se producen eventos*/
 tblProfesor.delegate('.glyphicon-edit', 'click', seleccionarProfesor);		/*(elemento, evento, funcion js) */
 $('#liEditarProfesor').addClass('active');
