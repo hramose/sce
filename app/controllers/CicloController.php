@@ -9,9 +9,9 @@ class CicloController extends BaseController
 		/* Datos recibidos por ajax */
 		$data = Input::all();
 
-		/* Insertar asignatura */
+		/* Insertar ciclo*/
 		$insert = Ciclo::insert(array(
-			//'cicId' => 1,
+			
 			'cicCiclo' => trim($data['ciclo'])
 			
 			));
@@ -22,16 +22,20 @@ class CicloController extends BaseController
 		if ( $insert )
 			$response = array(
 				'status' => 'OK',
-				'message' => 'El profesor se agrego correctamente'
+				'message' => 'Ciclo agregado correctamente'
 			);
 		else
 			$response = array(
 				'status' => 'ERROR',
-				'message' => 'No se pudo agregar al profesor, intente de nuevo'
+				'message' => 'No se pudo agregar el ciclo, intente de nuevo'
 			);
 
 
 		/* Se devuelve una respuesta en formato json */
 		return Response::json( $response );
+	}
+
+	public function cancelarCiclo(){
+		return Redirect::to('/inicio');
 	}
 }
