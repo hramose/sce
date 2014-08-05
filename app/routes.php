@@ -59,5 +59,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('profesor/buscarProfesor', array('uses' => 'ProfesorController@buscarProfesor'));
 	Route::post('profesor/eliminarProfesor', array('uses' => 'ProfesorController@eliminarProfesor'));
 	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
+	Route::post('profesor/editarProfesor', array('uses' => 'ProfesorController@editarProfesor'));
 
 });

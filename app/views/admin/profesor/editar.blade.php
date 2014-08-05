@@ -98,9 +98,9 @@ Editar Profesor | Sistema de Control Escolar
 
 
 						<div class="form-group">
-							<label for="txtActivoP" class="col-md-3 control-label">¿Activo?</label>
+							<label for="slctEstadoP" class="col-md-3 control-label">¿Activo?</label>
 							<div class="col-md-9">
-								<select name="" id="sltActivoP" class="form-control input-sm">
+								<select name="" id="slctEstadoP" class="form-control input-sm">
 									<option value="1">Sí</option>
 									<option value="0">No</option>
 								</select>
@@ -108,9 +108,9 @@ Editar Profesor | Sistema de Control Escolar
 						</div>
 
 						<div class="form-group">
-							<label for="txtOrientadorP" class="col-md-3 control-label">Orientador</label>
+							<label for="slctOrientadorP" class="col-md-3 control-label">Orientador</label>
 							<div class="col-md-9">
-								<select id="sltOrientaodrP" class="form-control input-sm">
+								<select id="slctOrientadorP" class="form-control input-sm">
 									<option value="0">No</option>
 									<option value="1">Sí</option>
 								</select>
