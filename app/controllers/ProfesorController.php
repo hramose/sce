@@ -38,8 +38,6 @@ public function agregarProfesor(){
 				'status' => 'ERROR',
 				'message' => 'No se pudo agregar al profesor, intente de nuevo'
 			);
-
-
 		/* Se devuelve una respuesta en formato json */
 		return Response::json( $response );
 	}
@@ -111,8 +109,7 @@ public function agregarProfesor(){
 		/* Se devuelve una respuesta en formato json */
 		return Response::json( $response );
 	}
-
-
+		/**************************************************************************/
 	public function eliminarProfesor(){
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
@@ -172,5 +169,4 @@ public function agregarProfesor(){
 
 				return Response::json( $response );
 			}
-
 }

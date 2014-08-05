@@ -53,21 +53,21 @@ Editar Profesor | Sistema de Control Escolar
 
 <!-- Panel editar profesor -->
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-11">
 		<div class="well hidden"id="formEditar"> <!--al inicio formulario oculto -->
 			<div class="form-horizontal">
 				<fieldset>
 					<legend>Editar profesor</legend>
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="form-group">
 							<label for="txtCurpP" class="col-md-3 control-label">CURP</label>
 							<div class="col-md-9">
-								<input type="text" id="txtCurpP" class="form-control input-sm" placeholder="CURP" maxlength="18" autofocus>
+								<input type="text" id="txtCurpP" class="form-control input-sm" placeholder="CURP" maxlength="18" onblur="pasarMayusculas()" autofocus>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="txtNombreP" class="col-md-3 control-label">Nombre</label>
+							<label for="txtNombreP" class="col-md-3 control-label">Nombre completo</label>
 							<div class="col-md-9">
 								<input type="text" id="txtNombreP" placeholder="Nombre completo" class="form-control input-sm">
 							</div>
@@ -86,9 +86,8 @@ Editar Profesor | Sistema de Control Escolar
 								<input type="text" class="form-control input-sm" id="txtTelefonoP" placeholder="Teléfono">
 							</div>
 						</div>
-					</div>
 
-					<div class="col-md-6">
+
 						<div class="form-group">
 							<label for="txtDireccionP" class="col-md-3 control-label">Dirección</label>
 							<div class="col-md-9">
@@ -123,6 +122,13 @@ Editar Profesor | Sistema de Control Escolar
 								<button class="btn btn-danger btn-sm" id="btnCancelarP">Cancelar</button>
 							</div>
 						</div>
+
+
+
+					</div>
+
+					<div class="form-group">
+
 					</div>
 				</fieldset>
 			</div>
