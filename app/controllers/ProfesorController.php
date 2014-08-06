@@ -38,8 +38,6 @@ public function agregarProfesor(){
 				'status' => 'ERROR',
 				'message' => 'No se pudo agregar al profesor, intente de nuevo'
 			);
-
-
 		/* Se devuelve una respuesta en formato json */
 		return Response::json( $response );
 	}
@@ -78,7 +76,40 @@ public function agregarProfesor(){
 		return Response::json( $response );
 	}
 
+		/********************************************************/
+	public function editarProfesor(){
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
 
+		$data = Input::all();
+
+		/* Actualizar datos del profesor*/
+		$editar = Profesor::where('profCurp', $data['id'])
+			->update(array(
+				'profCurp' => trim($data['curp']),
+				'profNombre' => trim($data['nombre']),
+				'profPerfil' => $data['perfil'],
+				'profTelefono' => trim($data['telefono']),
+				'profDireccion' => trim($data['direccion']),
+				'profOrientador' => trim($data['orientador']),
+				'profEstado' => trim($data['estado']),
+				'profPass' => Hash::make(trim($data['curp']))
+			));
+
+		if ( $editar )
+			$response = array(
+				'status' => 'OK',
+				'message' => 'El profesor se actualizo correctamente'
+			);
+		else
+			$response = array(
+				'status' => 'ERROR',
+				'message' => 'No se pudo actualizar el profesor, intente de nuevo'
+			);
+		/* Se devuelve una respuesta en formato json */
+		return Response::json( $response );
+	}
+		/**************************************************************************/
 	public function eliminarProfesor(){
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
@@ -138,5 +169,4 @@ public function agregarProfesor(){
 
 				return Response::json( $response );
 			}
-
 }

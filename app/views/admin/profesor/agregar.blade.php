@@ -20,7 +20,7 @@ Agregar profesor | Sistema de Control Escolar
 					<div class="form-group">
 						<label for="txtCurpP" class="col-md-3 control-label">CURP</label>
 						<div class="col-md-9">
-							<input type="text" id="txtCurpP" class="form-control input-sm" placeholder="CURP" maxlength="18" autofocus>
+							<input type="text" id="txtCurpP" class="form-control input-sm" placeholder="CURP" maxlength="18" onblur="pasarMayusculas()" autofocus>
 						</div>
 					</div>
 

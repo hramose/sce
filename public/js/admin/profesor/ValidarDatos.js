@@ -80,3 +80,10 @@ function ValidarDatos(){
     return true;
   };
 }
+
+function pasarMayusculas(){
+  var valorCurp, curpMayuscula;
+  valorCurp = txtCurpP.val();
+  curpMayuscula = valorCurp.toUpperCase();
+  txtCurpP.val(curpMayuscula);
+}

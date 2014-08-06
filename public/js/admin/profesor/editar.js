@@ -8,16 +8,21 @@ var tblProfesor = $('#tblProfesor'),
 
 	/*Formulario datos a editar*/
 var formEditar = $('#formEditar'),
- 		txtCurpP = $('#txtCurpP'),
+		txtCurpP = $('#txtCurpP'),
 		txtNombreP = $('#txtNombreP'),
 		txtPerfilP = $('#txtPerfilP'),
 		txtTelefonoP = $('#txtTelefonoP'),
 		txtDireccionP = $('#txtDireccionP'),
-		sltActivoP = $('#sltActivoP'),
-		sltOrientaodrP = $('#sltOrientaodrP'),
+		slctEstadoP = $('#slctEstadoP'),
+		slctOrientadorP = $('#slctOrientadorP'),
 		btnCancelarP = $('#btnCancelarP'),
 		btnGuardarP = $('#btnGuardarP');
 
+	/*variable almacena el id del profesor a editar*/
+var profesorSeleccionado;
+
+	/****************************************************************************/
+	/*al presionar boton buscar muestra tabla con datos relevantes*/
 function buscarProfesor(){
 
 	if ( txtBuscar.val() === "" )
@@ -76,17 +81,7 @@ function buscarProfesor(){
     	tbodyProfesor.html('<tr><td colspan="8" class="center"><h3>'+ res.message +'</h3></td></tr>');
 
 	tblProfesor.removeClass('hidden');
-}
-	/************************************************************************************/
-function cancelarEdicion(){
-	txtCurpP.val("");
-	txtNombreP.val("");
-	txtPerfilP.val("");
-	txtTelefonoP.val("");
-	txtDireccionP.val("");
-	sltActivoP.val("");
-	sltOrientaodrP.val("");
-	formEditar.addClass('hidden');
+	limpiarOcultarEdicion();
 }
 
 	/***********************************************************************************/
@@ -126,27 +121,83 @@ function eliminarProfesor(){
     	icon = '<span class="glyphicon glyphicon-remove"></span> ';
 
     messagePoster.html(icon + res.message);
-	boxPoster.show().delay(3000).fadeOut();
+	  boxPoster.show().delay(3000).fadeOut();
 }
 
-	/*********************************************************************************/
+	/********************************************************************************************/
 function guardarCambios(){
+	var id = profesorSeleccionado;	/*id = curp profesor seleccionado en vista, icono editar en tabla*/
+	if ( id === "")
+		return false;
+
 	var verificar = new ValidarDatos();	/*crea objeto desde ValidarDatos.js*/
 	var validar = verificar.validaInfo(txtCurpP.val(),
 												txtNombreP.val(),
 												txtPerfilP.val(),
 												txtTelefonoP.val(),
 												txtDireccionP.val());
+	if ( !validar)
+		return false;
 
-	alert("guardar "+validar);
+	var datos = $.ajax({
+		url: 'editarProfesor',
+		data: {
+			id: id,
+			curp: txtCurpP.val(),
+			nombre: txtNombreP.val(),
+			perfil: txtPerfilP.val(),
+			telefono: txtTelefonoP.val(),
+			direccion: txtDireccionP.val(),
+			orientador: slctOrientadorP.val(),
+			estado: slctEstadoP.val()
+		},
+		type: 'post',
+		dataType:'json',
+				async:false
+		}).error(function(e){
+				alert('Ocurrio un error, intente de nuevo');
+		}).responseText;
+
+	var res;
+	try{
+			res = JSON.parse(datos);
+	}catch (e){
+			messagePoster.html('Error JSON ' + e);
+			boxPoster.show().delay(2000).fadeOut();
+	}
+
+	if ( res.status === 'OK' ){
+		icon = '<span class="glyphicon glyphicon-ok"></span> ';
+		limpiarOcultarEdicion();
+		buscarProfesor();		/*Para actualizar datos que se muestran dentro del cuerpo de tabla*/
+	}else
+		icon = '<span class="glyphicon glyphicon-remove"></span> ';
+
+	messagePoster.html(icon + res.message);
+	boxPoster.show().delay(3000).fadeOut();
 
 }
-	/********************************************************************************/
-function seleccionarProfesor() {	/*Al presionar elemento .glyphicon-edit de una fila de la tabla */
+
+/************************************************************************************/
+function limpiarOcultarEdicion(){
+	txtCurpP.val("");
+	txtNombreP.val("");
+	txtPerfilP.val("");
+	txtTelefonoP.val("");
+	txtDireccionP.val("");
+	slctEstadoP.val("");
+	slctOrientadorP.val("");
+	formEditar.addClass('hidden');
+}
+
+	/************************************************************************************************/
+	/*Al presionar elemento .glyphicon-edit de una fila de la tabla */
+function seleccionarProfesor() {
 	var id = $(this).attr('id');
 	if ( id === "")
 		return false;
 
+		profesorSeleccionado = id;
 		var datos = $.ajax({
 			url: 'seleccionarProfesor',
 			data: {
@@ -174,17 +225,18 @@ function seleccionarProfesor() {	/*Al presionar elemento .glyphicon-edit de una 
 						txtPerfilP.val(datos.profPerfil);
 						txtTelefonoP.val(datos.profTelefono);
 						txtDireccionP.val(datos.profDireccion);
-						sltActivoP.val(datos.profEstado);
-						sltOrientaodrP.val(datos.profOrientador);
+						slctEstadoP.val(datos.profEstado);
+						slctOrientadorP.val(datos.profOrientador);
 					});
 			 		formEditar.removeClass('hidden');
+					btnCancelarP.focus();		/*para apreciar en pantalla formulario editor*/
 		}
 	}
 
 /* Eventos */
 btnBuscar.on('click', buscarProfesor);
-btnCancelarP.on('click',cancelarEdicion);
+btnCancelarP.on('click',limpiarOcultarEdicion);
 btnGuardarP.on('click',guardarCambios);
-tblProfesor.delegate('.glyphicon-trash', 'click', eliminarProfesor);	/*funcion cuando se producen eventos*/
-tblProfesor.delegate('.glyphicon-edit', 'click', seleccionarProfesor);		/*(elemento, evento, funcion js) */
+tblProfesor.delegate('.glyphicon-trash', 'click', eliminarProfesor);	/*funcion cuando se producen eventos...*/
+tblProfesor.delegate('.glyphicon-edit', 'click', seleccionarProfesor);		/*...(elemento, evento, funcion js) */
 $('#liEditarProfesor').addClass('active');
