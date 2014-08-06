@@ -54,6 +54,36 @@
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <li class="header">
+          <h5>Escuela</h5>
+        </li>
+        <li id="liEditarEscuela">
+          <a href="{{ URL::to('admin/escuela/editarEscuela')}}">
+            <span class="glyphicon glyphicon-edit"></span>
+            Editar
+          </a>
+        </li>
+        <li class="divisor"></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li class="header">
+          <h5>Turno</h5>
+        </li>
+        <li id="liAgregarTurno">
+          <a href="{{ URL::to('admin/turno/agregarTurno')}}">
+            <span class="glyphicon glyphicon-plus"></span>
+            Agregar 
+          </a>
+        </li>
+        <li id="liEditarTurno">
+          <a href="{{ URL::to('admin/turno/editarTurno')}}">
+            <span class="glyphicon glyphicon-edit"></span>
+            Editar
+          </a>
+        </li>
+        <li class="divisor"></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li class="header">
           <h5>Asignaturas</h5>
         </li>
         <li id="liAgregarAsignatura">
@@ -66,22 +96,6 @@
           <a href="{{ URL::to('admin/asignatura/editarAsignatura')}}">
             <span class="glyphicon glyphicon-edit"></span>
             Editar
-          </a>
-        </li>
-        <li class="divisor"></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li class="header">
-        	<h5>Alumnos</h5>
-        </li>
-        <li id="liAgregarAlumno">
-          <a href="{{ URL::to('admin/alumno/agregar') }}">
-            <span class="glyphicon glyphicon-plus"></span> Agregar
-          </a>
-        </li>
-        <li id="liEditarAlumno">
-          <a href="{{ URL::to('admin/alumno/editar') }}">
-            <span class="glyphicon glyphicon-edit"></span> Editar
           </a>
         </li>
         <li class="divisor"></li>
@@ -104,7 +118,23 @@
       </ul>
       <ul class="nav nav-sidebar">
         <li class="header">
-          <h5>Escuela</h5>
+          <h5>Alumnos</h5>
+        </li>
+        <li id="liAgregarAlumno">
+          <a href="{{ URL::to('admin/alumno/agregar') }}">
+            <span class="glyphicon glyphicon-plus"></span> Agregar
+          </a>
+        </li>
+        <li id="liEditarAlumno">
+          <a href="{{ URL::to('admin/alumno/editar') }}">
+            <span class="glyphicon glyphicon-edit"></span> Editar
+          </a>
+        </li>
+        <li class="divisor"></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li class="header">
+          <h5>Orientador</h5>
         </li>
       </ul>
     </div>

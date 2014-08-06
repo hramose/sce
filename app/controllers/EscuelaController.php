@@ -1,19 +1,23 @@
 <?php
 
-class AsignaturaController extends BaseController
+class EscuelaController extends BaseController
 {
-	public function agregarAsignatura(){
+	public function agregarEscuela(){
 		if( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
 		/* Datos recibidos por ajax */
 		$data = Input::all();
 
-		/* Insertar asignatura */
-		$insert = Asignatura::insert(array(
-			'asigId' => trim($data['id']),
-			'asigNombre' => trim($data['nombre']),
-			'asigEstado' => true
+		/* Insertar escuela */
+		$insert = Escuela::insert(array(
+			'escId' => trim($data['id']),
+			'escNombre' => trim($data['nombre']),
+			'escZona' => trim($data['zona']),
+			'escDireccion' => trim($data['direccion']),
+			'escTelefono' => trim($data['telefono']),
+			'escDirector' => trim($data['director']),
+			'escEstado' => true
 			));
 
 		/* Mensajes en caso de que la consulta halla tenido exito o no */
@@ -21,30 +25,33 @@ class AsignaturaController extends BaseController
 		if ( $insert )
 			$response = array(
 				'status' => 'OK',
-				'message' => 'Asignatura se agrego exitosamente'
+				'message' => 'La escuela se agrego exitosamente'
 				);
 		else 
 			$response = array(
 				'status' => 'ERROR',
-				'message' => 'Error al agregar la asigantura, intente mas tarde'
+				'message' => 'Error al agregar la escuela, intente mas tarde'
 				);
 
 		return Response::json($response);
 	}
 
-	public function buscarAsignatura(){
+	public function buscarEscuela(){
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
 		$data = Input::all();
 		$buscar = trim($data['buscar']);
 
-		$busqueda = Asignatura::where('asigNombre', 'like', '%'. $buscar.'%')
-		->orWhere('asigId', 'like','%'. $buscar .'%')
+		$busqueda = Escuela::where('escZona', 'like', '%'. $buscar.'%')
+		->orWhere('escNombre', 'like','%'. $buscar .'%')
+		->orWhere('escId', 'like', '%'. $buscar .'%')
 		->get(array(
-			'asigId',
-			'asigNombre',
-			'asigEstado'
+			'escId',
+			'escNombre',
+			'escZona',
+			'escTelefono',
+			'escEstado'
 			))
 			->toArray();
 		if( count( $busqueda)>0 )
@@ -62,26 +69,26 @@ class AsignaturaController extends BaseController
 			return Response::json($response);
 	}
 
-	public function eliminarAsignatura(){
+	public function eliminarEscuela(){
 		if( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
 		$data = Input::all();
 
-		/* Actualizar asignatura */
-		$actualizar = Asignatura::where('asigId', $data['id'])
+		/* Actualizar escuela */
+		$actualizar = Escuela::where('escId', $data['id'])
 		->update(array(
-			'asigEstado' => false
+			'escEstado' => false
 			));
 		if ( $actualizar )
 			$response = array(
 				'status' => 'OK',
-				'message' => 'Asignatura eliminada'
+				'message' => 'Escuela eliminada'
 				);
 		else
 			$response = array (
 				'status' => 'ERROR',
-				'message' => 'No se puede eliminar la asignatura, talvez no existe'
+				'message' => 'No se puede eliminar la escuela, talvez no existe'
 				);
 		return Response::json( $response );
 	}

@@ -22,26 +22,66 @@ Agregar asignatura | Sistema de Control Escolar
 				<fieldset>
 					<legend></legend>
 					<div class="form-group">
-						<label for="txtId" class="col-md-3 control-label">Clave</label>
-						<div class="col-md-9">
-							<input type="text" id="txtId" class="form-control input-sm" placeholder="Clave" autofocus>
-						</div>
-					</div>
-
-					<div class="form-group">
 						<label for="txtNombre" class="col-md-3 control-label">Nombre</label>
 						<div class="col-md-9">
-							<input type="text" id="txtNombre" class="form-control input-sm" placeholder="Nombre" >
+							<input type="text" id="txtNombre" class="form-control input-sm" placeholder="Nombre" autofocus>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="txtEstado" class="col-md-3 control-label">Estado</label>
+						<label for="txtId" class="col-md-3 control-label">Clave</label>
 						<div class="col-md-9">
-							<select id="txtEstado" class="form-control input-sm">
-								<option value="A">Activo</option>
-								<option value="I">Inactivo</option>
+							<input type="text" id="txtId" class="form-control input-sm" placeholder="Clave">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txttecEnfasis" class="col-md-3 control-label">Tecnología</label>
+						<div class="col-md-9">
+							<select id="txttecEnfasis" class="form-control input-sm">
+								<option value="I">Tecnología I</option>
+								<option value="II">Tecnología II</option>
+								<option value="III">Tecnología III</option>
 							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txtNombre" class="col-md-3 control-label">Énfasis</label>
+						<div class="col-md-9">
+							<input type="text" id="txtNombre" class="form-control input-sm" placeholder="Énfasis">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txttecClave" class="col-md-3 control-label">Clave</label>
+						<div class="col-md-9">
+							<input type="text" id="txttecClave" class="form-control input-sm" placeholder="Clave">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txtartDisciplina" class="col-md-3 control-label">Artes</label>
+						<div class="col-md-9">
+							<select id="txtartDisciplina" class="form-control input-sm">
+								<option value="I">Artes I</option>
+								<option valu="II">Artes II</option>
+								<option value="III">Artes III</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txtartNombre" class="col-md-3 control-label">Disciplina</label>
+						<div class="col-md-9">
+							<input type="text" id="txtartNombre" class="form-control input-sm" placeholder="Disciplina">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="txtartClave" class="col-md-3 control-label">Clave</label>
+						<div class="col-md-9">
+							<input type="text" id="txtartClave" class="form-control input-sm" placeholder="Clave">
 						</div>
 					</div>
 

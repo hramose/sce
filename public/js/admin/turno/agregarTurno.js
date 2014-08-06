@@ -5,12 +5,12 @@ var btnAgregar = $('#btnAgregar'),
 	txtNombre = $('#txtNombre');
 
 /* Funciones */
-function agregarAsignatura(){
-	if ( !validarAsignatura() ) 
+function agregarTurno(){
+	if ( !validarTurno() ) 
 		return false;
 
 	var datos = $.ajax({
-		url: 'agregarAsignatura',
+		url: 'agregarTurno',
 		data: {
 			id:txtId.val(),
 			nombre:txtNombre.val()
@@ -19,9 +19,9 @@ function agregarAsignatura(){
 		dataType: 'json',
 		async: false
 	}).error(function(e){
-		alert('Ocurrio un error, intente de nuevo');
+		alert('Ocurrio un error, intente nuevamente');
 	}).responseText;
-
+/* alert(datos); /* este alert sirve para ubicar el error */
 	var res;
 	try{
 		res = JSON.parse(datos);
@@ -32,7 +32,7 @@ function agregarAsignatura(){
 
 	if ( res.status === 'Ok') {
 		icon = '<span class="glyphicon glyphicon-ok"></span> ';
-		limpiarAsignatura();
+		limpiarTurno();
 	}else 
 		icon = '<span class="glyphicon glyphicon-remove"></span> ';
 
@@ -40,26 +40,19 @@ function agregarAsignatura(){
 	boxPoster.show().delay(3000).fadeOut();
 } 
 
-function limpiarAsignatura(){
+function limpiarTurno(){
 	txtId.val('');
-	txtNombre.val('');
 }
 
-function validarAsignatura(){
-	if ( txtNombre.val() === ""){
-		alert('Indique el nombre de la asignatura');
-		txtNombre.focus();
-		return false;
-	}
+function validarTurno(){
 	if (txtId.val() === "" ){
-		alert('Indique la clave de la asignatura');
+		alert('Indique la clave del turno');
 		txtId.focus();
 		return false;
 	}
 	return true;
 }
-
 /* Eventos */
-btnAgregar.on('click', agregarAsignatura);
-btnCancelar.on('click', limpiarAsignatura);
-$('#liAgregarAsignatura').addClass('active');
+btnAgregar.on('click', agregarTurno);
+btnCancelar.on('click', limpiarTurno);
+$('#liAgregarTurno').addClass('active');

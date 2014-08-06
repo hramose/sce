@@ -44,10 +44,18 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::get('asignatura/agregarAsignatura', function(){
 		return View::make('admin.asignatura.agregarAsignatura');
 	});
-	Route::post('asignatura/agregarAsignatura',array('uses' => 'AsignaturaController@agregarAsignatura'));
+	Route::post('asignatura/agregarAsignatura', array('uses' => 'AsignaturaController@agregarAsignatura'));
 	Route::get('asignatura/editarAsignatura', function(){
 		return View::make('admin.asignatura.editarAsignatura');
 	});	
+
+	/* Rutas para escuelas */
+	Route::get('escuela/editarEscuela', function(){
+		return View::make('admin.escuela.editarEscuela');
+	});
+	Route::post('escuela/buscarEscuela', array('uses' => 'EscuelaController@buscarEscuela'));
+	Route::post('escuela/eliminarEscuela', array('uses' => 'EscuelaController@eliminarEscuela'));
+
 	/*Rutas para profesor*/
 	Route::get('profesor/agregar', function () {
 		return View::make('admin.profesor.agregar');
@@ -56,6 +64,19 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::get('profesor/editar', function () {
 		return View::make('admin.profesor.editar');
 	});
+
+	/* Rutas para turnos */
+	Route::get('turno/agregarTurno', function (){
+		return View::make('admin.turno.agregarTurno');
+	});
+	Route::post('turno/agregarTurno', array('uses' => 'TurnoController@agregarTurno'));	
+	Route::get('turno/editarTurno', function(){
+		return View::make('admin.turno.editarTurno');
+	});
+	Route::post('turno/buscarTurno', array('uses' => 'TurnoController@buscarTurno'));
+	Route::post('turno/eliminarTurno', array('uses' => 'TurnoController@eliminarTurno'));
+	Route::post('turno/seleccionarTurno', array('uses' => 'TurnoController@seleccionarTurno'));
 	
-	
+	/* Rutas para Tecologias */
+	Route::post('tecnologia/agregarTecnologia', array('uses' => 'TecnologiaController@agregarTecnologia'));	 
 });
