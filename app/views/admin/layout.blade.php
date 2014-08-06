@@ -106,6 +106,18 @@
         <li class="header">
           <h5>Escuela</h5>
         </li>
+         <li class="divisor"></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li class="header">
+          <h5>Ciclo</h5>
+        </li>
+        <li id="liAgregarCiclo">
+          <a href="{{ URL::to('admin/ciclo/agregar') }}">
+              <span class="glyphicon glyphicon-plus"></span> Agregar
+            </a>
+        </li>
+        <li class="divisor"></li>
       </ul>
     </div>
   </div>
