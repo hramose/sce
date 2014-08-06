@@ -1,7 +1,6 @@
 <?php
 
-class CicloController extends BaseController
-{
+class CicloController extends BaseController{
 	public function agregarCiclo(){
 		if( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
@@ -11,9 +10,9 @@ class CicloController extends BaseController
 
 		/* Insertar ciclo*/
 		$insert = Ciclo::insert(array(
-			
+
 			'cicCiclo' => trim($data['ciclo'])
-			
+
 			));
 
 		/* Mensajes en caso de que la consulta
@@ -30,12 +29,9 @@ class CicloController extends BaseController
 				'message' => 'No se pudo agregar el ciclo, intente de nuevo'
 			);
 
-
 		/* Se devuelve una respuesta en formato json */
 		return Response::json( $response );
 	}
 
-	public function cancelarCiclo(){
-		return Redirect::to('/inicio');
-	}
+
 }
