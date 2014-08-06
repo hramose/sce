@@ -2,15 +2,14 @@
 
 class ProfesorController extends \BaseController {
 public function agregarProfesor(){
-
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
 		/* Datos recibidos por ajax */
 		$data = Input::all();
 
-		/* Insertar profesor 
-			La clase Hash sirve para encriptar, cuando se agrega un alumno
+		/* Insertar profesor
+			La clase Hash sirve para encriptar, cuando se agrega
 			su pass será su curp por default
 			La función trim elimina espacios en blanco al inicio y al final de la cadena
 		*/
@@ -43,29 +42,24 @@ public function agregarProfesor(){
 
 		/* Se devuelve una respuesta en formato json */
 		return Response::json( $response );
-		
 	}
-/*
-	public function buscarAlumno(){
 
+	public function buscarProfesor(){
+			/*Si no se autentifica como administrador */
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
 		$data = Input::all();
 		$buscar = trim($data['buscar']);
 
-		$busqueda = Alumno::where('aluApep', 'like', '%'. $buscar .'%')
-			->orWhere('aluApem', 'like', '%'. $buscar .'%')
-			->orWhere('aluNombre', 'like', '%'. $buscar .'%')
-			->orWhere('aluCurp', 'like', '%'. $buscar .'%')
+		$busqueda = Profesor::where('profNombre', 'like', '%'. $buscar .'%')
+			->orWhere('profCurp', 'like', '%'. $buscar .'%')
 			->get(array(
-				'aluCurp',
-				'aluApep',
-				'aluApem',
-				'aluNombre',
-				'aluTutor',
-				'aluTelefono',
-				'aluEstado'
+				'profCurp',
+				'profNombre',
+				'profPerfil',
+				'profTelefono',
+				'profEstado'
 			))
 			->toArray();
 
@@ -84,30 +78,65 @@ public function agregarProfesor(){
 		return Response::json( $response );
 	}
 
-	public function eliminarAlumno(){
 
+	public function eliminarProfesor(){
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
 		$data = Input::all();
-		
-		/* Actualizar estado del alumno 
-		$actualizar = Alumno::where('aluCurp', $data['id'])
+
+		/* Actualizar estado del profesor*/
+		$actualizar = Profesor::where('profCurp', $data['id'])
 			->update(array(
-				'aluEstado' => false
+				'profEstado' => false
 			));
 
 		if ( $actualizar )
 			$response = array(
 				'status' => 'OK',
-				'message' => 'El alumno se eliminó correctamente'
+				'message' => 'El profesor se eliminó correctamente'
 			);
 		else
 			$response = array(
 				'status' => 'ERROR',
-				'message' => 'No se pudo eliminar al alumno, tal vez ya se encuentra inactivo'
+				'message' => 'No se pudo eliminar al profesor, tal vez ya se encuentra inactivo'
 			);
 
 		return Response::json( $response );
-	}*/
+	}
+
+	/*******************************************************************/
+	public function seleccionarProfesor() {
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+
+			$data = Input::all();
+
+			$seleccionar = Profesor::where('profCurp', $data['id'])
+			->get(array(
+				'profCurp',
+				'profNombre',
+				'profPerfil',
+				'profTelefono',
+				'profDireccion',
+				'profEstado',
+				'profOrientador'
+				))
+				->toArray();
+
+				if ( count( $seleccionar ) > 0 )
+				$response = array(					/*response regresa parametros al js*/
+					'status' => 'OK',
+					'data' => $seleccionar,			/*datos de la consulta*/
+					'message' => 'Resultados obtenidos'
+				);
+				else
+				$response = array(
+					'status' => 'ERROR',
+					'message' => 'No se encontraron resultados'
+				);
+
+				return Response::json( $response );
+			}
+
 }

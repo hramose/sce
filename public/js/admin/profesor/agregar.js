@@ -10,7 +10,14 @@ var btnAgregar = $('#btnAgregarP'),
 
 /* Funciones */
 function agregarProfesor(){
-	if ( !validarProfesor() )
+	var verificar = new ValidarDatos();
+	var validarProfesor = verificar.validaInfo(txtCurpP.val(),
+												txtNombreP.val(),
+												txtPerfilP.val(),
+												txtTelefonoP.val(),
+												txtDireccionP.val());
+
+	if ( !validarProfesor)
 		return false;
 
 	var datos = $.ajax({
@@ -29,7 +36,7 @@ function agregarProfesor(){
     }).error(function(e){
         alert('Ocurrio un error, intente de nuevo');
     }).responseText;
-	
+
     var res;
     try{
         res = JSON.parse(datos);
@@ -43,10 +50,9 @@ function agregarProfesor(){
     	limpiarProfesor();
     }else
     	icon = '<span class="glyphicon glyphicon-remove"></span> ';
-    
+
     messagePoster.html(icon + res.message);
 	 boxPoster.show().delay(3000).fadeOut();
-	 alert("funcion agregarProfesor");
 }
 
 function limpiarProfesor(){
@@ -56,35 +62,6 @@ function limpiarProfesor(){
 	txtTelefonoP.val('');
 	txtDireccionP.val('');
 	txtOrientadorP.val('');
-}
-
-function validarProfesor(){
-	if ( txtCurpP.val() === "" || txtCurpP.val().length < 18 ){
-		alert('Indique una CURP válida');
-		txtCurpP.focus();
-		return false;
-	}
-	if ( txtNombreP.val() === "" ){
-		alert('Indique el nombre del profesor');
-		txtNombreP.focus();
-		return false;
-	}
-	if ( txtPerfilP.val() === "" ){
-		alert('Indique el perfil del profesor');
-		txtPerfilP.focus();
-		return false;
-	}
-	if ( txtTelefonoP.val() === "" ){
-		alert('Indique el teléfono del profesor');
-		txtTelefonoP.focus();
-		return false;
-	}
-	if ( txtDireccionP.val() === "" ){
-		alert('Indique la dirección del profesor');
-		txtDireccionP.focus();
-		return false;
-	}
-	return true;
 }
 
 /* Eventos */

@@ -3,7 +3,7 @@
 class Profesor extends Eloquent
 {
 	protected $table = 'profesores';
-	protected $primaryKey = 'admCurp';
+	protected $primaryKey = 'profCurp';
 	public $timestamps = false;
 	public $incrementing = false;
 	protected $fillable = array(
