@@ -9,14 +9,12 @@ class EscuelaController extends \BaseController {
 		$data = Input::all();
 		$buscar = trim($data['buscar']);
 
-		$busqueda = Escuela::where('escId', 'like', '%'. $buscar .'%')
-			->orWhere('escNombre', 'like', '%'. $buscar .'%')
-			->get(array(
+		$busqueda = Escuela::get(array(
 				'escId',
 				'escNombre',
-				'escZona',
 				'escTelefono',
-				'escEstado'
+				'escEstado',
+				'escTurno'
 			))
 			->toArray();
 
@@ -50,8 +48,8 @@ class EscuelaController extends \BaseController {
 			'escDireccion' => trim($data['direccion']),
 			'escTelefono' => trim($data['telefono']),
 			'escDirector' => trim($data['director']),
-			'escEstado' => $data['estado']
-			//'escTurno' => $data['turno']
+			'escEstado' => $data['estado'],
+			'escTurno' => $data['turno']
 			));
 		if ( $editar )
 			$response = array(

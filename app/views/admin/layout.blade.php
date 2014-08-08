@@ -66,24 +66,6 @@
       </ul>
       <ul class="nav nav-sidebar">
         <li class="header">
-          <h5>Turno</h5>
-        </li>
-        <li id="liAgregarTurno">
-          <a href="{{ URL::to('admin/turno/agregarTurno')}}">
-            <span class="glyphicon glyphicon-plus"></span>
-            Agregar 
-          </a>
-        </li>
-        <li id="liEditarTurno">
-          <a href="{{ URL::to('admin/turno/editarTurno')}}">
-            <span class="glyphicon glyphicon-edit"></span>
-            Editar
-          </a>
-        </li>
-        <li class="divisor"></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li class="header">
           <h5>Asignaturas</h5>
         </li>
         <li id="liAgregarAsignatura">

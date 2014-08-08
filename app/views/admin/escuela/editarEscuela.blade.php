@@ -21,12 +21,8 @@ Editar escuela | Sistema de Control Escolar
 		<div class="form-horizontal">
 			<fieldset>
 				<div class="form-group">
-					<label for="txtBuscarE" class="col-md-2">Buscar</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control input-sm" id="txtBuscarE" placeholder="Zona | Nombre | CCT" autofocus>
-					</div>
 					<div class="col-md-2">
-						<button class="btn btn-info btn-sm" id="btnBuscarE">Buscar</button>
+						<button class="btn btn-info btn-sm" id="btnBuscarE">Ver escuelas registradas </button>
 					</div>
 				</div>
 			</fieldset>
@@ -43,7 +39,7 @@ Editar escuela | Sistema de Control Escolar
 					<tr>
 						<th>CCT</th>
 						<th>Nombre</th>
-						<th>Zona</th>
+						<th>Turno</th>
 						<th class="center">Teléfono</th>
 						<th class="center">Status</th>
 						<th class="center">Editar</th>
@@ -110,7 +106,9 @@ Editar escuela | Sistema de Control Escolar
 						<label for="slctTurnoE" class="col-md-3 control-label">Turno</label>
 						<div class="col-md-9">
 							<select id="slctTurnoE" class="form-control input-sm">
-								<option value="T">Turno</option>
+								<option value="m">Matutino</option>
+								<option value="v">Vespertino</option>
+								<option value="c">Tiempo completo</option>
 							</select>
 						</div>
 					</div>

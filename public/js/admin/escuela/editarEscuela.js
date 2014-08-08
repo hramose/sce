@@ -23,13 +23,11 @@ var formEditarE = $('#formEditarE'),
 var escuelaSeleccionada;
 
 function buscarEscuela(){
-	if ( txtBuscarE.val() === "" )
-		return;
 
 	var datos = $.ajax({
 		url: 'buscarEscuela',
 		data: {
-			buscar: txtBuscarE.val()
+			buscar: 'null'	/*retorna todo contenido de tabla, nonecesita parametros*/
 		},
 		type: 'post',
         dataType:'json',
@@ -48,6 +46,7 @@ function buscarEscuela(){
 
     tbodyEscuelas.html('');
     if ( res.status === 'OK' ){
+			var turno;
 		 	var i = 1;
     	$.each(res.data, function(k,o){
     		if ( o.escEstado == 1 )
@@ -55,11 +54,18 @@ function buscarEscuela(){
     		else
     			status = '<span class="glyphicon glyphicon-remove" title="Inactivo"></span>';
 
+				if ( o.escTurno === "v")
+					turno = "vespertino";
+				if ( o.escTurno === "m")
+					turno = "matutino";
+				if ( o.escTurno === "c")
+					turno = "tiempo completo";
+
     		tbodyEscuelas.append(
     			'<tr>'+
     				'<td>'+o.escId+'</td>'+
     				'<td>'+o.escNombre+'</td>'+
-    				'<td>'+o.escZona+'</td>'+
+    				'<td>'+turno+'</td>'+
     				'<td class="center">'+o.escTelefono+'</td>'+
     				'<td class="center">'+status+'</td>'+
     				'<td class="center">'+
@@ -78,6 +84,7 @@ function buscarEscuela(){
     	tbodyEscuelas.html('<tr><td colspan="8" class="center"><h3>'+ res.message +'</h3></td></tr>');
 
 	tblEscuelas.removeClass('hidden');
+	limpiarOcultarEdicion();
 }
 
 	/****************************************************************************/
@@ -223,9 +230,6 @@ function seleccionarEscuela(){
 		}
 }
 
-/*function sc(){
-	alert("editar escuela");
-}*/
 
 /* Eventos */
 btnBuscarE.on('click', buscarEscuela);
@@ -234,4 +238,4 @@ btnCancelarE.on('click', limpiarOcultarEdicion);
 tblEscuelas.delegate('.glyphicon-trash', 'click', eliminarEscuela);
 tblEscuelas.delegate('.glyphicon-edit', 'click', seleccionarEscuela);
 $('#liEditarEscuela').addClass('active');
-//$('#liEditarEscuela').on('click',sc);
+//$('#liEditarEscuela').on('click',buscarEscuela);

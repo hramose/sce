@@ -71,19 +71,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('profesor/eliminarProfesor', array('uses' => 'ProfesorController@eliminarProfesor'));
 	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
 
-
-	/* Rutas para turnos */
-	Route::get('turno/agregarTurno', function (){
-		return View::make('admin.turno.agregarTurno');
-	});
-	Route::post('turno/agregarTurno', array('uses' => 'TurnoController@agregarTurno'));
-	Route::get('turno/editarTurno', function(){
-		return View::make('admin.turno.editarTurno');
-	});
-	Route::post('turno/buscarTurno', array('uses' => 'TurnoController@buscarTurno'));
-	Route::post('turno/eliminarTurno', array('uses' => 'TurnoController@eliminarTurno'));
-	Route::post('turno/seleccionarTurno', array('uses' => 'TurnoController@seleccionarTurno'));
-
 	/* Rutas para Tecologias */
 	Route::post('tecnologia/agregarTecnologia', array('uses' => 'TecnologiaController@agregarTecnologia'));
 
