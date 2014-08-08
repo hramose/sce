@@ -41,7 +41,7 @@ public function agregarProfesor(){
 		/* Se devuelve una respuesta en formato json */
 		return Response::json( $response );
 	}
-
+		/**************************************************************************/
 	public function buscarProfesor(){
 			/*Si no se autentifica como administrador */
 		if ( !Usuario::isAdmin() )

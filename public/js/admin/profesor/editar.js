@@ -219,14 +219,14 @@ function seleccionarProfesor() {
 			}
 
 		if (res.status === 'OK'){
-					$.each(res.data, function(k,datos){	/*recorre datos de consulta*/
-						txtCurpP.val(datos.profCurp);			/*asignan datos a elementos html*/
-						txtNombreP.val(datos.profNombre);
-						txtPerfilP.val(datos.profPerfil);
-						txtTelefonoP.val(datos.profTelefono);
-						txtDireccionP.val(datos.profDireccion);
-						slctEstadoP.val(datos.profEstado);
-						slctOrientadorP.val(datos.profOrientador);
+					$.each(res.data, function(k,info){	/*recorre datos de consulta*/
+						txtCurpP.val(info.profCurp);			/*asignan datos a elementos html*/
+						txtNombreP.val(info.profNombre);
+						txtPerfilP.val(info.profPerfil);
+						txtTelefonoP.val(info.profTelefono);
+						txtDireccionP.val(info.profDireccion);
+						slctEstadoP.val(info.profEstado);
+						slctOrientadorP.val(info.profOrientador);
 					});
 			 		formEditar.removeClass('hidden');
 					btnCancelarP.focus();		/*para apreciar en pantalla formulario editor*/
