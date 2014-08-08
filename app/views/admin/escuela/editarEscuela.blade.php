@@ -21,12 +21,12 @@ Editar escuela | Sistema de Control Escolar
 		<div class="form-horizontal">
 			<fieldset>
 				<div class="form-group">
-					<label for="txtBuscar" class="col-md-2">Buscar</label>
+					<label for="txtBuscarE" class="col-md-2">Buscar</label>
 					<div class="col-md-8">
-						<input type="text" class="form-control input-sm" id="txtBuscar" placeholder="Zona | Nombre | CCT" autofocus>
+						<input type="text" class="form-control input-sm" id="txtBuscarE" placeholder="Zona | Nombre | CCT" autofocus>
 					</div>
 					<div class="col-md-2">
-						<button class="btn btn-info btn-sm" id="btnBuscar">Buscar</button>
+						<button class="btn btn-info btn-sm" id="btnBuscarE">Buscar</button>
 					</div>
 				</div>
 			</fieldset>
@@ -37,8 +37,8 @@ Editar escuela | Sistema de Control Escolar
 <!-- Tabla de escuelas encontradas -->
 <div class="row">
 	<div class="col-md-12">
-		<div class="table-responsive hidden" id="tblEscuelas"> 
-			<table class="table table-striped table-hover"> 
+		<div class="table-responsive hidden" id="tblEscuelas">
+			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
 						<th>CCT</th>
@@ -59,66 +59,66 @@ Editar escuela | Sistema de Control Escolar
 <!-- Panel editar escuela -->
 <div class="row">
 	<div class="col-md-10">
-		<div class="well hidden" id="formEditar">
+		<div class="well hidden" id="formEditarE">
 			<div class="form-horizontal">
 				<fieldset>
-					<legend></legend>
+					<legend>Editar Escuela</legend>
 					<div class="form-group">
-						<label for="txtId" class="col-md-3 control-label">CCT</label>
+						<label for="txtIdE" class="col-md-3 control-label">CCT</label>
 						<div class="col-md-9">
-							<input type="text" id="txtId" class="form-control input-sm" placeholder="CCT" autofocus>
+							<input type="text" id="txtIdE" class="form-control input-sm" placeholder="CCT" autofocus>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="txtNombre" class="col-md-3 control-label">Nombre</label>
+						<label for="txtNombreE" class="col-md-3 control-label">Nombre</label>
 						<div class="col-md-9">
-							<input type="text" id="txtNombre" class="form-control input-sm" placeholder="Nombre">
+							<input type="text" id="txtNombreE" class="form-control input-sm" placeholder="Nombre">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="txtZona" class="col-md-3 control-label">Zona</label>
+						<label for="txtZonaE" class="col-md-3 control-label">Zona</label>
 						<div class="col-md-9">
-							<input type="text" id="txtZona" class="form-control input-sm" placeholder="Zona">
+							<input type="text" id="txtZonaE" class="form-control input-sm" placeholder="Zona">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="txtDireccion" class="col-md-3 control-label">Dirección</label>
+						<label for="txtDireccionE" class="col-md-3 control-label">Dirección</label>
 						<div class="col-md-9">
-							<input type="text" id="txtDireccion" class="form-control input-sm" 
+							<input type="text" id="txtDireccionE" class="form-control input-sm"
 							placeholder="Calle | Número | Localidad | Municipio | Estado | C.P.">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="txtTelefono" class="col-md-3 control-label">Teléfono</label>
+						<label for="txtTelefonoE" class="col-md-3 control-label">Teléfono</label>
 						<div class="col-md-9">
-							<input type="text" id="txtTelefono" class="form-control input-sm" placeholder="Teléfono">
+							<input type="text" id="txtTelefonoE" class="form-control input-sm" placeholder="Teléfono">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="txtDirector" class="col-md-3 control-label">Director</label>
+						<label for="txtDirectorE" class="col-md-3 control-label">Director</label>
 						<div class="col-md-9">
-							<input type="text" id="txtDirector" class="form-control input-sm" placeholder="Director">
+							<input type="text" id="txtDirectorE" class="form-control input-sm" placeholder="Director">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="txtTurno" class="col-md-3 control-label">Turno</label>
+						<label for="slctTurnoE" class="col-md-3 control-label">Turno</label>
 						<div class="col-md-9">
-							<select id="txtTurno" class="form-control input-sm">
+							<select id="slctTurnoE" class="form-control input-sm">
 								<option value="T">Turno</option>
 							</select>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="txtEstado" class="col-md-3 control-label">¿Activo?</label>
+						<label for="slctEstadoE" class="col-md-3 control-label">¿Activo?</label>
 						<div class="col-md-9">
-							<select id="sltEstado" class="form-control input-sm">
+							<select id="slctEstadoE" class="form-control input-sm">
 								<option value="1">Sí</option>
 								<option value="0">No</option>
 							</select>
@@ -127,8 +127,8 @@ Editar escuela | Sistema de Control Escolar
 
 					<div class="form-group">
 						<div class="col-md-9 col-md-offset-3">
-							<button class="btn btn-success btn-sm" id="btnGuardar">Guardar cambios</button>
-							<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
+							<button class="btn btn-success btn-sm" id="btnGuardarE">Guardar cambios</button>
+							<button class="btn btn-danger btn-sm" id="btnCancelarE">Cancelar</button>
 						</div>
 					</div>
 				</fieldset>
