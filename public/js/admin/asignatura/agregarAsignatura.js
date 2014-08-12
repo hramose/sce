@@ -1,9 +1,8 @@
 /* Nodos */
 var btnAgregar = $('#btnAgregar'),
 	btnCancelar = $('#btnCancelar'),
-	txtasigId = $('#txtasigId'),
-	txtasigNombre = $('#txtasigNombre'),
-	txtasigEstado = $('#txtasigEstado');
+	txtId = $('#txtId'),
+	txtNombre = $('#txtNombre');
 
 /* Funciones */
 function agregarAsignatura(){
@@ -13,9 +12,8 @@ function agregarAsignatura(){
 	var datos = $.ajax({
 		url: 'agregarAsignatura',
 		data: {
-			id:txtasigId.val(),
-			nombre:txtasigNombre.val(),
-			estado:txtasigEstado.val()
+			id:txtId.val(),
+			nombre:txtNombre.val()
 		},
 		type: 'post',
 		dataType: 'json',
@@ -43,19 +41,19 @@ function agregarAsignatura(){
 } 
 
 function limpiarAsignatura(){
-	txtasigId.val('');
-	txtasigNombre.val('');
+	txtId.val('');
+	txtNombre.val('');
 }
 
 function validarAsignatura(){
-	if (txtasigId.val() === "" ){
-		alert('Indique la clave de la asignatura');
-		txtasigId.focus();
+	if ( txtNombre.val() === ""){
+		alert('Indique el nombre de la asignatura');
+		txtNombre.focus();
 		return false;
 	}
-	if ( txtasigNombre.val() === ""){
-		alert('Indique el nombre de la asignatura');
-		txtasigNombre.focus();
+	if (txtId.val() === "" ){
+		alert('Indique la clave de la asignatura');
+		txtId.focus();
 		return false;
 	}
 	return true;

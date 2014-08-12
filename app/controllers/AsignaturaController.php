@@ -13,21 +13,19 @@ class AsignaturaController extends BaseController
 		$insert = Asignatura::insert(array(
 			'asigId' => trim($data['id']),
 			'asigNombre' => trim($data['nombre']),
-			'asigEstado' => trim($data['estado']),
-			'asigpass' => hash::make(trim($data['id']))
+			'asigEstado' => true
 			));
 
-		/* Mensajes en caso de que la consulta
-		halla tenido exito o no */
+		/* Mensajes en caso de que la consulta halla tenido exito o no */
 
 		if ( $insert )
 			$response = array(
-				'status' => 'Ok',
+				'status' => 'OK',
 				'message' => 'Asignatura se agrego exitosamente'
 				);
 		else 
 			$response = array(
-				'status' => 'Error',
+				'status' => 'ERROR',
 				'message' => 'Error al agregar la asigantura, intente mas tarde'
 				);
 
@@ -51,14 +49,14 @@ class AsignaturaController extends BaseController
 			->toArray();
 		if( count( $busqueda)>0 )
 			$response = array(
-				'status' => 'Ok',
+				'status' => 'OK',
 				'data' => $busqueda,
 				'message' => 'Busqueda exitosa'
 				);
 
 		else
 			$response = array(
-				'status' => 'Error',
+				'status' => 'ERROR',
 				'message' => 'No se encontraron resultados'
 				);
 			return Response::json($response);
@@ -71,18 +69,18 @@ class AsignaturaController extends BaseController
 		$data = Input::all();
 
 		/* Actualizar asignatura */
-		$Actualizar = Asignatura::where('asigId', $data['id'])
+		$actualizar = Asignatura::where('asigId', $data['id'])
 		->update(array(
 			'asigEstado' => false
 			));
 		if ( $actualizar )
 			$response = array(
-				'status' => 'Ok',
+				'status' => 'OK',
 				'message' => 'Asignatura eliminada'
 				);
 		else
 			$response = array (
-				'status' => 'Error',
+				'status' => 'ERROR',
 				'message' => 'No se puede eliminar la asignatura, talvez no existe'
 				);
 		return Response::json( $response );
