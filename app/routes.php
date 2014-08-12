@@ -64,5 +64,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 		return View::make('admin.ciclo.agregar');
 	});
 	Route::post('ciclo/agregarCiclo',array('uses' => 'CicloController@agregarCiclo'));
-
+	/*Rutas para Grupo*/
+	Route::get('grupo/agregarGrupo', function(){
+		return View::make('admin.grupo.agregarGrupo');
+		});
+	Route::post('grupo/agregarGrupo',array('uses' => 'GrupoController@agregarGrupo'));
 });
