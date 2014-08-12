@@ -140,7 +140,7 @@
             <span class="glyphicon glyphicon-plus"></span> Agregar
           </a>
       </li>
-      <li id="liEditarGrupo">
+      <li id="liEditarGrupo">// comentario
         <a href="{{ URL::to('admin/grupo/editar') }}">
             <span class="glyphicon glyphicon-edit"></span> Editar
           </a>
