@@ -3,14 +3,14 @@ var btnAgregar = $('#btnAgregar'),
 	txtCiclo = $('#txtCiclo');
 
 function agregarCiclo(){
-	alert(txtCiclo.val());
+
 
 	var datos = $.ajax({
         url:'agregarCiclo',
         data: {
         	ciclo: txtCiclo.val()
-        	
-        },        
+
+        },
         type:'post',
         dataType:'json',
         async:false
@@ -18,16 +18,22 @@ function agregarCiclo(){
         alert('Ocurrio un error, intente de nuevo');
     }).responseText;
 
-    var res;
-    try{
-        res = JSON.parse(datos);
-    }catch (e){
-        messagePoster.html('Error JSON ');
-        boxPoster.show().delay(2000).fadeOut();
-    }
+  var res;
+try{
+		res = JSON.parse(datos);
+}catch (e){
+		messagePoster.html('Error JSON ' + e);
+		boxPoster.show().delay(2000).fadeOut();
+}
 
-     messagePoster.html(icon + res.message);
-	 boxPoster.show().delay(3000).fadeOut();
+if ( res.status === 'OK' ){
+	icon = '<span class="glyphicon glyphicon-ok"></span> ';
+	
+}else
+	icon = '<span class="glyphicon glyphicon-remove"></span> ';
+
+messagePoster.html(icon + res.message);
+boxPoster.show().delay(3000).fadeOut();
 }
 
 

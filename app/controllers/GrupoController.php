@@ -10,7 +10,7 @@ class GrupoController extends BaseController{
 
     /* Insertar grupo*/
     $insert = Grupo::insert(array(
-
+      
       'grupNombre' => trim($data['grupo']),
       'grupEstado' => true
 

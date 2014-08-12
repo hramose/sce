@@ -1,8 +1,7 @@
-var btnAgregar = $('#btnAgregar'),
-    btnCancelar = $('#btnCancelar'),
-    btnAgregarNombre = $('#btnAgregarNombre'),
+var btnAgregarNombre = $('#btnAgregarNombre'),
     btnCancelarNombre = $('#btnCancelarNombre'),
     txtNombreGrupo = $('#txtNombreGrupo');
+
 
 
 function agregarNombre(){
@@ -10,6 +9,7 @@ function agregarNombre(){
   var datos = $.ajax({
         url:'agregarGrupo',
         data: {
+
           grupo: txtNombreGrupo.val()
 
         },
@@ -42,8 +42,7 @@ function cancelarNombre(){
 txtNombreGrupo.val('');
 }
 
-//btnAgregar.on('click', agregar);
-//btnCancelar.on('click',cancelar);
-btnAgregarNombre.on('click', agregarNombre);
+
+btnAgregarNombre.on('click', agregarNombre );
 btnCancelarNombre.on('click', cancelarNombre);
 $('#liAgregarGrupo').addClass('active');

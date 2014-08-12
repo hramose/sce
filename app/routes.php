@@ -80,8 +80,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	});
 	Route::post('ciclo/agregarCiclo',array('uses' => 'CicloController@agregarCiclo'));
 	/*Rutas para Grupo*/
-	Route::get('grupo/agregarGrupo', function(){
-		return View::make('admin.grupo.agregarGrupo');
+	Route::get('grupo/agregar', function(){
+		return View::make('admin.grupo.agregar');
 		});
 	Route::post('grupo/agregarGrupo',array('uses' => 'GrupoController@agregarGrupo'));
+	Route::get('grupo/editar', function(){
+		return View::make('admin.grupo.editar');
+		});
 });
