@@ -84,7 +84,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 		return View::make('admin.grupo.agregar');
 		});
 	Route::post('grupo/agregarGrupo',array('uses' => 'GrupoController@agregarGrupo'));
+
 	Route::get('grupo/editar', function(){
 		return View::make('admin.grupo.editar');
 		});
+	Route::post('grupo/buscarGrupo', array('uses' => 'GrupoController@buscarGrupo'));
+	Route::post('grupo/editarGrupo', array('uses' => 'GrupoController@editarGrupo'));
+	Route::post('grupo/eliminarGrupo', array('uses' => 'GrupoController@eliminarGrupo'));
+	Route::post('grupo/seleccionarGrupo', array('uses' => 'GrupoController@seleccionarGrupo'));
+
 });

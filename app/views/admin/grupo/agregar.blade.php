@@ -15,19 +15,32 @@ Agregar profesor | Sistema de Control Escolar
   <div class="col-md-10">
     <div class="well">
       <div class="form-horizontal">
-    
-      <legend>Nombre de los Grupos</legend>
-      <div class="col-md-9">
-        <div class="form-group">
-          <label for="txtNombreGrupo" class="col-md-3 control-label">Nombre del </label>
-          <div class="col-md-5">
-            <input type="text" id="txtNombreGrupo" class="form-control input-sm" placeholder="Nombre" maxlength="18" autofocus>
+
+          <div class="form-group" id="numero">
+              <label for="txtCiclo" class="col-md-3 control-label">Numero de Grupos</label>
+              <div class="col-md-3">
+              <input type="text" id="txtNumeroGrupo" placeholder="Numero de grupos a ingrear" class="form-control input-sm">
+              </div>
+            <div class="col-md-4">
+                <button class="btn btn-success btn-sm" id="btnAgregar">Agregar</button>
+                <button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
+            </div>
           </div>
-          <div class="col-md-5 col-md-offset-8">
-              <button class="btn btn-success btn-sm" id="btnAgregarNombre">Agregar</button>
-              <button class="btn btn-danger btn-sm" id="btnCancelarNombre">Cancelar</button>
+
+          <div class="form-group"style="display:none" id="nombre">
+          <legend>Nombre de los grupos</legend>
+              <label for="txtCiclo" class="col-md-3 control-label">Nombre del Grupos</label>
+              <div class="col-md-2">
+                <input type="text" id="txtNombreGrupo" placeholder="Nombre del grupo" class="form-control input-sm">
+              </div>
+            <div class="col-md-4">
+                <button class="btn btn-success btn-sm" id="btnAgregarNombre">Agregar</button>
+                <button class="btn btn-danger btn-sm" id="btnCancelarNombre">Cancelar</button>
+
+            </div>
           </div>
-        </div>
+
+
       </div>
     </div>
   </div>
