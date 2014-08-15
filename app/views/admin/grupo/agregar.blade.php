@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('title')
-Agregar profesor | Sistema de Control Escolar
+Agregar grupo | Sistema de Control Escolar
 @stop
 
 <!-- Encabezado de página -->

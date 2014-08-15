@@ -1,6 +1,7 @@
 <?php
 
 class GrupoController extends BaseController{
+
   public function agregarGrupo(){
     if( !Usuario::isAdmin() )
       return Redirect::to('admin/logout');
@@ -74,8 +75,8 @@ class GrupoController extends BaseController{
     $editar = Grupo::where('grupId', $data['id'])
     ->update(array(
       'grupNombre' => trim($data['nombre']),
-      'grupEstado' => true
-      //'escEstado' => $data['estado']
+      'grupEstado' => $data['estado']
+
 
       ));
     if ( $editar )
@@ -123,7 +124,7 @@ class GrupoController extends BaseController{
 
       $data = Input::all();
 
-      $seleccionar = Escuela::where('grupId', $data['id'])
+      $seleccionar = Grupo::where('grupId', $data['id'])
       ->get(array(
         'grupId',
         'grupNombre',

@@ -140,15 +140,13 @@
             <span class="glyphicon glyphicon-plus"></span> Agregar
           </a>
       </li>
-      <li id="liEditarGrup">
+      <li id="liEditarGrupo">
         <a href="{{ URL::to('admin/grupo/editar') }}">
             <span class="glyphicon glyphicon-edit"></span> Editar
           </a>
       </li>
       <li class="divisor"></li>
     </ul>
-    <ul class="nav nav-sidebar">
-      <li class="header">
 
     </div>
   </div>
