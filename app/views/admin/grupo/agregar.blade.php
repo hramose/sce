@@ -17,12 +17,12 @@ Agregar grupo | Sistema de Control Escolar
       <div class="form-horizontal">
 
           <div class="form-group" id="numero">
-              <label for="txtCiclo" class="col-md-3 control-label">Numero de Grupos</label>
+              <label for="txtGRupo" class="col-md-3 control-label">Numero de Grupos</label>
               <div class="col-md-3">
               <input type="text" id="txtNumeroGrupo" placeholder="Numero de grupos a ingrear" class="form-control input-sm">
               </div>
             <div class="col-md-4">
-                <button class="btn btn-success btn-sm" id="btnAgregar">Agregar</button>
+                <button class="btn btn-success btn-sm" id="btnAgregar">Aceptar</button>
                 <button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
             </div>
           </div>

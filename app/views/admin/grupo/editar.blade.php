@@ -38,8 +38,7 @@ Editar grupo | Sistema de Control Escolar
         <thead>
           <tr>
             <th>Nombre</th>
-            <th></th>
-            <th>Estado</th>
+            <th class="col-md-2">Estado</th>
           </tr>
         </thead>
         <tbody id="tbodyGrupo"></tbody>
@@ -56,7 +55,7 @@ Editar grupo | Sistema de Control Escolar
         <fieldset>
           <legend>Editar Grupos</legend>
 
-          <div class="form-group">
+          <div class="form-group hidden">
             <label for="txtId" class="col-md-3 control-label">Numero</label>
             <div class="col-md-9">
               <input type="text" id="txtId" class="form-control input-sm" placeholder="Numero" autofocus>

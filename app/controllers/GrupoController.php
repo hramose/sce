@@ -82,7 +82,7 @@ class GrupoController extends BaseController{
     if ( $editar )
       $response = array(
         'status' => 'OK',
-        'message' => 'Grupo actualizada'
+        'message' => 'Grupo actualizado'
         );
     else
       $response = array (

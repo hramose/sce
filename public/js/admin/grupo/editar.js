@@ -22,7 +22,7 @@ function buscarGrupo(){
   var datos = $.ajax({
     url: 'buscarGrupo',
     data: {
-      buscar: 'null'	/*retorna todo contenido de tabla, nonecesita parametros*/
+      buscar: 'null'	/*retorna todo contenido de tabla*/
     },
     type: 'post',
         dataType:'json',
@@ -53,7 +53,7 @@ function buscarGrupo(){
         tbodyGrupo.append(
           '<tr>'+
             '<td>'+o.grupNombre+'</td>'+
-            '<td class="center">'+status+'</td>'+
+            '<td class="col-md-2">'+status+'</td>'+
             '<td class="center">'+
               '<span class="glyphicon glyphicon-edit" id="'+o.grupId+'" '+
               'style="cursor:pointer" title="Editar"></span>'+

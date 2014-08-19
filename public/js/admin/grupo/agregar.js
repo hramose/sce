@@ -88,6 +88,9 @@ function agregarNombre(){
 
 function cancelarNombre(){
 txtNombreGrupo.val('');
+(nombre).hide();
+(numero).show();
+txtNumeroGrupo.val('');
 }
 function cancelarNumero(){
 txtNumeroGrupo.val('');
