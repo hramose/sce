@@ -57,7 +57,7 @@ Route::filter('admin', function()
 		return Redirect::to('/', 302)
 			->header('cache-control', 'no-store, no-cache, must-revalidate')
 			->header('pragma', 'no-cache');
-	} 
+	}
 });
 
 /*

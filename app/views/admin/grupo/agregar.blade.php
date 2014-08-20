@@ -30,7 +30,7 @@ Agregar grupo | Sistema de Control Escolar
           <div class="form-group"style="display:none" id="nombre">
           <legend>Nombre de los grupos</legend>
               <label for="txtCiclo" class="col-md-3 control-label">Nombre del Grupos</label>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <input type="text" id="txtNombreGrupo" placeholder="Nombre del grupo" class="form-control input-sm">
               </div>
             <div class="col-md-4">
