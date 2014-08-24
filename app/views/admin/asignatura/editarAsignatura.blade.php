@@ -15,39 +15,89 @@ Editar asignatura | Sistema de Control Escolar
 	Editar asignatura
 </h1>
 
-<!-- Formulario -->
+<!-- Formulario de busqueda -->
 <div class="row">
-	<div class="col-md-9">
-		<div class="well">
+	<div class="col-md-8">
+		<div class="form-horizontal">
+			<fieldset>
+				<div class="form-group">
+					<label for="txtBuscar" class="col-md-2">Buscar</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control input-sm" id="txtBuscar" placeholder="Nombre | Clave" autofocus>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-info btn-sm" id="btnBuscar">Buscar</button>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</div>
+
+<!-- Tabla de asignaturas enontradas -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="table-responsive hidden" id="tblAsignatura">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Clave</th>
+						<th>Nombre</th>
+						<th class="center">Status</th>
+						<th class="center">Editar</th>
+						<th class="center">Eliminar</th>
+					</tr>
+				</thead>
+				<tbody id="tbodyAsignatura"></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!-- Panel editar asinaturas -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="well hidden" id="formEditar">
 			<div class="form-horizontal">
 				<fieldset>
 					<legend></legend>
-					<div class="form-group">
-						<label for="txtasigNombre" class="col-md-3 control-label">Nombre</label>
-						<div class="col-md-9">
-							<input type="text" id="txtasigNombre" class="form-control input-sm" placeholder="Nombre" autofocus>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="txtId" class="col-md-3 control-label">Clave</label>
+							<div class="col-md-9">
+								<input type="text" id="txtId" class="form-control input-sm" placeholder="Clave" maxlength="18" >
+							</div>
 						</div>
-					</div>
 
-					<div class="form-group">
-						<label for="txtasig" class="col-md-3 control-label">Clave</label>
-						<div class="col-md-9">
-							<input type="text" id="txtasigId" class="form-control input-sm" placeholder="Clave">
+						<div class="form-group">
+							<label for="txtNombre" class="col-md-3 control-label">Nombre</label>
+							<div class="col-md-9">
+								<input type="text" id="txtNombre" placeholder="Nombre" class="form-control input-sm">
+							</div>
 						</div>
-					</div>
 
-					<div class="form-group">
-						<div class="col-md-9 col-md-offset-3">
-							<button class="btn btn-success btn-sm" id="btnGuardar">Guardar cambios</button>
-							<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
+						<div class="form-group">
+							<label for="txtEstado" class="col-md-3 control-label">Estado</label>
+							<div class="col-md-9">
+								<select id="sltEstado" class="form-control input-sm">
+									<option value="1">Activo</option>
+									<option value="0">Inactivo</option>
+								</select>
+							</div>
 						</div>
+
+						<div class="form-group">
+							<div class="col-md-9 col-md-offset-3">
+								<button class="btn btn-success btn-sm" id="btnGuardar">Guardar cambios</button>
+								<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
+							</div>
+						</div>						
 					</div>
 				</fieldset>
 			</div>
 		</div>
 	</div>
 </div>
-
 @stop
 
 @section('js')

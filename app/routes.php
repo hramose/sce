@@ -48,6 +48,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::get('asignatura/editarAsignatura', function(){
 		return View::make('admin.asignatura.editarAsignatura');
 	});
+	Route::post('asignatura/buscarAsignatura', array('uses' => 'AsignaturaController@buscarAsignatura'));
+	Route::post('asignatura/editarAsignatura', array('uses' => 'AsignaturaController@editarAsignatura'));
+	Route::post('asignatura/eliminarAsignatura', array('uses' => 'AsignaturaController@eliminarAsignatura'));
+	Route::post('asignatura/seleccionarAsignatura', array('uses' => 'AsignaturaController@seleccionarAsignatura'));
+	Route::post('asignatura/agregarTecnologia', array('uses' => 'TecnologiaController@agregarTecnologia'));
+	Route::post('asignatura/agregarArte', array('uses' => 'ArteController@agregarArte'));
 
 	/* Rutas para escuelas */
 	Route::get('escuela/editarEscuela', function(){
@@ -70,9 +76,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('profesor/editarProfesor', array('uses' => 'ProfesorController@editarProfesor'));
 	Route::post('profesor/eliminarProfesor', array('uses' => 'ProfesorController@eliminarProfesor'));
 	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
-
-	/* Rutas para Tecologias */
-	Route::post('tecnologia/agregarTecnologia', array('uses' => 'TecnologiaController@agregarTecnologia'));
 
 	/*Rutas para ciclo*/
 	Route::get('ciclo/agregar', function(){

@@ -1,6 +1,6 @@
 /* Nodos */
-var btnAgregar = $('#btnAgregar'),
-	btnCancelar = $('#btnCancelar'),
+var btnAgregarAsignatura = $('#btnAgregarAsignatura'),
+	btnCancelarAsignatura = $('#btnCancelarAsignatura'),
 	txtId = $('#txtId'),
 	txtNombre = $('#txtNombre');
 
@@ -30,7 +30,7 @@ function agregarAsignatura(){
 		boxPoster.show().delay(2000).fadeOut();	
 	}
 
-	if ( res.status === 'Ok') {
+	if ( res.status === 'OK') {
 		icon = '<span class="glyphicon glyphicon-ok"></span> ';
 		limpiarAsignatura();
 	}else 
@@ -60,6 +60,6 @@ function validarAsignatura(){
 }
 
 /* Eventos */
-btnAgregar.on('click', agregarAsignatura);
-btnCancelar.on('click', limpiarAsignatura);
+btnAgregarAsignatura.on('click', agregarAsignatura);
+btnCancelarAsignatura.on('click', limpiarAsignatura);
 $('#liAgregarAsignatura').addClass('active');

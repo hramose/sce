@@ -47,6 +47,7 @@ class AsignaturaController extends BaseController
 			'asigEstado'
 			))
 			->toArray();
+
 		if( count( $busqueda)>0 )
 			$response = array(
 				'status' => 'OK',
@@ -61,6 +62,32 @@ class AsignaturaController extends BaseController
 				);
 			return Response::json($response);
 	}
+
+	public function editarAsignatura(){
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+		
+		$data = Input::all();
+
+		/* Actualizar datos de asignatura */
+		$editar = Asignatura::where('asigId', $data['id'])
+		->update(array(
+			'asigId' => trim($data['id']),
+			'asigNombre' => trim($data['nombre']),
+			'asigEstado' => trim($data['estado'])
+			));
+		if ( $editar )
+			$response = array(
+				'status' => 'OK',
+				'message' => 'La asignatura se actualizo correctamente'
+				);
+		else
+			$response = array(
+				'status' => 'ERROR',
+				'message' => 'No se pudo actualizar la asignatura, intente nuevamente'
+				);
+		return Response::json( $response );
+	}	
 
 	public function eliminarAsignatura(){
 		if( !Usuario::isAdmin() )
@@ -85,4 +112,35 @@ class AsignaturaController extends BaseController
 				);
 		return Response::json( $response );
 	}
+
+	public function seleccionarAsignatura() {
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+
+			$data = Input::all();
+
+			$seleccionar = Asignatura::where('asigId', $data['id'])
+			->get(array(
+				'asigId',
+				'asigNombre',
+				'asigEstado'
+				))
+				->toArray();
+
+				if ( count( $seleccionar ) > 0 )
+				$response = array(					
+					'status' => 'OK',
+					'data' => $seleccionar,			
+					'message' => 'Resultados obtenidos'
+				);
+				else
+				$response = array(
+					'status' => 'ERROR',
+					'message' => 'No se encontraron resultados'
+				);
+
+				return Response::json( $response );
+			}
+
 }
+

@@ -66,6 +66,33 @@
       </ul>
       <ul class="nav nav-sidebar">
         <li class="header">
+          <h5>Grupo</h5>
+        </li>
+        <li id="liAgregarGrupo">
+          <a href="{{ URL::to('admin/grupo/agregar') }}">
+            <span class="glyphicon glyphicon-plus"></span> Agregar
+          </a>
+        </li>
+        <li id="liEditarGrupo">
+          <a href="{{ URL::to('admin/grupo/editar') }}">
+            <span class="glyphicon glyphicon-edit"></span> Editar
+          </a>
+        </li>
+        <li class="divisor"></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li class="header">
+          <h5>Ciclo</h5>
+        </li>
+        <li id="liAgregarCiclo">
+          <a href="{{ URL::to('admin/ciclo/agregar') }}">
+              <span class="glyphicon glyphicon-plus"></span> Agregar
+          </a>
+        </li>
+        <li class="divisor"></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li class="header">
           <h5>Asignaturas</h5>
         </li>
         <li id="liAgregarAsignatura">
@@ -114,39 +141,6 @@
         </li>
         <li class="divisor"></li>
       </ul>
-      <ul class="nav nav-sidebar">
-        <li class="header">
-          <h5>Orientador</h5>
-        </li>
-         <li class="divisor"></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li class="header">
-          <h5>Ciclo</h5>
-        </li>
-        <li id="liAgregarCiclo">
-          <a href="{{ URL::to('admin/ciclo/agregar') }}">
-              <span class="glyphicon glyphicon-plus"></span> Agregar
-            </a>
-        </li>
-        <li class="divisor"></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-      <li class="header">
-        <h5>Grupo</h5>
-      </li>
-      <li id="liAgregarGrupo">
-        <a href="{{ URL::to('admin/grupo/agregar') }}">
-            <span class="glyphicon glyphicon-plus"></span> Agregar
-          </a>
-      </li>
-      <li id="liEditarGrupo">
-        <a href="{{ URL::to('admin/grupo/editar') }}">
-            <span class="glyphicon glyphicon-edit"></span> Editar
-          </a>
-      </li>
-      <li class="divisor"></li>
-    </ul>
 
     </div>
   </div>

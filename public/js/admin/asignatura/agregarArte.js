@@ -1,17 +1,17 @@
 /* Nodos */
-var btnAgregarTecnologia = $('#btnAgregarTecnologia'),
-	btnCancelarTecnologia = $('#btnCancelarTecnologia'),
-	txtNombreTec = $('#txtNombreTec');
+var btnAgregarArte = $('#btnAgregarArte'),
+	btnCancelarArte = $('#btnCancelarArte'),
+	txtNombreArt = $('#txtNombreArt');
 
 /* Funciones */
-function agregarTecnologia(){
-	if ( !validarTecnologia () )
+function agregarArte(){
+	if ( !validarArte () )
 		return false;
 
 	var datos = $.ajax({
-		url: 'agregarTecnologia',
+		url: 'agregarArte',
 		data:{
-			nombreT:txtNombreTec.val()
+			nombreA:txtNombreArt.val()
 		},
 		type: 'post',
 		dataType: 'json',
@@ -29,28 +29,28 @@ function agregarTecnologia(){
 	}
 	if ( res.status === 'OK') {
 		icon = '<span class="glyphicon glyphicon-ok"></span> ';
-		limpiarTecnologia();
+		limpiarArte();
 	}else 
 		ico = '<span class="glyphicon glyphicon-remove"></span> ';
 		messagePoster.html(icon+res.message);
 		boxPoster.show().delay(3000).fadeOut();
 }
 
-function limpiarTecnologia(){
-	txtNombreTec.val('');
+function limpiarArte(){
+	txtNombreArt.val('');
 }
 
-function validarTecnologia(){
-	if (txtNombreTec.val() === "" ){
-		alert('Indique el nombre de la asignatura de tecnologia');
-		txtNombreTec.focus();
+function validarArte(){
+	if (txtNombreArt.val() === "" ){
+		alert('Indique el nombre de la asignatura de arte');
+		txtNombreArt.focus();
 		return false;
 	}
 	return true;
 }
 
 /* Eventos */
-btnAgregarTecnologia.on('click', agregarTecnologia);
-btnCancelarTecnologia.on('click', limpiarTecnologia);
+btnAgregarArte.on('click', agregarArte);
+btnCancelarArte.on('click', limpiarArte);
 
 
