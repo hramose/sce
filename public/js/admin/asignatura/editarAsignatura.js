@@ -15,7 +15,7 @@ var formEditar = $('#formEditar'),
 	txtNombre = $('#txtNombre'),
 	sltEstado = $('#sltEstado');
 var asigSeleccionada;
-	
+
 /* Funciones */
 
 function buscarAsignatura(){
@@ -84,13 +84,14 @@ function cancelarEdicion(){
 
 function editarAsignatura(){
 	var id = asigSeleccionada;
-  	if(id === "")	
+  	if(id === "")
     return false;
 
   	var datos = $.ajax({
     url: 'editarAsignatura',
     data: {
-      id: txtId.val(),		
+      id:id,    
+      idNueva: txtId.val(),
       nombre: txtNombre.val(),
       estado: sltEstado.val()
     },
@@ -112,7 +113,7 @@ function editarAsignatura(){
   	if ( res.status === 'OK' ){
     icon = '<span class="glyphicon glyphicon-ok"></span> ';
     cancelarEdicion();
-    buscarAsignatura();		
+    buscarAsignatura();
   	}else
     icon = '<span class="glyphicon glyphicon-remove"></span> ';
 
@@ -159,7 +160,7 @@ function eliminarAsignatura(){
 	boxPoster.show().delay(3000).fadeOut();
 }
 
-function seleccionarAsignatura() {	
+function seleccionarAsignatura() {
 	var id = $(this).attr('id');
 	if ( id === "")
 		return false;
@@ -186,8 +187,8 @@ function seleccionarAsignatura() {
 			}
 
 		if (res.status === 'OK'){
-					$.each(res.data, function(k,datos){	
-						txtId.val(datos.asigId);			
+					$.each(res.data, function(k,datos){
+						txtId.val(datos.asigId);
 						txtNombre.val(datos.asigNombre);
 						sltEstado.val(datos.asigEstado);
 					});
@@ -202,6 +203,6 @@ btnBuscar.on('click', buscarAsignatura);
 btnCancelar.on('click', cancelarEdicion);
 btnGuardar.on('click', editarAsignatura);
                        /*(elemento, evento, funcion js) */
-tblAsignatura.delegate('.glyphicon-trash', 'click', eliminarAsignatura);	
-tblAsignatura.delegate('.glyphicon-edit', 'click', seleccionarAsignatura); 
+tblAsignatura.delegate('.glyphicon-trash', 'click', eliminarAsignatura);
+tblAsignatura.delegate('.glyphicon-edit', 'click', seleccionarAsignatura);
 $('#liEditarAsignatura').addClass('active');

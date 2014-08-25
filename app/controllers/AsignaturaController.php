@@ -23,7 +23,7 @@ class AsignaturaController extends BaseController
 				'status' => 'OK',
 				'message' => 'Asignatura se agrego exitosamente'
 				);
-		else 
+		else
 			$response = array(
 				'status' => 'ERROR',
 				'message' => 'Error al agregar la asigantura, intente mas tarde'
@@ -66,13 +66,13 @@ class AsignaturaController extends BaseController
 	public function editarAsignatura(){
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
-		
+
 		$data = Input::all();
 
 		/* Actualizar datos de asignatura */
 		$editar = Asignatura::where('asigId', $data['id'])
 		->update(array(
-			'asigId' => trim($data['id']),
+			'asigId' => trim($data['idNueva']),
 			'asigNombre' => trim($data['nombre']),
 			'asigEstado' => trim($data['estado'])
 			));
@@ -87,7 +87,7 @@ class AsignaturaController extends BaseController
 				'message' => 'No se pudo actualizar la asignatura, intente nuevamente'
 				);
 		return Response::json( $response );
-	}	
+	}
 
 	public function eliminarAsignatura(){
 		if( !Usuario::isAdmin() )
@@ -128,9 +128,9 @@ class AsignaturaController extends BaseController
 				->toArray();
 
 				if ( count( $seleccionar ) > 0 )
-				$response = array(					
+				$response = array(
 					'status' => 'OK',
-					'data' => $seleccionar,			
+					'data' => $seleccionar,
 					'message' => 'Resultados obtenidos'
 				);
 				else
@@ -143,4 +143,3 @@ class AsignaturaController extends BaseController
 			}
 
 }
-
