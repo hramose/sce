@@ -11,7 +11,8 @@ class CicloController extends BaseController{
 		/* Insertar ciclo*/
 		$insert = Ciclo::insert(array(
 
-			'cicCiclo' => trim($data['ciclo'])
+			'cicCiclo' => trim($data['ciclo']),
+			'cicGrupo' => trim($data['grupo'])	/*para agregar relacion entre tabla ciclo y grupo*/
 
 			));
 

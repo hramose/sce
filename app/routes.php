@@ -82,15 +82,16 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 		return View::make('admin.ciclo.agregar');
 	});
 	Route::post('ciclo/agregarCiclo',array('uses' => 'CicloController@agregarCiclo'));
+	Route::post('ciclo/gruposActivos', array('uses' => 'GrupoController@gruposActivos'));
+
 	/*Rutas para Grupo*/
 	Route::get('grupo/agregar', function(){
 		return View::make('admin.grupo.agregar');
 		});
-	Route::post('grupo/agregarGrupo',array('uses' => 'GrupoController@agregarGrupo'));
-
 	Route::get('grupo/editar', function(){
-		return View::make('admin.grupo.editar');
-		});
+			return View::make('admin.grupo.editar');
+			});
+	Route::post('grupo/agregarGrupo',array('uses' => 'GrupoController@agregarGrupo'));
 	Route::post('grupo/buscarGrupo', array('uses' => 'GrupoController@buscarGrupo'));
 	Route::post('grupo/editarGrupo', array('uses' => 'GrupoController@editarGrupo'));
 	Route::post('grupo/eliminarGrupo', array('uses' => 'GrupoController@eliminarGrupo'));

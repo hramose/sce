@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('title')
-Agregar profesor | Sistema de Control Escolar
+Agregar ciclo | Sistema de Control Escolar
 @stop
 
 @section('content')
@@ -20,10 +20,10 @@ Agregar profesor | Sistema de Control Escolar
 
 
 					<div class="form-group" id="numero">
-							<label for="txtCiclo" class="col-md-3 control-label">Ciclo</label>
+							<label for="slctCiclo" class="col-md-3 control-label">Ciclo</label>
 							<div class="col-md-3">
-								<select id="txtCiclo" class="form-control input-sm">
-									<option value="0">Selecciona el Ciclo</option>
+								<select id="slctCiclo" class="form-control input-sm">
+									<option value="Z">Selecciona el Ciclo</option>
 									<option value="{{date("Y")}}-{{date("Y")+1}}">{{date("Y")}} - {{date("Y")+1}} </option>
 								</select>
 							</div>
@@ -31,23 +31,19 @@ Agregar profesor | Sistema de Control Escolar
 
 
 
-					<div class="form-group" id="grupo">
-							<label for="txtGrupo" class="col-md-3 control-label">Grupo</label>
+					<div class="form-group" id="divGrupo">
+							<label for="slctGrupo" class="col-md-3 control-label">Grupo</label>
 							<div class="col-md-3">
-								<select id="txtGrupo" class="form-control input-sm">
-									<option value="0">Selecciona el Ciclo</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
+								<select id="slctGrupo" class="form-control input-sm">
+									<option value= "Z">Selecione grupo</option>
 								</select>
 							</div>
 					</div>
 
-					<div class="form-group" id="grado">
-							<label for="txtGrado" class="col-md-3 control-label">Grado</label>
+					<div class="form-group" id="idvGrado">
+							<label for="slctGrado" class="col-md-3 control-label">Grado</label>
 							<div class="col-md-3">
-								<select id="txtrGado" class="form-control input-sm">
+								<select id="slctGrado" class="form-control input-sm">
 									<option value="0">Selecciona el Ciclo</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
