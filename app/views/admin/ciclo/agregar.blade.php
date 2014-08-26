@@ -21,16 +21,45 @@ Agregar profesor | Sistema de Control Escolar
 
 					<div class="form-group" id="numero">
 							<label for="txtCiclo" class="col-md-3 control-label">Ciclo</label>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<select id="txtCiclo" class="form-control input-sm">
 									<option value="0">Selecciona el Ciclo</option>
 									<option value="{{date("Y")}}-{{date("Y")+1}}">{{date("Y")}} - {{date("Y")+1}} </option>
 								</select>
 							</div>
-						<div class="col-md-4">
-								<button class="btn btn-success btn-sm" id="btnAgregar">Aceptar</button>
-								<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
-						</div>
+					</div>
+
+
+
+					<div class="form-group" id="grupo">
+							<label for="txtGrupo" class="col-md-3 control-label">Grupo</label>
+							<div class="col-md-3">
+								<select id="txtGrupo" class="form-control input-sm">
+									<option value="0">Selecciona el Ciclo</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
+							</div>
+					</div>
+
+					<div class="form-group" id="grado">
+							<label for="txtGrado" class="col-md-3 control-label">Grado</label>
+							<div class="col-md-3">
+								<select id="txtrGado" class="form-control input-sm">
+									<option value="0">Selecciona el Ciclo</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
+							</div>
+					</div>
+
+					<div class="col-md-6 control-label">
+							<button class="btn btn-success btn-sm" id="btnAgregar">Aceptar</button>
+							<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
 					</div>
 
 				</fieldset>
