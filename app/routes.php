@@ -83,7 +83,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	});
 	Route::post('ciclo/agregarCiclo',array('uses' => 'CicloController@agregarCiclo'));
 	Route::post('ciclo/gruposActivos', array('uses' => 'GrupoController@gruposActivos'));
-
+	Route::post('ciclo/gradosActivos', array('uses' => 'GradoController@gradosActivos'));
+	
 	/*Rutas para Grupo*/
 	Route::get('grupo/agregar', function(){
 		return View::make('admin.grupo.agregar');
@@ -97,4 +98,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('grupo/eliminarGrupo', array('uses' => 'GrupoController@eliminarGrupo'));
 	Route::post('grupo/seleccionarGrupo', array('uses' => 'GrupoController@seleccionarGrupo'));
 
+	/*Rutas para Grado*/
+	Route::post('grado/seleccionarGrado', array('uses' => 'GradoController@seleccionarGrado'));
 });
