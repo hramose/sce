@@ -88,6 +88,17 @@ class EscuelaController extends \BaseController {
 			return Response::json( $response );
 		}
 
+	/* Método estatico para obtener las escuelas */
+	public static function getEscuelas(){
+
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+
+		$escuelas = Escuela::orderBy('escNombre')->get()->toArray();
+
+		return $escuelas;
+	}
+
 
 		/**************************************************************************/
 	public function seleccionarEscuela(){

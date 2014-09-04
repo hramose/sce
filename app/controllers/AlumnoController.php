@@ -115,4 +115,42 @@ class AlumnoController extends BaseController
 
 		return Response::json( $response );
 	}
+
+	/* Método para encontrar los datos del alumno que se va a editar,
+	*	para que sea llenado en el formulario de editar alumno
+	 */
+	public function getEditarAlumno(){
+
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+
+		$data = Input::all();
+
+		/* Buscar los datos del alumno, incluye el select de tablas relacionadas */
+		$alumno = Alumno::where('aluCurp', $data['id'])
+			->leftJoin('escuelas', 'alumnos.aluEscuela', '=', 'escuelas.escId')
+			->get()
+			->toArray();
+
+		/* Obteniendo todas las escuelas */
+		$escuelas = EscuelaController::getEscuelas();
+
+		$datos = array(
+			'alumnos' => $alumno,
+			'escuelas' => $escuelas
+		);
+
+		if ( count( $alumno ) > 0 )
+			$response = array(
+				'status' => 'OK',
+				'data' => $datos
+			);
+		else
+			$response = array(
+				'status' => 'ERROR',
+				'message' => 'No se pudieron recuperar los datos, intente de nuevo'
+			);
+
+		return Response::json( $response );
+	}
 }

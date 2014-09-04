@@ -39,6 +39,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	});
 	Route::post('alumno/buscarAlumno', array('uses' => 'AlumnoController@buscarAlumno'));
 	Route::post('alumno/eliminarAlumno', array('uses' => 'AlumnoController@eliminarAlumno'));
+	Route::post('alumno/getEditarAlumno', array('uses' => 'AlumnoController@getEditarAlumno'));
 
 	/* Rutas para asignaturas */
 	Route::get('asignatura/agregarAsignatura', function(){

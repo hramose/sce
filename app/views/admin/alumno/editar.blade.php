@@ -51,7 +51,7 @@ Editar Alumno | Sistema de Control Escolar
 </div>
 
 <!-- Panel editar alumno -->
-<div class="row">
+<div class="row hidden" id="pnlEditAlumno">
 	<div class="col-md-12">
 		<div class="well">
 			<div class="form-horizontal">

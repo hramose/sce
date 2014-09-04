@@ -6,6 +6,19 @@ var btnBuscar = $('#btnBuscar'),
 var tblAlumnos = $('#tblAlumnos'),
 	tbodyAlumnos = $('#tbodyAlumnos');
 
+var pnlEditAlumno = $('#pnlEditAlumno'),
+  txtCurp = $('#txtCurp'),
+  txtApep = $('#txtApep'),
+  txtApem = $('#txtApem'),
+  txtNombre = $('#txtNombre'),
+  txtSexo = $('#txtSexo'),
+  txtTutor = $('#txtTutor'),
+  txtTelefono = $('#txtTelefono'),
+  txtDireccion = $('#txtDireccion'),
+  txtEdad = $('#txtEdad'),
+  txtEscuela = $('#txtEscuela'),
+  txtObservacion = $('#txtObservacion');
+
 /* Funciones */
 function buscarAlumno(){
 
@@ -106,7 +119,46 @@ function eliminarAlumno(){
 	boxPoster.show().delay(3000).fadeOut();
 }
 
+function getEditarAlumno(){
+  var id = $(this).attr('id');
+  if ( id === "" )
+    return false;
+
+  var datos = $.ajax({
+    url: 'getEditarAlumno',
+    data: {
+      id: id
+    },
+    type: 'post',
+    dataType:'json',
+        async:false
+    }).error(function(e){
+        alert('Ocurrio un error, intente de nuevo');
+    }).responseText;
+
+    var res;
+    try{
+        res = JSON.parse(datos);
+    }catch (e){
+        messagePoster.html('Error JSON ' + e);
+        boxPoster.show().delay(2000).fadeOut();
+    }
+
+    if ( res.status === 'OK' ){
+      tbodyAlumnos.html('');
+      tblAlumnos.addClass('hidden');
+      pnlEditAlumno.removeClass('hidden');
+
+      
+    }else{
+      icon = '<span class="glyphicon glyphicon-remove"></span> ';
+      messagePoster.html(icon + res.message);
+      boxPoster.show().delay(3000).fadeOut();
+    }
+}
+
 /* Eventos */
 btnBuscar.on('click', buscarAlumno);
 tblAlumnos.delegate('.glyphicon-trash', 'click', eliminarAlumno);
+tblAlumnos.delegate('.glyphicon-edit', 'click', getEditarAlumno);
 $('#liEditarAlumno').addClass('active');

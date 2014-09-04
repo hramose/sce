@@ -52,45 +52,25 @@
 	<div class="container-fluid">
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
+      <!-- Alumnos -->
       <ul class="nav nav-sidebar">
         <li class="header">
-          <h5>Escuela</h5>
+          <h5>Alumnos</h5>
         </li>
-        <li id="liEditarEscuela">
-          <a href="{{ URL::to('admin/escuela/editarEscuela')}}">
-            <span class="glyphicon glyphicon-edit"></span>
-            Editar
-          </a>
-        </li>
-        <li class="divisor"></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li class="header">
-          <h5>Grupo</h5>
-        </li>
-        <li id="liAgregarGrupo">
-          <a href="{{ URL::to('admin/grupo/agregar') }}">
+        <li id="liAgregarAlumno">
+          <a href="{{ URL::to('admin/alumno/agregar') }}">
             <span class="glyphicon glyphicon-plus"></span> Agregar
           </a>
         </li>
-        <li id="liEditarGrupo">
-          <a href="{{ URL::to('admin/grupo/editar') }}">
+        <li id="liEditarAlumno">
+          <a href="{{ URL::to('admin/alumno/editar') }}">
             <span class="glyphicon glyphicon-edit"></span> Editar
           </a>
         </li>
         <li class="divisor"></li>
       </ul>
-      <ul class="nav nav-sidebar">
-        <li class="header">
-          <h5>Ciclo</h5>
-        </li>
-        <li id="liAgregarCiclo">
-          <a href="{{ URL::to('admin/ciclo/agregar') }}">
-              <span class="glyphicon glyphicon-plus"></span> Agregar
-          </a>
-        </li>
-        <li class="divisor"></li>
-      </ul>
+
+      <!-- Asignaturas -->
       <ul class="nav nav-sidebar">
         <li class="header">
           <h5>Asignaturas</h5>
@@ -109,6 +89,53 @@
         </li>
         <li class="divisor"></li>
       </ul>
+
+      <!-- Ciclo -->
+      <ul class="nav nav-sidebar">
+        <li class="header">
+          <h5>Ciclo</h5>
+        </li>
+        <li id="liAgregarCiclo">
+          <a href="{{ URL::to('admin/ciclo/agregar') }}">
+              <span class="glyphicon glyphicon-plus"></span> Agregar
+          </a>
+        </li>
+        <li class="divisor"></li>
+      </ul>
+
+      <!-- Escuela -->
+      <ul class="nav nav-sidebar">
+        <li class="header">
+          <h5>Escuela</h5>
+        </li>
+        <li id="liEditarEscuela">
+          <a href="{{ URL::to('admin/escuela/editarEscuela')}}">
+            <span class="glyphicon glyphicon-edit"></span>
+            Editar
+          </a>
+        </li>
+        <li class="divisor"></li>
+      </ul>
+
+      <!-- Grupo -->
+      <ul class="nav nav-sidebar">
+        <li class="header">
+          <h5>Grupo</h5>
+        </li>
+        <li id="liAgregarGrupo">
+          <a href="{{ URL::to('admin/grupo/agregar') }}">
+            <span class="glyphicon glyphicon-plus"></span> Agregar
+          </a>
+        </li>
+        <li id="liEditarGrupo">
+          <a href="{{ URL::to('admin/grupo/editar') }}">
+            <span class="glyphicon glyphicon-edit"></span> Editar
+          </a>
+        </li>
+        <li class="divisor"></li>
+      </ul>
+
+      <!-- Profesores -->
       <ul class="nav nav-sidebar">
       	<li class="header">
       		<h5>Profesores</h5>
@@ -125,22 +152,7 @@
     		</li>
         <li class="divisor"></li>
       </ul>
-      <ul class="nav nav-sidebar">
-        <li class="header">
-          <h5>Alumnos</h5>
-        </li>
-        <li id="liAgregarAlumno">
-          <a href="{{ URL::to('admin/alumno/agregar') }}">
-            <span class="glyphicon glyphicon-plus"></span> Agregar
-          </a>
-        </li>
-        <li id="liEditarAlumno">
-          <a href="{{ URL::to('admin/alumno/editar') }}">
-            <span class="glyphicon glyphicon-edit"></span> Editar
-          </a>
-        </li>
-        <li class="divisor"></li>
-      </ul>
+      
 
     </div>
   </div>
