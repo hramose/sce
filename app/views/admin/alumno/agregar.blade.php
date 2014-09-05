@@ -88,7 +88,6 @@ Agregar alumno | Sistema de Control Escolar
 						<label for="txtEscuela" class="col-md-3 control-label">Escuela</label>
 						<div class="col-md-9">
 							<select id="txtEscuela" class="form-control input-sm">
-								<option value="1">Escuela registrada</option>
 							</select>
 						</div>
 					</div>

@@ -19,45 +19,76 @@ function agregarAlumno(){
 		return false;
 
 	var datos = $.ajax({
-        url:'agregarAlumno',
-        data: {
-        	curp: txtCurp.val(),
-        	apep: txtApep.val(),
-        	apem: txtApem.val(),
-        	nombre: txtNombre.val(),
-        	sexo: txtSexo.val(),
-        	tutor: txtTutor.val(),
-        	telefono: txtTelefono.val(),
-        	direccion: txtDireccion.val(),
-        	edad: txtEdad.val(),
-        	escuela: txtEscuela.val(),
-        	observacion: txtObservacion.val()
-        },
-        type:'post',
-        dataType:'json',
-        async:false
-    }).error(function(e){
-        alert('Ocurrio un error, intente de nuevo');
-    }).responseText;
+    url:'agregarAlumno',
+    data: {
+    	curp: txtCurp.val(),
+    	apep: txtApep.val(),
+    	apem: txtApem.val(),
+    	nombre: txtNombre.val(),
+    	sexo: txtSexo.val(),
+    	tutor: txtTutor.val(),
+    	telefono: txtTelefono.val(),
+    	direccion: txtDireccion.val(),
+    	edad: txtEdad.val(),
+    	escuela: txtEscuela.val(),
+    	observacion: txtObservacion.val()
+    },
+    type:'post',
+    dataType:'json',
+    async:false
+	}).error(function(e){
+	    alert('Ocurrio un error, intente de nuevo');
+	}).responseText;
 	
-    var res;
-    try{
-        res = JSON.parse(datos);
-    }catch (e){
-        messagePoster.html('Error JSON ' + e);
-        boxPoster.show().delay(2000).fadeOut();
-    }
+  var res;
+  try{
+      res = JSON.parse(datos);
+  }catch (e){
+      messagePoster.html('Error JSON ' + e);
+      boxPoster.show().delay(2000).fadeOut();
+  }
 
-    if ( res.status === 'OK' ){
-    	icon = '<span class="glyphicon glyphicon-ok"></span> ';
-    	limpiarAlumno();
-    }else
-    	icon = '<span class="glyphicon glyphicon-remove"></span> ';
-    
-    messagePoster.html(icon + res.message);
+  if ( res.status === 'OK' ){
+  	icon = '<span class="glyphicon glyphicon-ok"></span> ';
+  	limpiarAlumno();
+  }else
+  	icon = '<span class="glyphicon glyphicon-remove"></span> ';
+  
+  messagePoster.html(icon + res.message);
 	boxPoster.show().delay(3000).fadeOut();
 }
 
+function getEscuelas(){
+
+	var datos = $.ajax({
+		url: '../escuela/getEscuelas',
+		type: 'get',
+		async:false
+	}).error(function(e){
+	    alert('Ocurrio un error, intente de nuevo');
+	}).responseText;
+
+	var res;
+  try{
+      res = JSON.parse(datos);
+  }catch (e){
+      messagePoster.html('Error JSON ' + e);
+      boxPoster.show().delay(2000).fadeOut();
+  }
+
+  if ( res.length > 0 ){
+  	txtEscuela.html('');
+  	$.each(res, function(k,v){
+  		txtEscuela.append(
+  			'<option value="'+v.escId+'">'+v.escNombre+' - '+v.turNombre+'</option>'
+			);
+  	});
+  }else{
+		messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' + 
+			'No existen escuelas registradas');
+    boxPoster.show().delay(2000).fadeOut();
+  }
+}
 function limpiarAlumno(){
 	txtCurp.val('');
 	txtApep.val('');
@@ -121,6 +152,10 @@ function validarAlumno(){
 }
 
 /* Eventos */
+$(document).on('ready', function(){
+	limpiarAlumno();
+	getEscuelas();
+});
 btnAgregar.on('click', agregarAlumno);
 btnCancelar.on('click', limpiarAlumno);
 $('#liAgregarAlumno').addClass('active');

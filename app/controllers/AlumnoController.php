@@ -27,6 +27,7 @@ class AlumnoController extends BaseController
 			'aluEdad' => trim($data['edad']),
 			'aluObservaciones' => trim($data['observacion']),
 			'aluEstado' => true,
+			'aluEscuela' => $data['escuela'],
 			'aluPass' => Hash::make(trim($data['curp']))
 		));
 
@@ -37,7 +38,7 @@ class AlumnoController extends BaseController
 		if ( $insert )
 			$response = array(
 				'status' => 'OK',
-				'message' => 'El alumno se agrego correctamente'
+				'message' => 'El alumno se agregó correctamente'
 			);
 		else
 			$response = array(
@@ -63,6 +64,9 @@ class AlumnoController extends BaseController
 			->orWhere('aluApem', 'like', '%'. $buscar .'%')
 			->orWhere('aluNombre', 'like', '%'. $buscar .'%')
 			->orWhere('aluCurp', 'like', '%'. $buscar .'%')
+			->orderBy('aluApep')
+			->orderBy('aluApem')
+			->orderBy('aluNombre')
 			->get(array(
 				'aluCurp',
 				'aluApep',
@@ -85,6 +89,45 @@ class AlumnoController extends BaseController
 				'status' => 'ERROR',
 				'message' => 'No se encontraron resultados'
 			);
+
+		return Response::json( $response );
+	}
+
+	public function editarAlumno(){
+
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+
+		$data = Input::all();
+
+		$update = Alumno::where('aluCurp', $data['oldCurp'])
+			->update(
+				array(
+					'aluCurp' => trim($data['curp']),
+					'aluApep' => trim($data['apep']),
+					'aluApem' => trim($data['apem']),
+					'aluNombre' => trim($data['nombre']),
+					'aluSexo' => trim($data['sexo']),
+					'aluTutor' => trim($data['tutor']),
+					'aluTelefono' => trim($data['telefono']),
+					'aluDireccion' => trim($data['direccion']),
+					'aluEdad' => trim($data['edad']),
+					'aluEscuela' => $data['escuela'],
+					'aluEstado' => $data['activo'],
+					'aluObservaciones' => trim($data['observacion'])
+				)
+			);
+
+			if ( $update )
+				$response = array(
+					'status' => 'OK',
+					'message' => 'El alumno se editó correctamente'
+				);
+			else
+				$response = array(
+					'status' => 'ERROR',
+					'message' => 'No se pudo editar al alumno, intente de nuevo. No se pueden guardar los mismos datos'
+				);
 
 		return Response::json( $response );
 	}
@@ -136,7 +179,7 @@ class AlumnoController extends BaseController
 		$escuelas = EscuelaController::getEscuelas();
 
 		$datos = array(
-			'alumnos' => $alumno,
+			'alumno' => $alumno[0],
 			'escuelas' => $escuelas
 		);
 

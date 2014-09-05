@@ -61,6 +61,7 @@ Editar Alumno | Sistema de Control Escolar
 						<div class="form-group">
 							<label for="txtCurp" class="col-md-3 control-label">CURP</label>
 							<div class="col-md-9">
+								<input type="hidden" class="form-control input-sm" id="oldCurp">
 								<input type="text" id="txtCurp" class="form-control input-sm" placeholder="CURP" maxlength="18" autofocus>
 							</div>
 						</div>

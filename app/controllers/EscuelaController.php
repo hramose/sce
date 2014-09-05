@@ -94,7 +94,11 @@ class EscuelaController extends \BaseController {
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
-		$escuelas = Escuela::orderBy('escNombre')->get()->toArray();
+		$escuelas = Escuela::
+			leftJoin('turnos', 'escuelas.escTurno', '=', 'turnos.turId')
+			->orderBy('escNombre')
+			->get()
+			->toArray();
 
 		return $escuelas;
 	}

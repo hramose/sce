@@ -40,6 +40,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('alumno/buscarAlumno', array('uses' => 'AlumnoController@buscarAlumno'));
 	Route::post('alumno/eliminarAlumno', array('uses' => 'AlumnoController@eliminarAlumno'));
 	Route::post('alumno/getEditarAlumno', array('uses' => 'AlumnoController@getEditarAlumno'));
+	Route::post('alumno/editarAlumno', array('uses' => 'AlumnoController@editarAlumno'));
 
 	/* Rutas para asignaturas */
 	Route::get('asignatura/agregarAsignatura', function(){
@@ -57,6 +58,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('asignatura/agregarArte', array('uses' => 'ArteController@agregarArte'));
 
 	/* Rutas para escuelas */
+	Route::get('escuela/getEscuelas', array('uses' => 'EscuelaController@getEscuelas'));
 	Route::get('escuela/editarEscuela', function(){
 		return View::make('admin.escuela.editarEscuela');
 	});
