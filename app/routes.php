@@ -59,8 +59,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 
 	/* Rutas para escuelas */
 	Route::get('escuela/getEscuelas', array('uses' => 'EscuelaController@getEscuelas'));
-	Route::get('escuela/editarEscuela', function(){
-		return View::make('admin.escuela.editarEscuela');
+	Route::get('escuela/editar', function(){
+		return View::make('admin.escuela.editar');
 	});
 	Route::post('escuela/buscarEscuela', array('uses' => 'EscuelaController@buscarEscuela'));
 	Route::post('escuela/editarEscuela', array('uses' => 'EscuelaController@editarEscuela'));

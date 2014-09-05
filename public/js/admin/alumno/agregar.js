@@ -40,6 +40,7 @@ function agregarAlumno(){
 	    alert('Ocurrio un error, intente de nuevo');
 	}).responseText;
 	
+	alert(datos);
   var res;
   try{
       res = JSON.parse(datos);
@@ -143,8 +144,8 @@ function validarAlumno(){
 		txtEdad.focus();
 		return false;
 	}
-	if ( txtEscuela.val() === "" ){
-		alert('Indique una escuela donde se inscribirá');
+	if ( txtEscuela.val() === "" || txtEscuela.val() == null ){
+		alert('Indique una escuela donde se inscribirá al alumno');
 		txtEscuela.focus();
 		return false;
 	}

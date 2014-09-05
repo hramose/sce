@@ -85,6 +85,18 @@ class TurnoController extends BaseController
 		return Response::json( $response );
 	}
 
+	public static function getTurnos(){
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+
+		$turnos = Turno::where('turEstado', true)
+			->orderBy('turNombre')
+			->get()
+			->toArray();
+
+		return $turnos;
+	}
+
 	public function seleccionarTurno() {
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');

@@ -6,9 +6,6 @@ class EscuelaController extends \BaseController {
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
 
-		$data = Input::all();
-		$buscar = trim($data['buscar']);
-
 		$busqueda = Escuela::get(array(
 				'escId',
 				'escNombre',
@@ -111,26 +108,32 @@ class EscuelaController extends \BaseController {
 
 			$data = Input::all();
 
-			$seleccionar = Escuela::where('escId', $data['id'])
-			->get(array(
-				'escId',
-				'escNombre',
-				'escZona',
-				'escDireccion',
-				'escTelefono',
-				'escDirector',
-				'escEstado',
-				'escTurno'
-				))
+			$escuelas = Escuela::where('escId', $data['id'])
+				->get(array(
+					'escId',
+					'escNombre',
+					'escZona',
+					'escDireccion',
+					'escTelefono',
+					'escDirector',
+					'escEstado',
+					'escTurno'
+					))
 				->toArray();
 
-			if ( count( $seleccionar ) > 0 )
+			$turnos = TurnoController::getTurnos();
+
+			if ( count( $escuelas ) > 0 ){
+				$datos = array(
+					'escuelas' => $escuelas[0],
+					'turnos' => $turnos
+				);
 				$response = array(
 					'status' => 'OK',
-					'data' => $seleccionar,
+					'data' => $datos,
 					'message' => 'Resultados obtenidos'
 				);
-			else
+			}else
 				$response = array(
 					'status' => 'ERROR',
 					'message' => 'No se encontraron resultados'

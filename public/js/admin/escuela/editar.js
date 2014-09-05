@@ -1,7 +1,4 @@
 /* Nodos */
-var btnBuscarE = $('#btnBuscarE'),
-	txtBuscarE = $('#txtBuscarE');
-
 var btnGuardarE = $('#btnGuardarE'),
 		btnCancelarE = $('#btnCancelarE');
 
@@ -17,21 +14,17 @@ var formEditarE = $('#formEditarE'),
 		txtDireccionE = $('#txtDireccionE'),
 		txtTelefonoE = $('#txtTelefonoE'),
 		txtDirectorE = $('#txtDirectorE'),
-		slctTurnoE = $('#slctTurnoE'),
-		slctEstadoE = $('#slctEstadoE');
+		txtTurnoE = $('#txtTurnoE'),
+		txtEstadoE = $('#txtEstadoE');
 
 var escuelaSeleccionada;
 
 function buscarEscuela(){
 
 	var datos = $.ajax({
-		url: 'buscarEscuela',
-		data: {
-			buscar: 'null'	/*retorna todo contenido de tabla, nonecesita parametros*/
-		},
-		type: 'post',
-        dataType:'json',
-        async:false
+		url: 'getEscuelas',
+		type: 'get',
+    async:false
     }).error(function(e){
         alert('Ocurrio un error, intente de nuevo');
     }).responseText;
@@ -45,27 +38,20 @@ function buscarEscuela(){
     }
 
     tbodyEscuelas.html('');
-    if ( res.status === 'OK' ){
-			var turno;
+    if ( res.length > 0 ){
 		 	var i = 1;
-    	$.each(res.data, function(k,o){
+    	$.each(res, function(k,o){
     		if ( o.escEstado == 1 )
     			status = '<span class="glyphicon glyphicon-ok" title="Activo"></span>';
     		else
     			status = '<span class="glyphicon glyphicon-remove" title="Inactivo"></span>';
 
-				if ( o.escTurno === "v")
-					turno = "vespertino";
-				if ( o.escTurno === "m")
-					turno = "matutino";
-				if ( o.escTurno === "c")
-					turno = "tiempo completo";
-
     		tbodyEscuelas.append(
     			'<tr>'+
+  					'<td>'+i+'</td>'+
     				'<td>'+o.escId+'</td>'+
     				'<td>'+o.escNombre+'</td>'+
-    				'<td>'+turno+'</td>'+
+    				'<td>'+o.turNombre+'</td>'+
     				'<td class="center">'+o.escTelefono+'</td>'+
     				'<td class="center">'+status+'</td>'+
     				'<td class="center">'+
@@ -80,11 +66,14 @@ function buscarEscuela(){
 			);
 			i++;
     	});
-    }else
+    }else{
+    	messagePoster.html('No se encontraron escuelas');
+      boxPoster.show().delay(2000).fadeOut();
     	tbodyEscuelas.html('<tr><td colspan="8" class="center"><h3>'+ res.message +'</h3></td></tr>');
+    }
 
 	tblEscuelas.removeClass('hidden');
-	limpiarOcultarEdicion();
+	//limpiarOcultarEdicion();
 }
 
 	/****************************************************************************/
@@ -128,7 +117,7 @@ function eliminarEscuela(){
 }
 
 		/**************************************************************************/
-function guardarCambios(){
+function editarEscuela(){
 	if(escuelaSeleccionada === "")	/*escuelaSeleccionada variable global, se le asigna valor en funcion seleccionarEscuela*/
 		return false;
 
@@ -142,8 +131,8 @@ function guardarCambios(){
 			direccion: txtDireccionE.val(),
 			telefono: txtTelefonoE.val(),
 			director: txtDirectorE.val(),
-			turno: slctTurnoE.val(),
-			estado: slctEstadoE.val()
+			turno: txtTurnoE.val(),
+			estado: txtEstadoE.val()
 		},
 		type: 'post',
 		dataType:'json',
@@ -152,22 +141,22 @@ function guardarCambios(){
 			alert('Ocurrio un error, intente de nuevo');
 	}).responseText;
 
-	var resultadoConsulta;
+	var res;
 	try{
-			resultadoConsulta = JSON.parse(editar);
+			res = JSON.parse(editar);
 	}catch (e){
 			messagePoster.html('Error JSON ' + e);
 			boxPoster.show().delay(2000).fadeOut();
 	}
 
-	if ( resultadoConsulta.status === 'OK' ){
+	if ( res.status === 'OK' ){
 		icon = '<span class="glyphicon glyphicon-ok"></span> ';
 		limpiarOcultarEdicion();
 		buscarEscuela();		/*Para actualizar datos que se muestran dentro del cuerpo de tabla*/
 	}else
 		icon = '<span class="glyphicon glyphicon-remove"></span> ';
 
-	messagePoster.html(icon + resultadoConsulta.message);
+	messagePoster.html(icon + res.message);
 	boxPoster.show().delay(3000).fadeOut();
 
 }
@@ -180,8 +169,8 @@ function limpiarOcultarEdicion(){
 	txtDireccionE.val("");
 	txtTelefonoE.val("");
 	txtDirectorE.val("");
-	slctTurnoE.val("");
-	slctEstadoE.val("");
+	txtTurnoE.val("");
+	txtEstadoE.val("");
 	formEditarE.addClass('hidden');
 }
 
@@ -204,38 +193,55 @@ function seleccionarEscuela(){
 			alert('Ocurrio un error, intente de nuevo');
 		}).responseText;
 
-		var resConsulta;
+		var res;
 		try{
-				resConsulta = JSON.parse(datos);
+				res = JSON.parse(datos);
 
 				}catch(e){
 				messagePoster.html('Error JSON ' + e);
 				boxPoster.show().delay(2000).fadeOut();
 			}
 
-		if(resConsulta.status === 'OK'){
-			$.each(resConsulta.data, function(k,info){
-				txtIdE.val(info.escId);
-				txtNombreE.val(info.escNombre);
-				txtZonaE.val(info.escZona);
-				txtDireccionE.val(info.escDireccion);
-				txtTelefonoE.val(info.escTelefono);
-				txtDirectorE.val(info.escDirector);
-				slctTurnoE.val(info.escTurno);
-				slctEstadoE.val(info.escEstado);
+		if(res.status === 'OK'){
+			var esc = res.data.escuelas,
+				turnos = res.data.turnos;
 
+			txtTurnoE.html('');
+			$.each(turnos, function(k,v){
+				txtTurnoE.append(
+					'<option value="'+v.turId+'">'+v.turNombre+'</option>'
+				);
 			});
+
+			txtIdE.val(esc.escId);
+			txtNombreE.val(esc.escNombre);
+			txtZonaE.val(esc.escZona);
+			txtDireccionE.val(esc.escDireccion);
+			txtTelefonoE.val(esc.escTelefono);
+			txtDirectorE.val(esc.escDirector);
+			txtEstadoE.val(esc.escEstado);
+
+			txtTurnoE.find('option').each(function(){
+				if ( esc.escTurno == $(this).val() )
+					txtTurnoE.val(esc.escTurno);
+			});
+
+			txtEstadoE.find('option').each(function(){
+				if( esc.escEstado == $(this).val() )
+					txtEstadoE.val(esc.escEstado);
+			});
+
 			formEditarE.removeClass('hidden');
-			btnCancelarE.focus();
 		}
 }
 
-
 /* Eventos */
-btnBuscarE.on('click', buscarEscuela);
-btnGuardarE.on('click', guardarCambios);
+$(document).on('ready', function(){
+	buscarEscuela();
+	getTurnos();
+});
+btnGuardarE.on('click', editarEscuela);
 btnCancelarE.on('click', limpiarOcultarEdicion);
 tblEscuelas.delegate('.glyphicon-trash', 'click', eliminarEscuela);
 tblEscuelas.delegate('.glyphicon-edit', 'click', seleccionarEscuela);
 $('#liEditarEscuela').addClass('active');
-//$('#liEditarEscuela').on('click',buscarEscuela);

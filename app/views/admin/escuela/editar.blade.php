@@ -15,21 +15,6 @@ Editar escuela | Sistema de Control Escolar
 	Editar escuela
 </h1>
 
-<!-- Zona de búsqueda -->
-<div class="row">
-	<div class="col-md-8">
-		<div class="form-horizontal">
-			<fieldset>
-				<div class="form-group">
-					<div class="col-md-2">
-						<button class="btn btn-info btn-sm" id="btnBuscarE">Ver escuelas registradas </button>
-					</div>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-</div>
-
 <!-- Tabla de escuelas encontradas -->
 <div class="row">
 	<div class="col-md-12">
@@ -37,6 +22,7 @@ Editar escuela | Sistema de Control Escolar
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
+						<th class="center">#</th>
 						<th>CCT</th>
 						<th>Nombre</th>
 						<th>Turno</th>
@@ -103,20 +89,17 @@ Editar escuela | Sistema de Control Escolar
 					</div>
 
 					<div class="form-group">
-						<label for="slctTurnoE" class="col-md-3 control-label">Turno</label>
+						<label for="txtTurnoE" class="col-md-3 control-label">Turno</label>
 						<div class="col-md-9">
-							<select id="slctTurnoE" class="form-control input-sm">
-								<option value="m">Matutino</option>
-								<option value="v">Vespertino</option>
-								<option value="c">Tiempo completo</option>
+							<select id="txtTurnoE" class="form-control input-sm">
 							</select>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="slctEstadoE" class="col-md-3 control-label">¿Activo?</label>
+						<label for="txtEstadoE" class="col-md-3 control-label">¿Activo?</label>
 						<div class="col-md-9">
-							<select id="slctEstadoE" class="form-control input-sm">
+							<select id="txtEstadoE" class="form-control input-sm">
 								<option value="1">Sí</option>
 								<option value="0">No</option>
 							</select>
@@ -138,5 +121,5 @@ Editar escuela | Sistema de Control Escolar
 @stop
 
 @section('js')
-{{HTML::script('js/admin/escuela/editarEscuela.js')}}
+{{HTML::script('js/admin/escuela/editar.js')}}
 @stop

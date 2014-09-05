@@ -109,7 +109,7 @@
           <h5>Escuela</h5>
         </li>
         <li id="liEditarEscuela">
-          <a href="{{ URL::to('admin/escuela/editarEscuela')}}">
+          <a href="{{ URL::to('admin/escuela/editar')}}">
             <span class="glyphicon glyphicon-edit"></span>
             Editar
           </a>
