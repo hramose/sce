@@ -168,6 +168,7 @@ function guardarCambios(){
 
 	if ( res.status === 'OK' ){
 		icon = '<span class="glyphicon glyphicon-ok"></span> ';
+		txtBuscar.val(id);
 		limpiarOcultarEdicion();
 		buscarProfesor();		/*Para actualizar datos que se muestran dentro del cuerpo de tabla*/
 	}else
@@ -228,6 +229,8 @@ function seleccionarProfesor() {
 						slctEstadoP.val(info.profEstado);
 						slctOrientadorP.val(info.profOrientador);
 					});
+					txtBuscar.val('');
+					tblProfesor.addClass('hidden');
 			 		formEditar.removeClass('hidden');
 					btnCancelarP.focus();		/*para apreciar en pantalla formulario editor*/
 		}

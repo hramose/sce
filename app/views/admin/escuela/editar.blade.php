@@ -48,21 +48,21 @@ Editar escuela | Sistema de Control Escolar
 					<div class="form-group">
 						<label for="txtIdE" class="col-md-3 control-label">CCT</label>
 						<div class="col-md-9">
-							<input type="text" id="txtIdE" class="form-control input-sm" placeholder="CCT" autofocus>
+							<input type="text" id="txtIdE" class="form-control input-sm" placeholder="CCT" disabled>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="txtNombreE" class="col-md-3 control-label">Nombre</label>
 						<div class="col-md-9">
-							<input type="text" id="txtNombreE" class="form-control input-sm" placeholder="Nombre">
+							<input type="text" id="txtNombreE" class="form-control input-sm" placeholder="Nombre" disabled>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="txtZonaE" class="col-md-3 control-label">Zona</label>
 						<div class="col-md-9">
-							<input type="text" id="txtZonaE" class="form-control input-sm" placeholder="Zona">
+							<input type="text" id="txtZonaE" class="form-control input-sm" placeholder="Zona" autofocus>
 						</div>
 					</div>
 
