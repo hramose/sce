@@ -76,13 +76,13 @@
           <h5>Asignaturas</h5>
         </li>
         <li id="liAgregarAsignatura">
-          <a href="{{ URL::to('admin/asignatura/agregarAsignatura')}}">
+          <a href="{{ URL::to('admin/asignatura/agregar')}}">
             <span class="glyphicon glyphicon-plus"></span>
             Agregar
           </a>
         </li>
         <li id="liEditarAsignatura">
-          <a href="{{ URL::to('admin/asignatura/editarAsignatura')}}">
+          <a href="{{ URL::to('admin/asignatura/editar')}}">
             <span class="glyphicon glyphicon-edit"></span>
             Editar
           </a>

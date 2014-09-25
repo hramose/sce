@@ -11,8 +11,9 @@ class AsignaturaController extends BaseController
 
 		/* Insertar asignatura */
 		$insert = Asignatura::insert(array(
-			'asigId' => trim($data['id']),
+			'asigClave' => trim($data['clave']),
 			'asigNombre' => trim($data['nombre']),
+			'asigArea' => trim($data['area']),
 			'asigEstado' => true
 			));
 
@@ -21,7 +22,7 @@ class AsignaturaController extends BaseController
 		if ( $insert )
 			$response = array(
 				'status' => 'OK',
-				'message' => 'Asignatura se agrego exitosamente'
+				'message' => 'La asignatura se agregó exitosamente'
 				);
 		else
 			$response = array(
@@ -39,11 +40,14 @@ class AsignaturaController extends BaseController
 		$data = Input::all();
 		$buscar = trim($data['buscar']);
 
-		$busqueda = Asignatura::where('asigNombre', 'like', '%'. $buscar.'%')
-		->orWhere('asigId', 'like','%'. $buscar .'%')
+		$busqueda = Asignatura::where('asigArea', 'like', '%'. $buscar.'%')
+		->orWhere('asigNombre', 'like','%'. $buscar .'%')
+		->orderBy('asigArea')
+		->orderBy('asigNombre')
 		->get(array(
-			'asigId',
+			'asigClave',
 			'asigNombre',
+			'asigArea',
 			'asigEstado'
 			))
 			->toArray();
@@ -52,7 +56,7 @@ class AsignaturaController extends BaseController
 			$response = array(
 				'status' => 'OK',
 				'data' => $busqueda,
-				'message' => 'Busqueda exitosa'
+				'message' => 'Búsqueda exitosa'
 				);
 
 		else
@@ -70,16 +74,17 @@ class AsignaturaController extends BaseController
 		$data = Input::all();
 
 		/* Actualizar datos de asignatura */
-		$editar = Asignatura::where('asigId', $data['id'])
+		$editar = Asignatura::where('asigClave', $data['id'])
 		->update(array(
-			'asigId' => trim($data['idNueva']),
+			'asigClave' => trim($data['claveNueva']),
 			'asigNombre' => trim($data['nombre']),
+			'asigArea' =>trim($data['area']),
 			'asigEstado' => trim($data['estado'])
 			));
 		if ( $editar )
 			$response = array(
 				'status' => 'OK',
-				'message' => 'La asignatura se actualizo correctamente'
+				'message' => 'La asignatura se actualizó correctamente'
 				);
 		else
 			$response = array(
@@ -96,7 +101,7 @@ class AsignaturaController extends BaseController
 		$data = Input::all();
 
 		/* Actualizar asignatura */
-		$actualizar = Asignatura::where('asigId', $data['id'])
+		$actualizar = Asignatura::where('asigClave', $data['id'])
 		->update(array(
 			'asigEstado' => false
 			));
@@ -119,10 +124,11 @@ class AsignaturaController extends BaseController
 
 			$data = Input::all();
 
-			$seleccionar = Asignatura::where('asigId', $data['id'])
+			$seleccionar = Asignatura::where('asigClave', $data['id'])
 			->get(array(
-				'asigId',
+				'asigClave',
 				'asigNombre',
+				'asigArea',
 				'asigEstado'
 				))
 				->toArray();

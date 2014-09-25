@@ -11,9 +11,10 @@ var tblAsignatura = $('#tblAsignatura'),
 
 	/*Formulario datos a editar*/
 var formEditar = $('#formEditar'),
- 	txtId = $('#txtId'),
-	txtNombre = $('#txtNombre'),
-	sltEstado = $('#sltEstado');
+ 	  txtClave = $('#txtClave'),
+	  txtNombre = $('#txtNombre'),
+    sltArea = $('#sltArea'),
+	  sltEstado = $('#sltEstado');
 var asigSeleccionada;
 
 /* Funciones */
@@ -54,30 +55,36 @@ function buscarAsignatura(){
 
     		tbodyAsignatura.append(
     			'<tr>'+
-    				'<td>'+o.asigId+'</td>'+
+    				'<td>'+o.asigClave+'</td>'+
     				'<td>'+o.asigNombre+'</td>'+
+            '<td>'+o.asigArea+'</td>'+
     				'<td class="center">'+status+'</td>'+
     				'<td class="center">'+
-    					'<span class="glyphicon glyphicon-edit" id="'+o.asigId+'" '+		/*id para editar*/
+    					'<span class="glyphicon glyphicon-edit" id="'+o.asigClave+'" '+		/*id para editar*/
     					'style="cursor:pointer" title="Editar"></span>'+
 					'</td>'+
     				'<td class="center">'+
-    					'<span class="glyphicon glyphicon-trash" id="'+o.asigId+'" '+
+    					'<span class="glyphicon glyphicon-trash" id="'+o.asigClave+'" '+
     					'style="cursor:pointer" title="Eliminar"></span>'+
 					'</td>'+
     			'</tr>'
 			);
     	});
-    }else
-    	tbodyAsignatura.html('<tr><td colspan="8" class="center"><h3>'+ res.message +'</h3></td></tr>');
-
-	tblAsignatura.removeClass('hidden');
+      tblAsignatura.removeClass('hidden');
+    }
+    else 
+      if(res.status === 'ERROR'){
+        tblAsignatura.addClass('hidden');
+      	icon = '<span class="glyphicon glyphicon-remove"></span> ';
+        messagePoster.html(icon+res.message);
+        boxPoster.show().delay(3000).fadeOut();
+        txtBuscar.val("");
+        }
 }
 
 function cancelarEdicion(){
-	txtId.val("");
+	txtClave.val("");
 	txtNombre.val("");
-	sltEstado.val("");
 	txtBuscar.val("");
 	formEditar.addClass('hidden');
 }
@@ -86,13 +93,20 @@ function editarAsignatura(){
 	var id = asigSeleccionada;
   	if(id === "")
     return false;
+    
+    var verificar = new validar();
+    var validarAsignatura = verificar.validarDatos(txtNombre.val(),txtClave.val());
+    if ( !validarAsignatura ){ 
+    return false;
+    }
 
   	var datos = $.ajax({
     url: 'editarAsignatura',
     data: {
-      id:id,    
-      idNueva: txtId.val(),
+      id: id,    
+      claveNueva: txtClave.val(),
       nombre: txtNombre.val(),
+      area: sltArea.val(),
       estado: sltEstado.val()
     },
     type: 'post',
@@ -188,14 +202,15 @@ function seleccionarAsignatura() {
 
 		if (res.status === 'OK'){
 					$.each(res.data, function(k,datos){
-						txtId.val(datos.asigId);
+						txtClave.val(datos.asigClave);
 						txtNombre.val(datos.asigNombre);
+            sltArea.val(datos.asigArea);
 						sltEstado.val(datos.asigEstado);
 					});
 			 		formEditar.removeClass('hidden');
 			 		tblAsignatura.addClass('hidden');
 		}
-	}
+}
 
 /* Eventos */
 

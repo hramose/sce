@@ -1,19 +1,23 @@
 /* Nodos */
-var btnAgregarAsignatura = $('#btnAgregarAsignatura'),
-	btnCancelarAsignatura = $('#btnCancelarAsignatura'),
-	txtId = $('#txtId'),
-	txtNombre = $('#txtNombre');
+var btnAgregar = $('#btnAgregar'),
+	btnCancelar = $('#btnCancelar'),
+	txtClave = $('#txtClave'),
+	txtNombre = $('#txtNombre'),
+	sltArea = $('#sltArea');
 
 /* Funciones */
 function agregarAsignatura(){
-	if ( !validarAsignatura() ) 
+	var verificar = new validar();
+	var validarAsignatura = verificar.validarDatos(txtNombre.val(),txtClave.val());
+	if ( !validarAsignatura ) 
 		return false;
 
 	var datos = $.ajax({
 		url: 'agregarAsignatura',
 		data: {
-			id:txtId.val(),
-			nombre:txtNombre.val()
+			clave: txtClave.val(),
+			nombre: txtNombre.val(),
+			area: sltArea.val()
 		},
 		type: 'post',
 		dataType: 'json',
@@ -21,7 +25,7 @@ function agregarAsignatura(){
 	}).error(function(e){
 		alert('Ocurrio un error, intente de nuevo');
 	}).responseText;
-
+	
 	var res;
 	try{
 		res = JSON.parse(datos);
@@ -41,25 +45,11 @@ function agregarAsignatura(){
 } 
 
 function limpiarAsignatura(){
-	txtId.val('');
+	txtClave.val('');
 	txtNombre.val('');
 }
 
-function validarAsignatura(){
-	if ( txtNombre.val() === ""){
-		alert('Indique el nombre de la asignatura');
-		txtNombre.focus();
-		return false;
-	}
-	if (txtId.val() === "" ){
-		alert('Indique la clave de la asignatura');
-		txtId.focus();
-		return false;
-	}
-	return true;
-}
-
 /* Eventos */
-btnAgregarAsignatura.on('click', agregarAsignatura);
-btnCancelarAsignatura.on('click', limpiarAsignatura);
+btnAgregar.on('click', agregarAsignatura);
+btnCancelar.on('click', limpiarAsignatura);
 $('#liAgregarAsignatura').addClass('active');

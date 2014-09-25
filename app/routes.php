@@ -43,19 +43,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('alumno/editarAlumno', array('uses' => 'AlumnoController@editarAlumno'));
 
 	/* Rutas para asignaturas */
-	Route::get('asignatura/agregarAsignatura', function(){
-		return View::make('admin.asignatura.agregarAsignatura');
+	Route::get('asignatura/agregar', function(){
+		return View::make('admin.asignatura.agregar');
 	});
 	Route::post('asignatura/agregarAsignatura', array('uses' => 'AsignaturaController@agregarAsignatura'));
-	Route::get('asignatura/editarAsignatura', function(){
-		return View::make('admin.asignatura.editarAsignatura');
+	Route::get('asignatura/editar', function(){
+		return View::make('admin.asignatura.editar');
 	});
 	Route::post('asignatura/buscarAsignatura', array('uses' => 'AsignaturaController@buscarAsignatura'));
 	Route::post('asignatura/editarAsignatura', array('uses' => 'AsignaturaController@editarAsignatura'));
 	Route::post('asignatura/eliminarAsignatura', array('uses' => 'AsignaturaController@eliminarAsignatura'));
 	Route::post('asignatura/seleccionarAsignatura', array('uses' => 'AsignaturaController@seleccionarAsignatura'));
-	Route::post('asignatura/agregarTecnologia', array('uses' => 'TecnologiaController@agregarTecnologia'));
-	Route::post('asignatura/agregarArte', array('uses' => 'ArteController@agregarArte'));
 
 	/* Rutas para escuelas */
 	Route::get('escuela/getEscuelas', array('uses' => 'EscuelaController@getEscuelas'));

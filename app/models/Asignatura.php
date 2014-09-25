@@ -3,12 +3,13 @@
 class Asignatura extends Eloquent 
 {
 	protected $table = 'asignaturas';
-	protected $primarykey = 'asigId';
+	protected $primarykey = 'asigClave';
 	public $timestamps = false;
 	public $incrementing = false;
 	protected $fillable = array(
-		'asigId',
+		'asigClave',
 		'asigNombre',
+		'asigArea',
 		'asigEstado'
 		);
 }
