@@ -66,9 +66,11 @@ function buscarGrupo(){
       );
       i++;
       });
-    }else
+    }else{
+      messagePoster.html('No se encotraron Grupos');
+      boxPoster.show().delay(2000).fadeOut();
       tbodyGrupo.html('<tr><td colspan="8" class="center"><h3>'+ res.message +'</h3></td></tr>');
-
+}
   tblGrupo.removeClass('hidden');
   limpiarOcultarEdicion();
 }
@@ -203,6 +205,12 @@ function seleccionarGrupo(){
 
 
 /* Eventos */
+
+
+$(document).on('ready', function(){
+  buscarGrupo();
+  getTurnos();
+});
 $('#liEditarGrupo').addClass('active');
 btnBuscarG.on('click', buscarGrupo);
 btnGuardarG.on('click', guardarCambios);

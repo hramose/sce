@@ -15,20 +15,6 @@ Editar grupo | Sistema de Control Escolar
   Editar grupos
 </h1>
 
-<!-- Zona de búsqueda -->
-<div class="row">
-  <div class="col-md-8">
-    <div class="form-horizontal">
-      <fieldset>
-        <div class="form-group">
-          <div class="col-md-2">
-            <button class="btn btn-info btn-sm" id="btnBuscarG">Ver grupos </button>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-  </div>
-</div>
 
 <!-- Tabla de grupos encontradas -->
 <div class="row">
