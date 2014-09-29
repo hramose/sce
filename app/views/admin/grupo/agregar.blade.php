@@ -25,7 +25,6 @@ Agregar grupo | Sistema de Control Escolar
             
               <input type='text' id='txtNombreGrupo'placeholder='Nombre del grupo' class='form-control input-sm'>
               </div>
-
                 
                 <button class="btn btn-success btn-sm" id="btnAgregarNombre">Agregar</button>
                 <button class="btn btn-danger btn-sm" id="btnCancelarNombre">Cancelar</button>

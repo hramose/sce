@@ -47,7 +47,6 @@ function agregar(){
     
   }
 
-
 function cancelar () {
        txtNombreGrupo.val('');
 }
