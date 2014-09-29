@@ -23,7 +23,7 @@ Editar asignatura | Sistema de Control Escolar
 				<div class="form-group">
 					<label for="txtBuscar" class="col-md-2">Buscar</label>
 					<div class="col-md-8">
-						<input type="text" class="form-control input-sm" id="txtBuscar" placeholder="Nombre | Clave" autofocus>
+						<input type="text" class="form-control input-sm" id="txtBuscar" placeholder="Área | Nombre" autofocus>
 					</div>
 					<div class="col-md-2">
 						<button class="btn btn-info btn-sm" id="btnBuscar">Buscar</button>
@@ -43,6 +43,7 @@ Editar asignatura | Sistema de Control Escolar
 					<tr>
 						<th>Clave</th>
 						<th>Nombre</th>
+						<th>Área</th>
 						<th class="center">Status</th>
 						<th class="center">Editar</th>
 						<th class="center">Eliminar</th>
@@ -63,9 +64,20 @@ Editar asignatura | Sistema de Control Escolar
 					<legend></legend>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="txtId" class="col-md-3 control-label">Clave</label>
+							<label for="sltArea" class="col-md-3 control-label">Área</label>
 							<div class="col-md-9">
-								<input type="text" id="txtId" class="form-control input-sm" placeholder="Clave" maxlength="18" >
+								<select id="sltArea" class="form-control input-sm">
+									<option value="Asignatura">Asignatura</option>
+									<option value="Artes">Taller de Artes</option>
+									<option value="Tecnología">Taller de Tecnología</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="txtClave" class="col-md-3 control-label">Clave</label>
+							<div class="col-md-9">
+								<input type="text" id="txtClave" class="form-control input-sm" placeholder="Clave" maxlength="18" >
 							</div>
 						</div>
 
@@ -77,7 +89,7 @@ Editar asignatura | Sistema de Control Escolar
 						</div>
 
 						<div class="form-group">
-							<label for="txtEstado" class="col-md-3 control-label">Estado</label>
+							<label for="sltEstado" class="col-md-3 control-label">Estado</label>
 							<div class="col-md-9">
 								<select id="sltEstado" class="form-control input-sm">
 									<option value="1">Activo</option>
@@ -101,5 +113,6 @@ Editar asignatura | Sistema de Control Escolar
 @stop
 
 @section('js')
-{{HTML::script('js/admin/asignatura/editarAsignatura.js')}}
+{{HTML::script('js/admin/asignatura/editar.js')}}
+{{HTML::script('js/admin/asignatura/validar.js')}}
 @stop

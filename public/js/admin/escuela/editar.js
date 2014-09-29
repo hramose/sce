@@ -121,6 +121,9 @@ function editarEscuela(){
 	if(escuelaSeleccionada === "")	/*escuelaSeleccionada variable global, se le asigna valor en funcion seleccionarEscuela*/
 		return false;
 
+	if ( !validarEscuela() )
+		return false;
+
 	var editar = $.ajax({
 		url: 'editarEscuela',
 		data: {
@@ -172,6 +175,7 @@ function limpiarOcultarEdicion(){
 	txtTurnoE.val("");
 	txtEstadoE.val("");
 	formEditarE.addClass('hidden');
+	tblEscuelas.removeClass('hidden');
 }
 
 		/**************************************************************************/
@@ -213,6 +217,7 @@ function seleccionarEscuela(){
 				);
 			});
 
+			tblEscuelas.addClass('hidden');
 			txtIdE.val(esc.escId);
 			txtNombreE.val(esc.escNombre);
 			txtZonaE.val(esc.escZona);
@@ -233,6 +238,40 @@ function seleccionarEscuela(){
 
 			formEditarE.removeClass('hidden');
 		}
+}
+
+function validarEscuela(){
+	if (txtZonaE.val()=== ""){
+		alert('Indique la zona escolar');
+		txtZonaE.focus();
+		return false;
+	}
+	if(txtDireccionE.val() === ""){
+		alert('Indique la dirección de la escuela');
+		txtDireccionE.focus();
+		return false;
+	}
+	if(txtTelefonoE.val() === ""){
+		alert('Indique el teléfono de la escuela');
+		txtTelefonoE.focus();
+		return false;
+	}
+	if(txtDirectorE.val() === ""){
+		alert('Indique el nombre del director');
+		txtDirectorE.focus();
+		return false;
+	}
+	if(txtTurnoE.val() === ""){
+		alert('Indique el turno');
+		txtTurnoE.focus();
+		return false;
+	}
+	if(txtEstadoE.val() === ""){
+		alert('Indique el estado de la escuela');
+		txtEstadoE.focus();
+		return false;
+	}
+	return true;
 }
 
 /* Eventos */

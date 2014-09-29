@@ -14,8 +14,7 @@ class Grupo extends Eloquent
    public function ciclos()
     {
         return $this->belongsTo('Ciclos', 'grupId');
-        /*
-          Relacion Inversa
+        /*Relacion Inversa
           belongsTo('modelo a donde pertecene la relación','id de la tabla padre en la tabla actual')
         */
         // El primero es la tabla a donde pertecene la relación

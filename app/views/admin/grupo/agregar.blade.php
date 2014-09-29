@@ -15,12 +15,6 @@ Agregar grupo | Sistema de Control Escolar
   <div class="col-md-10">
     <div class="well">
       <div class="form-horizontal">
-         <!-- <div class="form-group">
-            <label for="txtNumero" class="col-md-3 control-label">Numero de Grupos</label>
-            <div class="col-md-5">
-              <input type="text" id="txtNumero" class="form-control input-sm" placeholder="Numero de Grupos" maxlength="18" autofocus>
-            </div>
-          </div>-->
 
 
           <div class="form-group" id="nombre">

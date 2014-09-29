@@ -49,10 +49,7 @@ function agregar(){
 
 
 function cancelar () {
-    
-   txtNombreGrupo.val('');
-
-
+       txtNombreGrupo.val('');
 }
 
 
@@ -65,7 +62,6 @@ function validar(){
   }
   return true;
 }
-
 
 
 

@@ -1,35 +1,6 @@
 <?php
 class EscuelaController extends \BaseController {
 
-	public function buscarEscuela(){
-			/*Si no se autentifica como administrador */
-		if ( !Usuario::isAdmin() )
-			return Redirect::to('admin/logout');
-
-		$busqueda = Escuela::get(array(
-				'escId',
-				'escNombre',
-				'escTelefono',
-				'escEstado',
-				'escTurno'
-			))
-			->toArray();
-
-		if ( count( $busqueda ) > 0 )
-			$response = array(
-				'status' => 'OK',
-				'data' => $busqueda,
-				'message' => 'Resultados obtenidos'
-			);
-		else
-			$response = array(
-				'status' => 'ERROR',
-				'message' => 'No se encontraron resultados'
-			);
-
-		return Response::json( $response );
-	}
-
 		/**************************************************************************/
 	public function editarEscuela(){
 		if( !Usuario::isAdmin() )
@@ -96,7 +67,6 @@ class EscuelaController extends \BaseController {
 			->orderBy('escNombre')
 			->get()
 			->toArray();
-
 		return $escuelas;
 	}
 
