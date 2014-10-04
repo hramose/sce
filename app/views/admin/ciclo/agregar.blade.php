@@ -29,18 +29,6 @@ Agregar ciclo | Sistema de Control Escolar
 							</div>
 					</div>
 
-
-
-					<div class="form-group" id="divGrupo">
-							<label for="slctGrupo" class="col-md-3 control-label">Grupo</label>
-							<div class="col-md-3">
-								<select id="slctGrupo" class="form-control input-sm">
-									<option value="Z">Selecione Grupo</option>
-								<!-- <option value="Z">Selecione Grupo</option> -->
-								</select>
-							</div>
-					</div>
-
 					<div class="form-group" id="divGrado">
 							<label for="slctGrado" class="col-md-3 control-label">Grado</label>
 							<div class="col-md-3">
@@ -49,8 +37,14 @@ Agregar ciclo | Sistema de Control Escolar
 							</div>
 					</div>
 
-
-
+					<div class="form-group" id="divGrupo">
+							<label for="slctGrupo" class="col-md-3 control-label">Grupo</label>
+							<div class="col-md-3">
+								<select id="slctGrupo" class="form-control input-sm">
+								</select>
+							</div>
+					</div>
+					
 					<div class="col-md-6 control-label">
 							<button class="btn btn-success btn-sm" id="btnAgregar">Aceptar</button>
 							<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>

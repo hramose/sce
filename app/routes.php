@@ -55,6 +55,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('asignatura/eliminarAsignatura', array('uses' => 'AsignaturaController@eliminarAsignatura'));
 	Route::post('asignatura/seleccionarAsignatura', array('uses' => 'AsignaturaController@seleccionarAsignatura'));
 
+	/*Rutas para ciclo*/
+	Route::get('ciclo/agregar', function(){
+		return View::make('admin.ciclo.agregar');
+	});
+	Route::post('ciclo/agregarCiclo',array('uses' => 'CicloController@agregarCiclo'));
+	Route::get('ciclo/getGrados',array('uses' => 'GradoController@getGrados'));
+	Route::get('ciclo/getGrupos',array('uses' => 'GrupoController@getGrupos'));
+
 	/* Rutas para escuelas */
 	Route::get('escuela/getEscuelas', array('uses' => 'EscuelaController@getEscuelas'));
 	Route::get('escuela/editar', function(){
@@ -78,15 +86,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('profesor/eliminarProfesor', array('uses' => 'ProfesorController@eliminarProfesor'));
 	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
 
-	/*Rutas para ciclo*/
-	Route::get('ciclo/agregar', function(){
-		return View::make('admin.ciclo.agregar');
-	});
-	Route::post('ciclo/agregarCiclo',array('uses' => 'CicloController@agregarCiclo'));
-	Route::post('ciclo/gruposActivos', array('uses' => 'GrupoController@gruposActivos'));
-	Route::get('ciclo/getGrados',array('uses' => 'GradoController@getGrados'));
-
-	/*Rutas para Grupo*/
+		/*Rutas para Grupo*/
 	Route::get('grupo/agregar', function(){
 		return View::make('admin.grupo.agregar');
 		});

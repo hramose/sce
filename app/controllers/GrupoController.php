@@ -146,33 +146,17 @@ class GrupoController extends BaseController{
 
       return Response::json($response);
   }
-    /*****************************************Selecciona grupos que no han sido eliminados************/
-  public function gruposActivos(){
-    if ( !Usuario::isAdmin() )
+
+/************************************GetGrupos******************************************/
+  public static function getGrupos(){
+  if( !Usuario::isAdmin() )
         return Redirect::to('admin/logout');
 
-    $data = Input::all();
-
-    $seleccionarActivos = Grupo::where('grupEstado',1)  //select grupId, grupNombre from grupos where grupEstado = 1;
-      ->get(array(
-        'grupId',
-        'grupNombre'
-      ))
-      ->toArray();
-
-    if(count($seleccionarActivos) > 0)
-      $response = array(
-        'status' => 'OK',
-        'data' => $seleccionarActivos,
-        'message' => 'Correcto'
-      );
-    else
-      $response = array(
-        'status' => 'ERROR',
-        'message' => 'No se encontraron Grupos'
-      );
-    return Response::json($response);
+  $grupos = Grupo::where('grupEstado',1)  //select grupId, grupNombre from grupos where grupEstado = 1;
+        ->orderBy('grupNombre')
+        ->get()
+        ->toArray();
+    return $grupos;
   }
-
 
 }
