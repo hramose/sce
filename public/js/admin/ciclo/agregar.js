@@ -33,8 +33,8 @@ function agregarCiclo(){
 	if ( res.status === 'OK' ){
 		icon = '<span class="glyphicon glyphicon-ok"></span> ';
 		        	slctCiclo.val('Z');
-					
-					
+
+
 
 	}else
 		icon = '<span class="glyphicon glyphicon-remove"></span> ';
@@ -48,10 +48,41 @@ function cancelar(){
 		alert(slctGrado.val());
 }
 
+/******************************************************************************/
+function getGrados(){
+	var datos = $.ajax({
+		url: 'getGrados',
+		type: 'get',
+		async:false
+	}).error(function(e){
+			alert('Ocurrio un error, intente de nuevo');
+	}).responseText;
+
+	var res;
+	try{
+			res = JSON.parse(datos);
+	}catch (e){
+			messagePoster.html('Error JSON ' + e);
+			boxPoster.show().delay(2000).fadeOut();
+	}
+
+	if ( res.length > 0 ){
+		slctGrado.html('');
+		$.each(res, function(k,v){
+			slctGrado.append(
+				'<option value="'+v.gradId+'">'+v.gradId+'</option>'
+			);
+		});
+	}else{
+		messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
+			'No existen grados registrados');
+		boxPoster.show().delay(2000).fadeOut();
+	}
+}
 	/*****************************************************************************/
 function mostrarGrupos(){
-	if (slctGrupo.val()=== 'Z'){	/*Para no repetir la consulta en cada clic y repetir valores*/
-		var datosG = $.ajax({				/* el valor 'Z' tiene por defecto en option 'Selecione grupo'*/
+	if (slctGrupo.val()=== 'Z'){	//Para no repetir la consulta en cada clic y repetir valores
+		var datosG = $.ajax({				// el valor 'Z' tiene por defecto en option 'Selecione grupo'
 			url:'gruposActivos',
 			data:{
 				null:'null'
@@ -75,9 +106,9 @@ function mostrarGrupos(){
 		if ( res.status === 'OK' ){
 			var i = 1;
 			$.each(res.data, function(k,datoGrupo){
-				slctGrupo.append(										/*Agrega datos de la BD al select*/
+				slctGrupo.append(										//Agrega datos de la BD al select
 					'<option value = "'+datoGrupo.grupId+'">'+datoGrupo.grupNombre+'</option>'
-							/*value de select = id de Grupos      texto que muestra = grupNombre*/
+							//value de select = id de Grupos      texto que muestra = grupNombre
 				);
 
 				i++;
@@ -87,9 +118,9 @@ function mostrarGrupos(){
 				'<option value = "'+'Z'+'">'+res.message+'</option>'
 			);
 		}
-		
+
 	}
-	
+
 }
 
 	/*******************************************************************************/
@@ -109,55 +140,11 @@ function validarCiclo(){
 	return true;
 }
 
-/*******************************Mostrar Grados***********************/
-
-function mostrarGrados(){
-	if (slctGrado.val()=== 'Z'){	/*Para no repetir la consulta en cada clic y repetir valores*/
-		var datosG = $.ajax({				/* el valor 'Z' tiene por defecto en option 'Selecione grados'*/
-			url:'gradosActivos',
-			data:{
-				null:'null'
-			},
-			type:'post',
-						dataType:'json',
-						async:false
-		}).error(function(e){
-				alert('Ocurrio un error, intente de nuevo1');
-		}).responseText;
-
-		var res;
-		try{
-			res = JSON.parse(datosG);
-		}catch (e){
-			messagePoster.html('Error JSON ' + e);
-			boxPoster.show().delay(2000).fadeOut();
-		}
-
-		slctGrado.html('');
-		if ( res.status === 'OK' ){
-			var i = 1;
-			$.each(res.data, function(k,datoGrado){
-				slctGrado.append(										/*Agrega datos de la BD al select*/
-					'<option value = "'+datoGrado.gradId+'">'+datoGrado.gradId+'</option>'
-							/*value de select = id de Grados     texto que muestra = gradId*/
-				);
-
-				i++;
-			});
-		}else{
-			slctGrado.append(										//Mensaje en select cuando no existe grados en BD
-				'<option value = "'+'Z'+'">'+res.message+'</option>'
-			);
-		}
-		
-	}
-	
-}
-
-
+$(document).on('ready', function(){
+	getGrados();
+});
 
 btnAgregar.on('click', agregarCiclo);
 btnCancelar.on('click',cancelar);
 slctGrupo.on('click',mostrarGrupos);		/*evento click sobre select*/
-slctGrado.on('click',mostrarGrados);		/*evento click sobre select*/
 $('#liAgregarCiclo').addClass('active');

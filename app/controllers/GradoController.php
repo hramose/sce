@@ -29,30 +29,17 @@ class GradoController extends BaseController{
 
       return Response::json($response);
   }
-    /*****************************************Selecciona grados************/
-  public function gradosActivos(){
-    if ( !Usuario::isAdmin() )
+
+  /************************************GetGrados******************************************/
+  public static function getGrados(){
+  if( !Usuario::isAdmin() )
         return Redirect::to('admin/logout');
 
-    $data = Input::all();
-
-    $seleccionarActivos = Grado::where('gradId','>', 0)  //select gradId from grados where sea mayor que cero;
-      ->get(array(
+  $grados = Grado::get(array(
         'gradId'
       ))
       ->toArray();
-
-    if(count($seleccionarActivos) > 0)
-      $response = array(
-        'status' => 'OK',
-        'data' => $seleccionarActivos,
-        'message' => 'Correcto'
-      );
-    else
-      $response = array(
-        'status' => 'ERROR',
-        'message' => 'No se encontraron Grados'
-      );
-    return Response::json($response);
+    return $grados;
   }
+
 }

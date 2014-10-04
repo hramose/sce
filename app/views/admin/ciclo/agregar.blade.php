@@ -36,6 +36,7 @@ Agregar ciclo | Sistema de Control Escolar
 							<div class="col-md-3">
 								<select id="slctGrupo" class="form-control input-sm">
 									<option value="Z">Selecione Grupo</option>
+								<!-- <option value="Z">Selecione Grupo</option> -->
 								</select>
 							</div>
 					</div>
@@ -44,7 +45,6 @@ Agregar ciclo | Sistema de Control Escolar
 							<label for="slctGrado" class="col-md-3 control-label">Grado</label>
 							<div class="col-md-3">
 								<select id="slctGrado" class="form-control input-sm">
-									<option value="Z">Selecione Grado</option>
 								</select>
 							</div>
 					</div>
