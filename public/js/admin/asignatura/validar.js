@@ -8,8 +8,7 @@ function validar(){
 			return false;
 		}
 		var patt = new RegExp( '^[0-9]*$' );
-		if( txtClave.val() ==="" || !patt.test(txtClave.val()) || 
-			txtClave.val().length > 10 ){
+		if( !patt.test(txtClave.val()) || txtClave.val().length > 10 ){
 			alert('Indique una clave válida de asignatura');
 			txtClave.focus();
 			return false;

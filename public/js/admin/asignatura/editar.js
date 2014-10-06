@@ -60,11 +60,11 @@ function buscarAsignatura(){
             '<td>'+o.asigArea+'</td>'+
     				'<td class="center">'+status+'</td>'+
     				'<td class="center">'+
-    					'<span class="glyphicon glyphicon-edit" id="'+o.asigClave+'" '+		/*id para editar*/
+    					'<span class="glyphicon glyphicon-edit" id="'+o.asigId+'" '+		/*id para editar*/
     					'style="cursor:pointer" title="Editar"></span>'+
 					'</td>'+
     				'<td class="center">'+
-    					'<span class="glyphicon glyphicon-trash" id="'+o.asigClave+'" '+
+    					'<span class="glyphicon glyphicon-trash" id="'+o.asigId+'" '+
     					'style="cursor:pointer" title="Eliminar"></span>'+
 					'</td>'+
     			'</tr>'
@@ -72,8 +72,7 @@ function buscarAsignatura(){
     	});
       tblAsignatura.removeClass('hidden');
     }
-    else 
-      if(res.status === 'ERROR'){
+    else if(res.status === 'ERROR'){
         tblAsignatura.addClass('hidden');
       	icon = '<span class="glyphicon glyphicon-remove"></span> ';
         messagePoster.html(icon+res.message);
@@ -104,7 +103,7 @@ function editarAsignatura(){
     url: 'editarAsignatura',
     data: {
       id: id,    
-      claveNueva: txtClave.val(),
+      clave: txtClave.val(),
       nombre: txtNombre.val(),
       area: sltArea.val(),
       estado: sltEstado.val()
@@ -136,6 +135,7 @@ function editarAsignatura(){
 }
 
 function eliminarAsignatura(){
+  
 	var id = $(this).attr('id');
 	if ( id === "" )
 		return false;

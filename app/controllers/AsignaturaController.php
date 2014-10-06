@@ -45,6 +45,7 @@ class AsignaturaController extends BaseController
 		->orderBy('asigArea')
 		->orderBy('asigNombre')
 		->get(array(
+			'asigId',
 			'asigClave',
 			'asigNombre',
 			'asigArea',
@@ -74,9 +75,9 @@ class AsignaturaController extends BaseController
 		$data = Input::all();
 
 		/* Actualizar datos de asignatura */
-		$editar = Asignatura::where('asigClave', $data['id'])
+		$editar = Asignatura::where('asigId', $data['id'])
 		->update(array(
-			'asigClave' => trim($data['claveNueva']),
+			'asigClave' => trim($data['clave']),
 			'asigNombre' => trim($data['nombre']),
 			'asigArea' =>trim($data['area']),
 			'asigEstado' => trim($data['estado'])
@@ -101,14 +102,14 @@ class AsignaturaController extends BaseController
 		$data = Input::all();
 
 		/* Actualizar asignatura */
-		$actualizar = Asignatura::where('asigClave', $data['id'])
+		$actualizar = Asignatura::where('asigId', $data['id'])
 		->update(array(
 			'asigEstado' => false
 			));
 		if ( $actualizar )
 			$response = array(
 				'status' => 'OK',
-				'message' => 'Asignatura eliminada'
+				'message' => 'La asignatura se eliminó correctamente'
 				);
 		else
 			$response = array (
@@ -124,8 +125,9 @@ class AsignaturaController extends BaseController
 
 			$data = Input::all();
 
-			$seleccionar = Asignatura::where('asigClave', $data['id'])
+			$seleccionar = Asignatura::where('asigId', $data['id'])
 			->get(array(
+				'asigId',
 				'asigClave',
 				'asigNombre',
 				'asigArea',
