@@ -11,6 +11,7 @@ var btnAgregar = $('#btnAgregar'),
 	txtDireccion = $('#txtDireccion'),
 	txtEdad = $('#txtEdad'),
 	txtEscuela = $('#txtEscuela'),
+	txtGrado = $('#txtGrado'),
 	txtObservacion = $('#txtObservacion');
 
 /* Funciones */
@@ -31,7 +32,9 @@ function agregarAlumno(){
     	direccion: txtDireccion.val(),
     	edad: txtEdad.val(),
     	escuela: txtEscuela.val(),
+			grado:txtGrado.val(),
     	observacion: txtObservacion.val()
+			//grado: txtGrado.val()
     },
     type:'post',
     dataType:'json',
@@ -39,7 +42,7 @@ function agregarAlumno(){
 	}).error(function(e){
 	    alert('Ocurrio un error, intente de nuevo');
 	}).responseText;
-	
+
 	alert(datos);
   var res;
   try{
@@ -54,7 +57,7 @@ function agregarAlumno(){
   	limpiarAlumno();
   }else
   	icon = '<span class="glyphicon glyphicon-remove"></span> ';
-  
+
   messagePoster.html(icon + res.message);
 	boxPoster.show().delay(3000).fadeOut();
 }
@@ -85,11 +88,44 @@ function getEscuelas(){
 			);
   	});
   }else{
-		messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' + 
+		messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
 			'No existen escuelas registradas');
     boxPoster.show().delay(2000).fadeOut();
   }
 }
+
+function getGrados(){
+	var datos = $.ajax({
+		url: '../ciclo/getGrados',
+		type: 'get',
+		async:false
+	}).error(function(e){
+			alert('Ocurrio un error, intente de nuevo');
+	}).responseText;
+
+	var res;
+	try{
+			res = JSON.parse(datos);
+	}catch (e){
+			messagePoster.html('Error JSON ' + e);
+			boxPoster.show().delay(2000).fadeOut();
+	}
+
+	if ( res.length > 0 ){
+		txtGrado.html('');
+		$.each(res, function(k,v){
+			txtGrado.append(
+				'<option value="'+v.gradId+'">'+v.gradId+'</option>'
+			);
+		});
+	}else{
+		messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
+			'No existen grados registradas');
+		boxPoster.show().delay(2000).fadeOut();
+	}
+
+}
+
 function limpiarAlumno(){
 	txtCurp.val('');
 	txtApep.val('');
@@ -156,6 +192,7 @@ function validarAlumno(){
 $(document).on('ready', function(){
 	limpiarAlumno();
 	getEscuelas();
+	getGrados();
 });
 btnAgregar.on('click', agregarAlumno);
 btnCancelar.on('click', limpiarAlumno);

@@ -93,6 +93,14 @@ Agregar alumno | Sistema de Control Escolar
 					</div>
 
 					<div class="form-group">
+						<label for="txtGrado" class="col-md-3 control-label">Grado</label>
+						<div class="col-md-9">
+							<select id="txtGrado" class="form-control input-sm">
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
 						<label for="txtObservacion" class="col-md-3 control-label">Observaciones</label>
 						<div class="col-md-9">
 							<textarea name="" id="txtObservacion" rows="5" class="form-control" placeholder="Observaciones"></textarea>

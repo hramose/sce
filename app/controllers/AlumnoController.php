@@ -10,7 +10,7 @@ class AlumnoController extends BaseController
 		/* Datos recibidos por ajax */
 		$data = Input::all();
 
-		/* Insertar alumno 
+		/* Insertar alumno
 			La clase Hash sirve para encriptar, cuando se agrega un alumno
 			su pass será su curp por default
 			La función trim elimina espacios en blanco al inicio y al final de la cadena
@@ -28,7 +28,8 @@ class AlumnoController extends BaseController
 			'aluObservaciones' => trim($data['observacion']),
 			'aluEstado' => true,
 			'aluEscuela' => $data['escuela'],
-			'aluPass' => Hash::make(trim($data['curp']))
+			'aluPass' => Hash::make(trim($data['curp'])),
+			'aluGrado' => $data['grado']
 		));
 
 		/* Si se realizó la consulta devuelve un array con
@@ -49,7 +50,7 @@ class AlumnoController extends BaseController
 
 		/* Se devuelve una respuesta en formato json */
 		return Response::json( $response );
-		
+
 	}
 
 	public function buscarAlumno(){
@@ -138,7 +139,7 @@ class AlumnoController extends BaseController
 			return Redirect::to('admin/logout');
 
 		$data = Input::all();
-		
+
 		/* Actualizar estado del alumno */
 		$actualizar = Alumno::where('aluCurp', $data['id'])
 			->update(array(
@@ -172,15 +173,18 @@ class AlumnoController extends BaseController
 		/* Buscar los datos del alumno, incluye el select de tablas relacionadas */
 		$alumno = Alumno::where('aluCurp', $data['id'])
 			->leftJoin('escuelas', 'alumnos.aluEscuela', '=', 'escuelas.escId')
+			->leftJoin('grados', 'alumnos.aluGrado', '=', 'grados.gradId')
 			->get()
 			->toArray();
 
 		/* Obteniendo todas las escuelas */
 		$escuelas = EscuelaController::getEscuelas();
+		$grados = GradoController::getGrados();
 
 		$datos = array(
 			'alumno' => $alumno[0],
-			'escuelas' => $escuelas
+			'escuelas' => $escuelas,
+			'grados' => $grados
 		);
 
 		if ( count( $alumno ) > 0 )

@@ -19,6 +19,7 @@ class Alumno extends Eloquent
 		'aluObservaciones',
 		'aluEstado',
 		'aluPass',
-		'aluEscuela'
+		'aluEscuela',
+		'aluGrado'
 	);
 }
