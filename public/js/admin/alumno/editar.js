@@ -105,6 +105,7 @@ function editarAlumno(){
       edad: txtEdad.val(),
       escuela: txtEscuela.val(),
       activo: txtActivo.val(),
+      grado: txtGrado.val(),
       observacion: txtObservacion.val()
     },
     type:'post',
@@ -215,8 +216,9 @@ function getEditarAlumno(){
         );
       });
 
+      txtGrado.html('');
       $.each(grados, function(k,v){
-        txtGrados.append(
+        txtGrado.append(
           '<option value="'+v.gradId+'">'+v.gradId+'</option>'
         );
       });

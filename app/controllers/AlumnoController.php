@@ -115,6 +115,7 @@ class AlumnoController extends BaseController
 					'aluEdad' => trim($data['edad']),
 					'aluEscuela' => $data['escuela'],
 					'aluEstado' => $data['activo'],
+					'aluGrado' => $data['grado'],
 					'aluObservaciones' => trim($data['observacion'])
 				)
 			);
@@ -172,7 +173,7 @@ class AlumnoController extends BaseController
 
 		/* Buscar los datos del alumno, incluye el select de tablas relacionadas */
 		$alumno = Alumno::where('aluCurp', $data['id'])
-			->leftJoin('escuelas', 'alumnos.aluEscuela', '=', 'escuelas.escId')
+		//	->leftJoin('escuelas', 'alumnos.aluEscuela', '=', 'escuelas.escId')
 			->leftJoin('grados', 'alumnos.aluGrado', '=', 'grados.gradId')
 			->get()
 			->toArray();
