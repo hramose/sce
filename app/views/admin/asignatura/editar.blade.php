@@ -114,5 +114,7 @@ Editar asignatura | Sistema de Control Escolar
 
 @section('js')
 {{HTML::script('js/admin/asignatura/editar.js')}}
-{{HTML::script('js/admin/asignatura/validar.js')}}
+<script>
+	$('#collapseAsig').addClass('in');
+</script>
 @stop

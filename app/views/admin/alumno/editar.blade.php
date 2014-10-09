@@ -177,4 +177,7 @@ Editar Alumno | Sistema de Control Escolar
 
 @section('js')
 {{ HTML::script('js/admin/alumno/editar.js') }}
+<script>
+	$('#collapseAlu').addClass('in');
+</script>
 @stop

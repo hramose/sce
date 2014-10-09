@@ -73,6 +73,27 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('escuela/eliminarEscuela', array('uses' => 'EscuelaController@eliminarEscuela'));
 	Route::post('escuela/seleccionarEscuela', array('uses' => 'EscuelaController@seleccionarEscuela'));
 
+	/*Rutas para Grupo*/
+	Route::get('grupo/agregar', function(){
+		return View::make('admin.grupo.agregar');
+	});
+	Route::get('grupo/editar', function(){
+		return View::make('admin.grupo.editar');
+	});
+	Route::post('grupo/agregarGrupo',array('uses' => 'GrupoController@agregarGrupo'));
+	Route::post('grupo/buscarGrupo', array('uses' => 'GrupoController@buscarGrupo'));
+	Route::post('grupo/editarGrupo', array('uses' => 'GrupoController@editarGrupo'));
+	Route::post('grupo/eliminarGrupo', array('uses' => 'GrupoController@eliminarGrupo'));
+	Route::post('grupo/seleccionarGrupo', array('uses' => 'GrupoController@seleccionarGrupo'));
+
+	/*Rutas para Grado*/
+	Route::post('grado/seleccionarGrado', array('uses' => 'GradoController@seleccionarGrado'));
+
+	/* Rutas listas */
+	Route::get('lista/agregar', function(){
+		return View::make('admin.lista.agregar');
+	});
+
 	/*Rutas para profesor*/
 	Route::get('profesor/agregar', function () {
 		return View::make('admin.profesor.agregar');
@@ -86,19 +107,4 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('profesor/eliminarProfesor', array('uses' => 'ProfesorController@eliminarProfesor'));
 	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
 
-		/*Rutas para Grupo*/
-	Route::get('grupo/agregar', function(){
-		return View::make('admin.grupo.agregar');
-		});
-	Route::get('grupo/editar', function(){
-			return View::make('admin.grupo.editar');
-			});
-	Route::post('grupo/agregarGrupo',array('uses' => 'GrupoController@agregarGrupo'));
-	Route::post('grupo/buscarGrupo', array('uses' => 'GrupoController@buscarGrupo'));
-	Route::post('grupo/editarGrupo', array('uses' => 'GrupoController@editarGrupo'));
-	Route::post('grupo/eliminarGrupo', array('uses' => 'GrupoController@eliminarGrupo'));
-	Route::post('grupo/seleccionarGrupo', array('uses' => 'GrupoController@seleccionarGrupo'));
-
-	/*Rutas para Grado*/
-	Route::post('grado/seleccionarGrado', array('uses' => 'GradoController@seleccionarGrado'));
 });

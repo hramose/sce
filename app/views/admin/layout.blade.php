@@ -16,7 +16,7 @@
 		@section('title')
 		@show
 	</title>
-  	<!-- CSS -->
+	<!-- CSS -->
   {{ HTML::style('css/bootstrap.css') }}
   {{ HTML::style('css/layout.css') }}
   {{ HTML::style('css/pace.css') }}
@@ -49,33 +49,52 @@
 	  </div>
 	</div>
 
+  
+</div>
+
 	<div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
+    <div class="col-sm-3 col-md-2 sidebar" id="accordion">
+
       <!-- Alumnos -->
       <ul class="nav nav-sidebar">
         <li class="header">
-          <h5>Alumnos</h5>
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseAlu">
+                Alumnos
+              </a>
+          </h5>
         </li>
-        <li id="liAgregarAlumno">
-          <a href="{{ URL::to('admin/alumno/agregar') }}">
-            <span class="glyphicon glyphicon-plus"></span> Agregar
-          </a>
-        </li>
-        <li id="liEditarAlumno">
-          <a href="{{ URL::to('admin/alumno/editar') }}">
-            <span class="glyphicon glyphicon-edit"></span> Editar
-          </a>
-        </li>
-        <li class="divisor"></li>
       </ul>
+      <div id="collapseAlu" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
+          <li id="liAgregarAlumno">
+            <a href="{{ URL::to('admin/alumno/agregar') }}">
+              <span class="glyphicon glyphicon-plus"></span> Agregar
+            </a>
+          </li>
+          <li id="liEditarAlumno">
+            <a href="{{ URL::to('admin/alumno/editar') }}">
+              <span class="glyphicon glyphicon-edit"></span> Editar
+            </a>
+          </li>
+          <li class="divisor"></li>
+        </ul>
+      </div>
 
       <!-- Asignaturas -->
       <ul class="nav nav-sidebar">
         <li class="header">
-          <h5>Asignaturas</h5>
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseAsig">
+                Asignaturas
+              </a>
+          </h5>
         </li>
-        <li id="liAgregarAsignatura">
+      </ul>
+      <div id="collapseAsig" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
+          <li id="liAgregarAsignatura">
           <a href="{{ URL::to('admin/asignatura/agregar')}}">
             <span class="glyphicon glyphicon-plus"></span>
             Agregar
@@ -88,71 +107,119 @@
           </a>
         </li>
         <li class="divisor"></li>
-      </ul>
-
+        </ul>
+      </div>
+      
       <!-- Ciclo -->
       <ul class="nav nav-sidebar">
         <li class="header">
-          <h5>Ciclo</h5>
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseCiclo">
+                Ciclo
+              </a>
+          </h5>
         </li>
+      </ul>
+      <div id="collapseCiclo" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
         <li id="liAgregarCiclo">
           <a href="{{ URL::to('admin/ciclo/agregar') }}">
               <span class="glyphicon glyphicon-plus"></span> Agregar
           </a>
         </li>
         <li class="divisor"></li>
-      </ul>
+        </ul>
+      </div>
 
       <!-- Escuela -->
       <ul class="nav nav-sidebar">
         <li class="header">
-          <h5>Escuela</h5>
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseEsc">
+                Escuela
+              </a>
+          </h5>
         </li>
-        <li id="liEditarEscuela">
+      </ul>
+      <div id="collapseEsc" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
+          <li id="liEditarEscuela">
           <a href="{{ URL::to('admin/escuela/editar')}}">
             <span class="glyphicon glyphicon-edit"></span>
             Editar
           </a>
         </li>
         <li class="divisor"></li>
-      </ul>
+        </ul>
+      </div>
 
       <!-- Grupo -->
       <ul class="nav nav-sidebar">
         <li class="header">
-          <h5>Grupo</h5>
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseGrupo">
+                Grupo
+              </a>
+          </h5>
         </li>
+      </ul>
+      <div id="collapseGrupo" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
         <li id="liAgregarGrupo">
           <a href="{{ URL::to('admin/grupo/agregar') }}">
+            <span class="glyphicon glyphicon-plus"></span> Agregar - Editar
+          </a>
+        </li>
+        <li class="divisor"></li>
+        </ul>
+      </div>
+
+      <!-- Listas -->
+      <ul class="nav nav-sidebar">
+        <li class="header">
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseLista">
+                Listas
+              </a>
+          </h5>
+        </li>
+      </ul>
+      <div id="collapseLista" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
+        <li id="liAgregarLista">
+          <a href="{{ URL::to('admin/lista/agregar') }}">
             <span class="glyphicon glyphicon-plus"></span> Agregar
           </a>
         </li>
-        <li id="liEditarGrupo">
-          <a href="{{ URL::to('admin/grupo/editar') }}">
-            <span class="glyphicon glyphicon-edit"></span> Editar
-          </a>
-        </li>
         <li class="divisor"></li>
-      </ul>
+        </ul>
+      </div>
 
       <!-- Profesores -->
       <ul class="nav nav-sidebar">
-      	<li class="header">
-      		<h5>Profesores</h5>
+        <li class="header">
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseProf">
+                Profesor
+              </a>
+          </h5>
         </li>
-    		<li id="liAgregarProfesor">
-    			<a href="{{ URL::to('admin/profesor/agregar') }}">
-            	<span class="glyphicon glyphicon-plus"></span> Agregar
-            </a>
-    		</li>
-    		<li id="liEditarProfesor">
-    			<a href="{{ URL::to('admin/profesor/editar') }}">
-            	<span class="glyphicon glyphicon-edit"></span> Editar
-            </a>
-    		</li>
-        <li class="divisor"></li>
       </ul>
-      
+      <div id="collapseProf" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
+        <li id="liAgregarProfesor">
+          <a href="{{ URL::to('admin/profesor/agregar') }}">
+              <span class="glyphicon glyphicon-plus"></span> Agregar
+            </a>
+        </li>
+        <li id="liEditarProfesor">
+          <a href="{{ URL::to('admin/profesor/editar') }}">
+              <span class="glyphicon glyphicon-edit"></span> Editar
+            </a>
+        </li>
+        <li class="divisor"></li>
+        </ul>
+      </div>
 
     </div>
   </div>

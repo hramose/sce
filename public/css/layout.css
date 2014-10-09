@@ -148,6 +148,9 @@ footer
   font-size: 1.1em;
   font-weight: bold;
 }
+.nav-sidebar .header > h5 > a {
+  color: #333333;
+}
 .nav-sidebar > li > a {
   cursor: pointer;
   padding: 5px 20px;
@@ -268,7 +271,7 @@ footer
 }
 /* Fin Carrusel */
 }
-@media (min-width: 768px) {
+@media (min-width: 480px) {
   .main {
     padding-right: 40px;
     padding-left: 40px;

@@ -32,14 +32,13 @@ function agregarCiclo(){
 
 	if ( res.status === 'OK' ){
 		icon = '<span class="glyphicon glyphicon-ok"></span> ';
-		        	limpiar();
-
-
-
+  	limpiar();
 	}else
 		icon = '<span class="glyphicon glyphicon-remove"></span> ';
-		messagePoster.html(icon + res.message);
-		boxPoster.show().delay(3000).fadeOut();
+
+	messagePoster.html(icon + res.message);
+	boxPoster.show().delay(3000).fadeOut();
+	
 }
 
 
@@ -102,14 +101,13 @@ function getGrupos(){
 		});
 	}else{
 		messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
-			'No existen grados registrados');
+			'No existen grupos registrados');
 		boxPoster.show().delay(2000).fadeOut();
 	}
 }
 
 /********************************************************************************/
 function limpiar(){
-	getGrados();
 	getGrupos();
 }
 	/*******************************************************************************/
@@ -130,7 +128,7 @@ function validarCiclo(){
 }
 
 $(document).on('ready', function(){
-	getGrados();
+	// getGrados();
 	getGrupos();
 });
 

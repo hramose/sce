@@ -44,13 +44,14 @@ Agregar asignatura | Sistema de Control Escolar
 								<input type="text" id="txtClave" class="form-control input-sm" placeholder="Clave">
 							</div>
 						</div>
-					</div>						
-						<div class="form-group">
-							<div class="col-md-9 col-md-offset-3">
-							<button class="btn btn-success btn-sm" id="btnAgregar">Agregar</button>
-							<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
-							</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-9 col-md-offset-3">
+						<button class="btn btn-success btn-sm" id="btnAgregar">Agregar</button>
+						<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
 						</div>
+					</div>
 				</fieldset>
 			</div>
 		</div>
@@ -60,5 +61,7 @@ Agregar asignatura | Sistema de Control Escolar
 
 @section('js')
 {{HTML::script('js/admin/asignatura/agregar.js')}}
-{{HTML::script('js/admin/asignatura/validar.js')}}	
+<script>
+	$('#collapseAsig').addClass('in');
+</script>
 @stop

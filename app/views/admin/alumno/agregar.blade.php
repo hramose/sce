@@ -13,11 +13,10 @@ Agregar alumno | Sistema de Control Escolar
 
 <!-- Formulario -->
 <div class="row">
-	<div class="col-md-10">
+	<div class="col-md-6">
 		<div class="well">
 			<div class="form-horizontal">
 				<fieldset>
-					<legend>Agregar</legend>
 					<div class="form-group">
 						<label for="txtCurp" class="col-md-3 control-label">CURP</label>
 						<div class="col-md-9">
@@ -70,6 +69,17 @@ Agregar alumno | Sistema de Control Escolar
 						</div>
 					</div>
 
+
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="well">
+			<div class="form-horizontal">
+				<fieldset>
+					
 					<div class="form-group">
 						<label for="txtDireccion" class="col-md-3 control-label">Dirección</label>
 						<div class="col-md-9">
@@ -92,13 +102,13 @@ Agregar alumno | Sistema de Control Escolar
 						</div>
 					</div>
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label for="txtGrado" class="col-md-3 control-label">Grado</label>
 						<div class="col-md-9">
 							<select id="txtGrado" class="form-control input-sm">
 							</select>
 						</div>
-					</div>
+					</div> -->
 
 					<div class="form-group">
 						<label for="txtObservacion" class="col-md-3 control-label">Observaciones</label>
@@ -113,6 +123,7 @@ Agregar alumno | Sistema de Control Escolar
 							<button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
 						</div>
 					</div>
+					
 				</fieldset>
 			</div>
 		</div>
@@ -122,4 +133,7 @@ Agregar alumno | Sistema de Control Escolar
 
 @section('js')
 {{ HTML::script('js/admin/alumno/agregar.js') }}
+<script>
+	$('#collapseAlu').addClass('in');
+</script>
 @stop

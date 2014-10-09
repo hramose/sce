@@ -9,6 +9,19 @@ class AsignaturaController extends BaseController
 		/* Datos recibidos por ajax */
 		$data = Input::all();
 
+		/* Duplicado */
+		$duplicado = Asignatura::where('asigClave', $data['clave'])
+			->where('asigNombre', $data['nombre'])
+			->where('asigArea', $data['area'])
+			->get()
+			->toArray();
+
+		if ( count( $duplicado ) > 0 )
+			return Response::json(array(
+					'status' => 'ERROR',
+					'message' => 'Ya existe una asignatura igual, verifiquelo'
+				));
+
 		/* Insertar asignatura */
 		$insert = Asignatura::insert(array(
 			'asigClave' => trim($data['clave']),
@@ -90,7 +103,8 @@ class AsignaturaController extends BaseController
 		else
 			$response = array(
 				'status' => 'ERROR',
-				'message' => 'No se pudo actualizar la asignatura, intente nuevamente'
+				'message' => 'No se pudo actualizar la asignatura, intente nuevamente. 
+								Los datos deben ser distintos para realizar la actualización'
 				);
 		return Response::json( $response );
 	}
@@ -114,7 +128,7 @@ class AsignaturaController extends BaseController
 		else
 			$response = array (
 				'status' => 'ERROR',
-				'message' => 'No se puede eliminar la asignatura, talvez no existe'
+				'message' => 'No se puede eliminar la asignatura, tal vez no existe o ya está inactiva'
 				);
 		return Response::json( $response );
 	}

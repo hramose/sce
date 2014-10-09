@@ -18,7 +18,6 @@ var formEditar = $('#formEditar'),
 var asigSeleccionada;
 
 /* Funciones */
-
 function buscarAsignatura(){
 
 	if ( txtBuscar.val() === "" )
@@ -90,15 +89,14 @@ function cancelarEdicion(){
 
 function editarAsignatura(){
 	var id = asigSeleccionada;
-  	if(id === "")
+	if(id === "")
     return false;
     
-    var verificar = new validar();
-    var validarAsignatura = verificar.validarDatos(txtNombre.val(),txtClave.val());
-    if ( !validarAsignatura ){ 
+  var verificar = new validar();
+  var validarAsignatura = verificar.validarDatos(txtNombre.val(),txtClave.val());
+  if ( !validarAsignatura )
     return false;
-    }
-
+  
   	var datos = $.ajax({
     url: 'editarAsignatura',
     data: {
@@ -140,7 +138,7 @@ function eliminarAsignatura(){
 	if ( id === "" )
 		return false;
 
-	var del = confirm('¿Está seguro que desea eliminar la asignatura');
+	var del = confirm('¿Está seguro que desea eliminar la asignatura?');
 	if ( del === false )
 		return false;
 
@@ -212,8 +210,27 @@ function seleccionarAsignatura() {
 		}
 }
 
-/* Eventos */
+function validar(){
+  this.validarDatos = function validarDatos( nombre, clave ){
+    var patt = new RegExp( '^[á-úÁ-Úa-zA-Z \t]*$' );
+    //var patt = new RegExp('^[á-úa-z(ñ)]*$', 'i');
+    if( txtNombre.val() ==="" || !patt.test(txtNombre.val()) ){
+      alert('Indique un nombre válido de asignatura');
+      txtNombre.focus();
+      return false;
+    }
+    
+    var patt = new RegExp( '^[0-9]*$' );
+    if( !patt.test(txtClave.val()) || txtClave.val().length > 10 ){
+      alert('Indique una clave válida de asignatura');
+      txtClave.focus();
+      return false;
+    } 
+    return true;  
+  };
+}
 
+/* Eventos */
 btnBuscar.on('click', buscarAsignatura);
 btnCancelar.on('click', cancelarEdicion);
 btnGuardar.on('click', editarAsignatura);

@@ -9,12 +9,17 @@ class GrupoController extends BaseController{
     /* Datos recibidos por ajax */
     $data = Input::all();
 
+    $duplicado = GrupoController::duplicado($data['grupo']);
+    if ( !$duplicado )
+        return Response::json(array(
+        'status' => 'ERROR',
+        'message' => 'Ya existe un grupo igual, verificalo'
+      ));
+
     /* Insertar grupo*/
     $insert = Grupo::insert(array(
-
       'grupNombre' => trim($data['grupo']),
       'grupEstado' => true
-
       ));
 
     /* Mensajes en caso de que la consulta
@@ -43,7 +48,8 @@ class GrupoController extends BaseController{
     $data = Input::all();
     $buscar = trim($data['buscar']);
 
-    $busqueda = Grupo::get(array(
+    $busqueda = Grupo::orderBy('grupNombre', 'asc')
+      ->get(array(
         'grupId',
         'grupNombre',
         'grupEstado'
@@ -66,15 +72,34 @@ class GrupoController extends BaseController{
   }
 
   /*************************************************************/
+  public static final function duplicado( $grupo){
+
+    $duplicado = Grupo::where('grupNombre', $grupo)
+      ->get()
+      ->toArray();
+
+    if ( count( $duplicado ) > 0 )
+      return false;
+    else
+      return true;
+  }
+
   public function editarGrupo(){
     if( !Usuario::isAdmin() )
       return Redirect::to('admin/logout');
 
     $data = Input::all();
 
+    $duplicado = GrupoController::duplicado($data['grupo']);
+    if ( !$duplicado )
+        return Response::json(array(
+        'status' => 'ERROR',
+        'message' => 'Ya existe un grupo igual, verificalo'
+      ));
+
     $editar = Grupo::where('grupId', $data['id'])
     ->update(array(
-      'grupNombre' => trim($data['nombre']),
+      'grupNombre' => trim($data['grupo']),
       'grupEstado' => $data['estado']
 
 
