@@ -1,0 +1,109 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html >
+<body>
+<SCRIPT LANGUAJE=JavaScript>
+<!--
+tamanoPromedio = 35; //Seria mejor q lo ingrese el usuario 35, 40 o n alumnos para q los grupos sean de acuerdo a sus necesidades
+
+nombres= ['Aguirre','Alba','Aviles','Baltazar','Baz','Beltran','Benicio','Calvillo','Campos','Carmona','Corona','Enriquez','Garcia','Gomez','Martinez','Medina','Mendez','Nieto','Palacios','Penedo','Pereira','Perez','Rivera','Sanchez','Sosa','Torres','Vera','Vizcarra','Zamora','Zarco','AguirreD','AlbaD','AvilesD','BaltazarD','BazD','BeltranD','BenicioD','CalvilloD','CamposD','CarmonaD','CoronaD','EnriquezD','GarciaD','GomezD','MartinezD','MedinaD','MendezD','NietoD','PalaciosD','PenedoD','PereiraD','PerezD','RiveraD','SanchezD','SosaD','TorresD','VeraD','VizcarraD','ZamoraD','ZarcoD','AguirreT','AlbaT','AvilesT','BaltazarT','BazT','BeltranT','BenicioT','CalvilloT','CamposT','CarmonaT','CoronaT','EnriquezT','GarciaT','GomezT','MartinezT','MedinaT','MendezT','NietoT','PalaciosT','PenedoT','PereiraT','PerezT','RiveraT','SanchezT','SosaT','TorresT','VeraT','VizcarraT','ZamoraT','ZarcoT','AguirreC','AlbaC','AvilesC','BaltazarC','BazC','BeltranC','BenicioC','CalvilloC','CamposC','CarmonaC'];
+tamano = nombres.length;
+
+nGrupos = tamano/tamanoPromedio; //se calcula un numero de grupos aproximado entre el tamano del arreglo de nombres y el tamano q desea el usuario
+nAlumnos = tamano/nGrupos; //aproximacion de cuantos alumnos habra en cada grupo
+alumnosRestantes = 0; //se utiliza cuando salga numero de alumnos flotantes
+
+residuo = nGrupos%1; //si el numero de grupos no es entero se compara la parte del residuo, sino se salta este proceso y llena el nuevo arreglo
+if(residuo != 0){
+        //si salen ej. 2.51 grupos se sube a 3 grupos
+    if(residuo >= .5){
+        nGrupos = nGrupos - residuo + 1;
+        nAlumnos = tamano/nGrupos;
+        residuonAlumnos = nAlumnos%1;
+        //el restante de alumnos se hace 0 para no desequilibar los grupos ya q al ser mayor a .5 obtendriamos + de un alumno
+        if(residuonAlumnos >= .5){
+                nAlumnos = nAlumnos - residuonAlumnos +1;
+                alumnosRestantes = 0;
+        }
+        //como el residuo de alumno es menor a .5 se obtendra solo uno
+        if(residuonAlumnos < .5){
+                nAlumnos = nAlumnos - residuonAlumnos;
+                alumnosRestantes = residuonAlumnos * nGrupos;
+                //en algunos casos sale flotante entonces se hace entero
+                //asegura q los primeros grupos siempre esten abastecidos
+                if(alumnosRestantes%1 != 0){
+                        alumnosRestantes = (alumnosRestantes-(alumnosRestantes%1))+1;
+                }
+                 //para q no agrupe mas en el primer grupo de este caso
+                        if(alumnosRestantes>1){alumnosRestantes=1;}
+        }
+        }
+    //si salen ej. 2.4 grupos se baja a 2 grupos
+        if(residuo < .5){
+        nGrupos = nGrupos - residuo;
+        nAlumnos = tamano/nGrupos;
+        residuonAlumnos = nAlumnos%1;
+        //aqui como los grupos se acotaron los alumnos sobrantes
+        //se asegura q los primeros grupos siempre esten con mayor tamano
+        //en ambos casos de residuonAlumnos
+        if(residuonAlumnos >= .5){
+                nAlumnos = nAlumnos - residuonAlumnos  ;
+                alumnosRestantes = residuonAlumnos * nGrupos;
+                if(alumnosRestantes%1 != 0){
+                        alumnosRestantes = (alumnosRestantes-(alumnosRestantes%1))+1;
+                 }
+        }
+
+        if(residuonAlumnos < .5){
+                nAlumnos = nAlumnos - residuonAlumnos;
+                alumnosRestantes = residuonAlumnos * nGrupos;
+
+                if(alumnosRestantes%1 != 0){
+                        alumnosRestantes = (alumnosRestantes-(alumnosRestantes%1))+1;
+                }
+                    //para q no agrupe mas en el primer grupo de este caso
+                        if(alumnosRestantes>1){alumnosRestantes=1;}
+        }
+
+    }
+   //document.write("nGrup:",nGrupos," Residuo:",residuo, " RAlumn:", residuonAlumnos," AlumRest:",alumnosRestantes," nAlum",nAlumnos,"<br>");
+}
+
+var lista = new Array();
+lista = new Array(tamano+nGrupos+alumnosRestantes);
+c = 1; //contador para q pueda ir llenando el nuevo arreglo
+g = 1; //va colocando el separador del numero de grupo
+h = nAlumnos; //conserva el valor original del numero de alumnos
+//ciclo para llenar el nuevo arreglo formando grupos indicados por el separador 1, 2, 3 ....
+for (i = 0; i < (tamano+nGrupos); i++){
+        //si se tienen alumnos sobrantes se utiliza el exedente para el primer grupo
+        if(alumnosRestantes !=0){
+       if(c==1){
+          nAlumnos = nAlumnos+alumnosRestantes;
+                }
+
+         if(i == nAlumnos ){
+                g=g+1;
+                nAlumnos= nAlumnos + h;
+                lista[c]= g; c=c+1;
+          }
+        lista[0] = g;
+        lista[c] = nombres[i];
+        document.write(lista[i]+"<BR>");
+        }
+//si no ha alumnos sobrntes se llena el arreglo de acuerdo al numero de alumnos obtenidos para cada grupo
+        if(alumnosRestantes ==0){
+                if(i == nAlumnos ){
+                        g=g+1;
+                        nAlumnos= nAlumnos + h;
+                        lista[c]= g; c=c+1;
+                }
+        lista[0] = g;
+        lista[c] = nombres[i];
+        document.write(lista[i]+"<BR>");
+        }
+        c=c+1;
+}
+//-->
+</SCRIPT>
+</body>
+</html>
