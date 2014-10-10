@@ -21,7 +21,6 @@ var pnlEditAlumno = $('#pnlEditAlumno'),
   txtEdad = $('#txtEdad'),
   txtEscuela = $('#txtEscuela'),
   txtActivo = $('#txtActivo'),
-  txtGrado  = $('#txtGrado'),
   txtObservacion = $('#txtObservacion');
 
 /* Funciones */
@@ -105,7 +104,6 @@ function editarAlumno(){
       edad: txtEdad.val(),
       escuela: txtEscuela.val(),
       activo: txtActivo.val(),
-      grado: txtGrado.val(),
       observacion: txtObservacion.val()
     },
     type:'post',
@@ -206,20 +204,12 @@ function getEditarAlumno(){
       pnlEditAlumno.removeClass('hidden');
 
       var alu = res.data.alumno,
-        escuelas = res.data.escuelas,
-        grados = res.data.grados;
+        escuelas = res.data.escuelas;
 
       txtEscuela.html('');
       $.each(escuelas, function(k,v){
         txtEscuela.append(
           '<option value="'+v.escId+'">'+v.escNombre+' - '+v.turNombre+'</option>'
-        );
-      });
-
-      txtGrado.html('');
-      $.each(grados, function(k,v){
-        txtGrado.append(
-          '<option value="'+v.gradId+'">'+v.gradId+'</option>'
         );
       });
 
@@ -250,52 +240,12 @@ function getEditarAlumno(){
           txtActivo.val(alu.aluEstado);
       });
 
-      txtGrado.find('option').each(function(){
-        if ( alu.aluGrado == $(this).val() )
-          txtGrado.val(alu.aluGrado);
-      });
-
-
     }else{
       icon = '<span class="glyphicon glyphicon-remove"></span> ';
       messagePoster.html(icon + res.message);
       boxPoster.show().delay(3000).fadeOut();
     }
 }
-
-/*function getGrados(){
-  var datos = $.ajax({
-    url: '../ciclo/getGrados',
-    type: 'get',
-    async:false
-  }).error(function(e){
-      alert('Ocurrio un error, intente de nuevo');
-  }).responseText;
-
-  var res;
-  try{
-      res = JSON.parse(datos);
-  }catch (e){
-      messagePoster.html('Error JSON ' + e);
-      boxPoster.show().delay(2000).fadeOut();
-  }
-
-  if ( res.length > 0 ){
-    txtGrado.html('');
-    $.each(res, function(k,v){
-      txtGrado.append(
-        '<option value="'+v.gradId+'">'+v.gradId+'</option>'
-      );
-    });
-  }else{
-    messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
-      'No existen grados registradas');
-    boxPoster.show().delay(2000).fadeOut();
-  }
-
-}*/
-
-
 
 function validarAlumno(){
   if ( txtCurp.val() === "" || txtCurp.val().length < 18 ){

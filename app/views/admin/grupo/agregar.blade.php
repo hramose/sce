@@ -74,7 +74,7 @@ Agregar grupo | Sistema de Control Escolar
           <div class="form-group">
             <label for="txtNombreG" class="col-md-3 control-label">Nombre</label>
             <div class="col-md-9">
-              <input type="text" id="txtNombreG" class="form-control input-sm" placeholder="Nombre">
+              <input type="text" id="txtNombreG" class="form-control input-sm" placeholder="Nombre" disabled>
             </div>
           </div>
 

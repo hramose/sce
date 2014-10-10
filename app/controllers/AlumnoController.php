@@ -28,8 +28,7 @@ class AlumnoController extends BaseController
 			'aluObservaciones' => trim($data['observacion']),
 			'aluEstado' => true,
 			'aluEscuela' => $data['escuela'],
-			'aluPass' => Hash::make(trim($data['curp'])),
-			'aluGrado' => $data['grado']
+			'aluPass' => Hash::make(trim($data['curp']))
 		));
 
 		/* Si se realizó la consulta devuelve un array con
@@ -115,7 +114,6 @@ class AlumnoController extends BaseController
 					'aluEdad' => trim($data['edad']),
 					'aluEscuela' => $data['escuela'],
 					'aluEstado' => $data['activo'],
-					'aluGrado' => $data['grado'],
 					'aluObservaciones' => trim($data['observacion'])
 				)
 			);
@@ -173,19 +171,16 @@ class AlumnoController extends BaseController
 
 		/* Buscar los datos del alumno, incluye el select de tablas relacionadas */
 		$alumno = Alumno::where('aluCurp', $data['id'])
-		//	->leftJoin('escuelas', 'alumnos.aluEscuela', '=', 'escuelas.escId')
-			->leftJoin('grados', 'alumnos.aluGrado', '=', 'grados.gradId')
+			// ->leftJoin('escuelas', 'alumnos.aluEscuela', '=', 'escuelas.escId')
 			->get()
 			->toArray();
 
 		/* Obteniendo todas las escuelas */
 		$escuelas = EscuelaController::getEscuelas();
-		$grados = GradoController::getGrados();
 
 		$datos = array(
 			'alumno' => $alumno[0],
-			'escuelas' => $escuelas,
-			'grados' => $grados
+			'escuelas' => $escuelas
 		);
 
 		if ( count( $alumno ) > 0 )

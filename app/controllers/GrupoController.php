@@ -90,20 +90,11 @@ class GrupoController extends BaseController{
 
     $data = Input::all();
 
-    $duplicado = GrupoController::duplicado($data['grupo']);
-    if ( !$duplicado )
-        return Response::json(array(
-        'status' => 'ERROR',
-        'message' => 'Ya existe un grupo igual, verificalo'
-      ));
-
     $editar = Grupo::where('grupId', $data['id'])
-    ->update(array(
-      'grupNombre' => trim($data['grupo']),
-      'grupEstado' => $data['estado']
-
-
+      ->update(array(
+        'grupEstado' => $data['estado']
       ));
+
     if ( $editar )
       $response = array(
         'status' => 'OK',

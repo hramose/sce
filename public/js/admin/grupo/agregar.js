@@ -185,7 +185,6 @@ function guardarCambios(){
     url: 'editarGrupo',
     data: {
       id: grupoSeleccionada,    /*id=ct actual, id dentro de BD a buscar*/
-      grupo: txtNombreG.val(),
       estado: slctEstadoG.val()
     },
     type: 'post',
