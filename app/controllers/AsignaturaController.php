@@ -103,7 +103,7 @@ class AsignaturaController extends BaseController
 		else
 			$response = array(
 				'status' => 'ERROR',
-				'message' => 'No se pudo actualizar la asignatura, intente nuevamente. 
+				'message' => 'No se pudo actualizar la asignatura, intente nuevamente.
 								Los datos deben ser distintos para realizar la actualización'
 				);
 		return Response::json( $response );
@@ -131,6 +131,18 @@ class AsignaturaController extends BaseController
 				'message' => 'No se puede eliminar la asignatura, tal vez no existe o ya está inactiva'
 				);
 		return Response::json( $response );
+	}
+
+	public static function getAsignaturas(){
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+
+		$asignaturas = Asignatura::where('asigEstado', true)
+			->orderBy('asigNombre')
+			->get()
+			->toArray();
+
+		return $asignaturas;
 	}
 
 	public function seleccionarAsignatura() {

@@ -49,7 +49,7 @@
 	  </div>
 	</div>
 
-  
+
 </div>
 
 	<div class="container-fluid">
@@ -109,7 +109,35 @@
         <li class="divisor"></li>
         </ul>
       </div>
-      
+
+      <!-- Calificaciones -->
+      <ul class="nav nav-sidebar">
+        <li class="header">
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseCal">
+                Calificaciones
+              </a>
+          </h5>
+        </li>
+      </ul>
+      <div id="collapseCal" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
+          <li id="liAgregarCalificacion">
+          <a href="{{ URL::to('admin/calificacion/agregar')}}">
+            <span class="glyphicon glyphicon-plus"></span>
+            Agregar
+          </a>
+        </li>
+        <li id="liEditarCalificacion">
+          <a href="{{ URL::to('admin/calificacion/editar')}}">
+            <span class="glyphicon glyphicon-edit"></span>
+            Editar
+          </a>
+        </li>
+        <li class="divisor"></li>
+        </ul>
+      </div>
+
       <!-- Ciclo -->
       <ul class="nav nav-sidebar">
         <li class="header">

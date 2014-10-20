@@ -54,6 +54,16 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('asignatura/editarAsignatura', array('uses' => 'AsignaturaController@editarAsignatura'));
 	Route::post('asignatura/eliminarAsignatura', array('uses' => 'AsignaturaController@eliminarAsignatura'));
 	Route::post('asignatura/seleccionarAsignatura', array('uses' => 'AsignaturaController@seleccionarAsignatura'));
+	Route::get('asignatura/getAsignaturas', array('uses'=> 'AsignaturaController@getAsignaturas'));
+
+	/*Rutas calificacion*/
+	Route::get('calificacion/agregar', function(){
+		return View::make('admin.calificacion.agregar');
+	});
+	Route::post('calificacion/agregarCalificacion', array('uses' => 'CalificacionController@agregarCalificacion'));
+	Route::get('calificacion/editar', function(){
+		return View::make('admin.calificacion.editar');
+	});
 
 	/*Rutas para ciclo*/
 	Route::get('ciclo/agregar', function(){
@@ -89,6 +99,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	/*Rutas para Grado*/
 	Route::post('grado/seleccionarGrado', array('uses' => 'GradoController@seleccionarGrado'));
 
+	/*Rutas para identificador*/
+	Route::get('identificador/getIdentificadores', array('uses' => 'IdentificadorController@getIdentificadores'));
+
 	/* Rutas listas */
 	Route::get('lista/agregar', function(){
 		return View::make('admin.lista.agregar');
@@ -106,5 +119,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('profesor/editarProfesor', array('uses' => 'ProfesorController@editarProfesor'));
 	Route::post('profesor/eliminarProfesor', array('uses' => 'ProfesorController@eliminarProfesor'));
 	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
+	Route::get('profesor/getProfesores', array('uses' => 'ProfesorController@getProfesores'));
 
 });

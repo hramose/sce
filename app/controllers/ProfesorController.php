@@ -135,6 +135,22 @@ public function agregarProfesor(){
 
 		return Response::json( $response );
 	}
+	/*******************************************************************/
+	public static function getProfesores(){
+		if ( !Usuario::isAdmin() )
+			return Redirect::to('admin/logout');
+
+		$profesores = Profesor::where('profEstado', true)
+			->orderBy('profNombre')
+			->get(array(			/*datos necesarios por ahora para mostrar en un select*/
+				'profCurp',
+				'profNombre',
+				'profPerfil',
+			))
+			->toArray();
+		return $profesores;
+	}
+
 
 	/*******************************************************************/
 	public function seleccionarProfesor() {
