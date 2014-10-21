@@ -13,7 +13,7 @@ var tblCalificacion = $('#tblCalificacion'),
     tbodyCalificacion = $('#tbodyCalificacion'),
     pnlEditarCal = $('#pnlEditarCal');
 
-var calSeleccionda;
+var calSeleccionda, calAsignatira, calIdentificador;
 /* Funciones */
 function buscarCalificacion(){
   if ( txtBuscar.val() === "" )
@@ -160,14 +160,8 @@ function seleccionarCalificacion() {
             );
       });
       /*Para evitar que edite los siguientes campos solo aparecera el que contiene el registro dentro de calificacion*/
-      sltAsignatura.append(
-        '<option value="'+cal.asigId+'">'+cal.asigNombre+' </option>'
-      );
-
-      sltIdentificador.append(
-        '<option value="'+cal.calIdentificador+'">'+cal.aluApep+' '+cal.aluApem+' '+cal.aluNombre+'</option>'
-      );
-
+      sltAsignatura.val(cal.asigNombre);  //no se necesita el id ya que no se modificaran
+      sltIdentificador.val(cal.aluApep+' '+cal.aluApem+' '+cal.aluNombre);
       sltBimestre.val(cal.calBimestre);
       /*------------------------------------------*/
       txtCalificacion.val(cal.calCalificacion);

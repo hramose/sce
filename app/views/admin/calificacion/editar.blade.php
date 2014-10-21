@@ -66,15 +66,13 @@ Editar calificación | Sistema de Control Escolar
             <div class="form-group">
               <label for="sltIdentificador" class="col-md-3 control-label">Alumno</label>
               <div class="col-md-9">
-                <select id="sltIdentificador" class="form-control input-sm">
-                </select>
+                <input type="text" id="sltIdentificador" class="form-control input-sm" disabled>
               </div>
             </div>
             <div class="form-group">
               <label for="sltAsignatura" class="col-md-3 control-label">Asignatura</label>
               <div class="col-md-9">
-                <select id="sltAsignatura" class="form-control input-sm" >
-                </select>
+              <input type="text" id="sltAsignatura" class="form-control input-sm" disabled>
               </div>
             </div>
             <div class="form-group">
