@@ -10,7 +10,13 @@ class IdentificadorController extends \BaseController {
       ->leftJoin('ciclos', 'identificador.ideCiclo', '=', 'ciclos.cicId')
       ->where('aluEstado', true)
       ->orderBy('cicGrado')
-      ->get()
+      ->get(array(
+        'aluApep',
+        'aluApem',
+        'aluNombre',
+        'cicCiclo',
+        'cicGrado',
+      ))
       ->toArray();
     return $identificadores;
   }

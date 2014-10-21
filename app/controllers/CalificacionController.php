@@ -6,14 +6,13 @@ class CalificacionController extends BaseController
     if( !Usuario::isAdmin() )
       return Redirect::to('admin/logout');
 
-    /* Datos recibidos por ajax */
     $data = Input::all();
 
     $duplicado = CalificacionController::duplicado($data['bimestre'],$data['identificador'],$data['asignatura']);
     if ( !$duplicado )
         return Response::json(array(
         'status' => 'ERROR',
-        'message' => 'Ya existe una calificación asignada al alumno en ese bimestre y asignatura'
+        'message' => 'Ya existe una calificación asignada al alumno con ese bimestre y asignatura'
       ));
 
     $insert = Calificacion::insert(array(
@@ -24,7 +23,7 @@ class CalificacionController extends BaseController
       'calProfesor' => trim($data['profesor'])
       ));
 
-    /* Mensajes en caso de que la consulta halla tenido exito o no */
+    /* Mensajes en caso de que la consulta halla tenido exito o no*/
 
     if ( $insert )
       $response = array(
@@ -38,6 +37,52 @@ class CalificacionController extends BaseController
         );
 
     return Response::json($response);
+  }
+    /*****************************************************************/
+  public function buscarCalificacion(){
+    if ( !Usuario::isAdmin() )
+      return Redirect::to('admin/logout');
+
+    $data = Input::all();
+    $buscar = trim($data['buscar']);
+
+    $busqueda = Identificador::
+      leftJoin('alumnos', 'identificador.ideAlumno', '=', 'alumnos.aluCurp')
+      ->leftJoin('ciclos', 'identificador.ideCiclo', '=', 'ciclos.cicId')
+      ->leftJoin('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')
+      ->leftJoin('asignaturas', 'calificaciones.calAsignatura', '=', 'asignaturas.asigId')
+      ->where('aluEstado', true)
+      ->where('aluApem', 'like', '%'. $buscar .'%')
+      ->orWhere('aluNombre', 'like', '%'. $buscar .'%')
+      ->orWhere('aluCurp', 'like', '%'. $buscar .'%')
+      ->orderBy('aluApep')
+      ->orderBy('cicGrado')
+      ->orderBy('calBimestre')
+      ->get(array(
+        'aluApep',
+        'aluApem',
+        'aluNombre',
+        'asigNombre',
+        'calBimestre',
+        'calId',
+        'cicCiclo',
+        'cicGrado',
+      ))
+      ->toArray();
+
+    if( count( $busqueda)>0 )
+      $response = array(
+        'status' => 'OK',
+        'data' => $busqueda,
+        'message' => 'Busqueda exitosa'
+        );
+
+    else
+      $response = array(
+        'status' => 'ERROR',
+        'message' => 'No se encontraron resultados'
+        );
+      return Response::json($response);
   }
 
     /*****************************************************************/
@@ -54,91 +99,70 @@ class CalificacionController extends BaseController
     else
       return true;
   }
+  /***********************************************************************/
+public function editarCalificacion(){
+  if ( !Usuario::isAdmin() )
+    return Redirect::to('admin/logout');
 
-  /*public function buscarTurno(){
-    if ( !Usuario::isAdmin() )
-      return Redirect::to('admin/logout');
+  $data = Input::all();
 
-    $data = Input::all();
-    $buscar = trim($data['buscar']);
+  $update = Calificacion::where('calId', $data['id'])
+    ->update(
+      array(
+        'calCalificacion' => trim($data['calificacion']),
+        'calProfesor' => trim($data['profesor'])
+      )
+    );
 
-    $busqueda = Turno::where('turNombre', 'like', '%'. $buscar.'%')
-    ->orWhere('turId', 'like','%'. $buscar .'%')
-    ->get(array(
-      'turId',
-      'turNombre',
-      'turEstado'
-      ))
-      ->toArray();
-    if( count( $busqueda)>0 )
+    if ( $update )
       $response = array(
         'status' => 'OK',
-        'data' => $busqueda,
-        'message' => 'Busqueda exitosa'
-        );
-
+        'message' => 'La calificación se editó correctamente'
+      );
     else
       $response = array(
         'status' => 'ERROR',
-        'message' => 'No se encontraron resultados'
-        );
-      return Response::json($response);
-  }*/
+        'message' => 'No se pudo editar la calificación, intente de nuevo. No se pueden guardar los mismos datos'
+      );
 
-/*  public function eliminarTurno(){
-    if( !Usuario::isAdmin() )
-      return Redirect::to('admin/logout');
-
-    $data = Input::all();
-
-    // Actualizar turno
-    $actualizar = Turno::where('turId', $data['id'])
-    ->update(array(
-      'turEstado' => false
-      ));
-    if ( $actualizar )
-      $response = array(
-        'status' => 'OK',
-        'message' => 'turno eliminado'
-        );
-    else
-      $response = array (
-        'status' => 'ERROR',
-        'message' => 'No se puede eliminar el turno, talvez no existe'
-        );
-    return Response::json( $response );
-  }
-
-  public static function getTurnos(){
-    if ( !Usuario::isAdmin() )
-      return Redirect::to('admin/logout');
-
-    $turnos = Turno::where('turEstado', true)
-      ->orderBy('turNombre')
-      ->get()
-      ->toArray();
-
-    return $turnos;
-  }*/
-
-/*  public function seleccionarTurno() {
+  return Response::json( $response );
+}
+  /**********************************************************************/
+  public function getEditarCal() {
     if ( !Usuario::isAdmin() )
       return Redirect::to('admin/logout');
 
       $data = Input::all();
 
-      $seleccionar = Turno::where('turId', $data['id'])
-      ->get(array(
-        'turId',
-        'turNombre',
-        'turEstado'
+      $calificacion = Calificacion::where('calId', $data['id'])
+        ->leftJoin('asignaturas', 'calificaciones.calAsignatura', '=', 'asignaturas.asigId')
+        ->leftJoin('identificador', 'calificaciones.calIdentificador', '=', 'identificador.ideId')
+        ->leftJoin('alumnos', 'identificador.ideAlumno', '=', 'alumnos.aluCurp')
+        ->get(array(
+          'calCalificacion',
+          'calBimestre',
+          'calProfesor',
+          'calIdentificador',
+          'aluApep',
+          'aluApem',
+          'aluNombre',
+          'asigId',
+          'asigNombre',
         ))
         ->toArray();
 
-        if ( count( $seleccionar ) > 0 )
+      $profesores = Profesor::get(array('profCurp','profNombre'))
+        ->toArray();
+
+      $datos = array(
+        'calificacion' => $calificacion[0],
+        'profesores' => $profesores
+      );
+
+      if ( count( $calificacion ) > 0 )
         $response = array(
           'status' => 'OK',
-          'data' => $seleccionar,
+          'data' => $datos,
           'message' => 'Resultados obtenidos'
         );
         else
@@ -148,5 +172,5 @@ class CalificacionController extends BaseController
         );
 
         return Response::json( $response );
-      }*/
+      }
 }

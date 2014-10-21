@@ -168,7 +168,7 @@ function validarCalificacion(){
   }
   if ( txtCalificacion.val() === "" ){
     alert('Indique una calificación');
-    txtNombre.focus();
+    txtCalificacion.focus();
     return false;
   }
   if ( sltProfesor.val() === "" || sltProfesor.val()=== null ){

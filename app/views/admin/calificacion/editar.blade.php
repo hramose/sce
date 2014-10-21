@@ -21,9 +21,9 @@ Editar calificación | Sistema de Control Escolar
     <div class="form-horizontal">
       <fieldset>
         <div class="form-group">
-          <label for="txtBuscar" class="col-md-2">Buscar</label>
-          <div class="col-md-8">
-            <input type="text" class="form-control input-sm" id="txtBuscar" placeholder="Área | Nombre" autofocus>
+          <label for="txtBuscar" class="col-md-3">Buscar alumno</label>
+          <div class="col-md-7">
+            <input type="text" class="form-control input-sm" id="txtBuscar" placeholder="Apellidos | Nombre | CURP" autofocus>
           </div>
           <div class="col-md-2">
             <button class="btn btn-info btn-sm" id="btnBuscar">Buscar</button>
@@ -34,75 +34,74 @@ Editar calificación | Sistema de Control Escolar
   </div>
 </div>
 
-<!-- Tabla de asignaturas enontradas -->
-<div class="row">
+<!-- Tabla de alumnos enontradas -->
+<div class="row" id=>
   <div class="col-md-12">
-    <div class="table-responsive hidden" id="tblAsignatura">
+    <div class="table-responsive hidden" id="tblCalificacion">
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th>Clave</th>
             <th>Nombre</th>
-            <th>Área</th>
-            <th class="center">Status</th>
+            <th class="center">Asignatura</th>
+            <th class="center">Bimestre</th>
+            <th class="center">Grado</th>
+            <th class="center">Ciclo Escolar</th>
             <th class="center">Editar</th>
-            <th class="center">Eliminar</th>
           </tr>
         </thead>
-        <tbody id="tbodyAsignatura"></tbody>
+        <tbody id="tbodyCalificacion"></tbody>
       </table>
     </div>
   </div>
 </div>
 
-<!-- Panel editar asinaturas -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="well hidden" id="formEditar">
+<!-- Panel editar calificacion -->
+<div class="row hidden" id="pnlEditarCal">
+  <div class="col-md-10">
+    <div class="well">
       <div class="form-horizontal">
         <fieldset>
-          <legend></legend>
-          <div class="col-md-6">
+          <div id = "secCalificacion">
+            <legend></legend>
             <div class="form-group">
-              <label for="sltArea" class="col-md-3 control-label">Área</label>
+              <label for="sltIdentificador" class="col-md-3 control-label">Alumno</label>
               <div class="col-md-9">
-                <select id="sltArea" class="form-control input-sm">
-                  <option value="Asignatura">Asignatura</option>
-                  <option value="Artes">Taller de Artes</option>
-                  <option value="Tecnología">Taller de Tecnología</option>
+                <select id="sltIdentificador" class="form-control input-sm">
                 </select>
               </div>
             </div>
-
             <div class="form-group">
-              <label for="txtClave" class="col-md-3 control-label">Clave</label>
+              <label for="sltAsignatura" class="col-md-3 control-label">Asignatura</label>
               <div class="col-md-9">
-                <input type="text" id="txtClave" class="form-control input-sm" placeholder="Clave" maxlength="18" >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="txtNombre" class="col-md-3 control-label">Nombre</label>
-              <div class="col-md-9">
-                <input type="text" id="txtNombre" placeholder="Nombre" class="form-control input-sm">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="sltEstado" class="col-md-3 control-label">Estado</label>
-              <div class="col-md-9">
-                <select id="sltEstado" class="form-control input-sm">
-                  <option value="1">Activo</option>
-                  <option value="0">Inactivo</option>
+                <select id="sltAsignatura" class="form-control input-sm" >
                 </select>
               </div>
             </div>
+            <div class="form-group">
+              <label for="sltBimestre" class="col-md-3 control-label">Bimestre</label>
+              <div class="col-md-9">
+                <input type="text" id="sltBimestre" class="form-control input-sm" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="txtCalificacion" class="col-md-3 control-label">Calificación</label>
+              <div class="col-md-9">
+                <input type="text" id="txtCalificacion" class="form-control input-sm" placeholder="Calificación">
+              </div>
+            </div>
 
             <div class="form-group">
-              <div class="col-md-9 col-md-offset-3">
-                <button class="btn btn-success btn-sm" id="btnGuardar">Guardar cambios</button>
-                <button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
+              <label for="sltProfesor" class="col-md-3 control-label">Profesor(a)</label>
+              <div class="col-md-9">
+                <select id="sltProfesor" class="form-control input-sm">
+                </select>
               </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-9 col-md-offset-3">
+            <button class="btn btn-success btn-sm" id="btnGuardar">Guardar cambios</button>
+            <button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
             </div>
           </div>
         </fieldset>
@@ -113,7 +112,7 @@ Editar calificación | Sistema de Control Escolar
 @stop
 
 @section('js')
- {{HTML::script('js/admin/calificacion/editar.js')}} 
+ {{HTML::script('js/admin/calificacion/editar.js')}}
 <script>
   $('#collapseCal').addClass('in');
 </script>

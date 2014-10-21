@@ -64,6 +64,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::get('calificacion/editar', function(){
 		return View::make('admin.calificacion.editar');
 	});
+	Route::post('calificacion/buscarCalificacion', array('uses' => 'CalificacionController@buscarCalificacion'));
+	Route::post('calificacion/getEditarCal', array('uses' => 'CalificacionController@getEditarCal'));
+	Route::post('calificacion/editarCalificacion', array('uses' => 'CalificacionController@editarCalificacion'));
 
 	/*Rutas para ciclo*/
 	Route::get('ciclo/agregar', function(){

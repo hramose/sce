@@ -3,26 +3,24 @@ var btnBuscar = $('#btnBuscar'),
     btnCancelar = $('#btnCancelar');
     btnGuardar = $('#btnGuardar');
 
-  /* Tabla asignaturas encontradas */
-var tblAsignatura = $('#tblAsignatura'),
-    tbodyAsignatura = $('#tbodyAsignatura');
+var sltIdentificador = $('#sltIdentificador'),
+    sltAsignatura = $('#sltAsignatura'),
+    sltBimestre = $('#sltBimestre'),
+    txtCalificacion = $('#txtCalificacion'),
+    sltProfesor = $('#sltProfesor');
 
-  /*Formulario datos a editar*/
-var formEditar = $('#formEditar'),
-     txtClave = $('#txtClave'),
-    txtNombre = $('#txtNombre'),
-    sltArea = $('#sltArea'),
-    sltEstado = $('#sltEstado');
-var asigSeleccionada;
+var tblCalificacion = $('#tblCalificacion'),
+    tbodyCalificacion = $('#tbodyCalificacion'),
+    pnlEditarCal = $('#pnlEditarCal');
 
+var calSeleccionda;
 /* Funciones */
-function buscarAsignatura(){
-
+function buscarCalificacion(){
   if ( txtBuscar.val() === "" )
     return;
 
     var datos = $.ajax({
-    url: 'buscarAsignatura',
+    url: 'buscarCalificacion',
     data: {
       buscar: txtBuscar.val()
     },
@@ -41,68 +39,64 @@ function buscarAsignatura(){
         boxPoster.show().delay(2000).fadeOut();
     }
 
-    formEditar.addClass('hidden');
-    tbodyAsignatura.html('');
+    pnlEditarCal.addClass('hidden');
+    tbodyCalificacion.html('');
     if ( res.status === 'OK' ){
       $.each(res.data, function(k,o){
-        if ( o.asigEstado == 1 )
-          status = '<span class="glyphicon glyphicon-ok" title="Activo"></span>';
-        else
-          status = '<span class="glyphicon glyphicon-remove" title="Inactivo"></span>';
-
-        tbodyAsignatura.append(
+        tbodyCalificacion.append(
           '<tr>'+
-            '<td>'+o.asigClave+'</td>'+
-            '<td>'+o.asigNombre+'</td>'+
-            '<td>'+o.asigArea+'</td>'+
-            '<td class="center">'+status+'</td>'+
+            '<td>'+o.aluApep+' '+o.aluApem+' '+o.aluNombre+'</td>'+
+            '<td class="center">'+o.asigNombre+'</td>'+
+            '<td class="center">'+o.calBimestre+'</td>'+
+            '<td class="center">'+o.cicGrado+'</td>'+
+            '<td class="center">'+o.cicCiclo+'</td>'+
             '<td class="center">'+
-              '<span class="glyphicon glyphicon-edit" id="'+o.asigId+'" '+		/*id para editar*/
+              '<span class="glyphicon glyphicon-edit" id="'+o.calId+'" '+		//id para editar
               'style="cursor:pointer" title="Editar"></span>'+
-          '</td>'+
-            '<td class="center">'+
-              '<span class="glyphicon glyphicon-trash" id="'+o.asigId+'" '+
-              'style="cursor:pointer" title="Eliminar"></span>'+
-          '</td>'+
+            '</td>'+
           '</tr>'
       );
       });
-      tblAsignatura.removeClass('hidden');
+      tblCalificacion.removeClass('hidden');
     }
     else if(res.status === 'ERROR'){
-        tblAsignatura.addClass('hidden');
+        tblCalificacion.addClass('hidden');
         icon = '<span class="glyphicon glyphicon-remove"></span> ';
         messagePoster.html(icon+res.message);
         boxPoster.show().delay(3000).fadeOut();
         txtBuscar.val("");
-        }
+      }
 }
-
+  /*********************************************************************/
 function cancelarEdicion(){
-  txtClave.val("");
-  txtNombre.val("");
-  txtBuscar.val("");
-  formEditar.addClass('hidden');
+  limpiarEdicion();
+  pnlEditarCal.addClass('hidden');
+}
+function limpiarEdicion(){
+  sltIdentificador.html('');
+  sltAsignatura.html('');
+  sltBimestre.val('');
+  txtCalificacion.val('');
+  sltProfesor.html('');
+  txtBuscar.val('');
 }
 
-function editarAsignatura(){
-  var id = asigSeleccionada;
+  /*********************************************************************/
+function editarCalificacion(){
+  var id = calSeleccionda;
+
   if(id === "")
     return false;
 
-  var verificar = new validar();
-  var validarAsignatura = verificar.validarDatos(txtNombre.val(),txtClave.val());
-  if ( !validarAsignatura )
+  if ( !validarCalificacion() )
     return false;
 
-    var datos = $.ajax({
-    url: 'editarAsignatura',
+  var datos = $.ajax({
+    url: 'editarCalificacion',
     data: {
       id: id,
-      clave: txtClave.val(),
-      nombre: txtNombre.val(),
-      area: sltArea.val(),
-      estado: sltEstado.val()
+      calificacion: txtCalificacion.val(),  /*solo estos campos se podra editar*/
+      profesor: sltProfesor.val(),
     },
     type: 'post',
     dataType:'json',
@@ -122,64 +116,23 @@ function editarAsignatura(){
     if ( res.status === 'OK' ){
     icon = '<span class="glyphicon glyphicon-ok"></span> ';
     cancelarEdicion();
-    buscarAsignatura();
     }else
     icon = '<span class="glyphicon glyphicon-remove"></span> ';
 
     messagePoster.html(icon + res.message);
     boxPoster.show().delay(3000).fadeOut();
 }
-
-function eliminarAsignatura(){
-
-  var id = $(this).attr('id');
-  if ( id === "" )
-    return false;
-
-  var del = confirm('¿Está seguro que desea eliminar la asignatura?');
-  if ( del === false )
-    return false;
-
-  var datos = $.ajax({
-    url: 'eliminarAsignatura',
-    data: {
-      id: id
-    },
-    type: 'post',
-    dataType:'json',
-        async:false
-    }).error(function(e){
-        alert('Ocurrio un error, intente de nuevo');
-    }).responseText;
-
-    var res;
-    try{
-        res = JSON.parse(datos);
-    }catch (e){
-        messagePoster.html('Error JSON ' + e);
-        boxPoster.show().delay(2000).fadeOut();
-    }
-
-    if ( res.status === 'OK' ){
-      icon = '<span class="glyphicon glyphicon-ok"></span> ';
-      buscarAsignatura();
-    }else
-      icon = '<span class="glyphicon glyphicon-remove"></span> ';
-
-    messagePoster.html(icon + res.message);
-  boxPoster.show().delay(3000).fadeOut();
-}
-
-function seleccionarAsignatura() {
+  /*********************************************************************/
+function seleccionarCalificacion() {
   var id = $(this).attr('id');
   if ( id === "")
     return false;
 
-    asigSeleccionada = id;
+    calSeleccionda = id;
     var datos = $.ajax({
-      url: 'seleccionarAsignatura',
+      url: 'getEditarCal',
       data: {
-        id: asigSeleccionada
+        id: calSeleccionda
       },
       type: 'post',
       dataType:'json',
@@ -197,42 +150,70 @@ function seleccionarAsignatura() {
       }
 
     if (res.status === 'OK'){
-          $.each(res.data, function(k,datos){
-            txtClave.val(datos.asigClave);
-            txtNombre.val(datos.asigNombre);
-            sltArea.val(datos.asigArea);
-            sltEstado.val(datos.asigEstado);
-          });
-           formEditar.removeClass('hidden');
-           tblAsignatura.addClass('hidden');
+      limpiarEdicion();
+      var cal = res.data.calificacion,
+        prof = res.data.profesores;
+
+      $.each(prof, function(k,datos){
+            sltProfesor.append(
+              '<option value="'+datos.profCurp+'">'+datos.profNombre+'</option>'
+            );
+      });
+      /*Para evitar que edite los siguientes campos solo aparecera el que contiene el registro dentro de calificacion*/
+      sltAsignatura.append(
+        '<option value="'+cal.asigId+'">'+cal.asigNombre+' </option>'
+      );
+
+      sltIdentificador.append(
+        '<option value="'+cal.calIdentificador+'">'+cal.aluApep+' '+cal.aluApem+' '+cal.aluNombre+'</option>'
+      );
+
+      sltBimestre.val(cal.calBimestre);
+      /*------------------------------------------*/
+      txtCalificacion.val(cal.calCalificacion);
+
+      sltProfesor.find('option').each(function(){
+        if ( cal.calProfesor == $(this).val() )
+          sltProfesor.val(cal.calProfesor);
+      });
+
+      pnlEditarCal.removeClass('hidden');
+      tblCalificacion.addClass('hidden');
     }
 }
-
-function validar(){
-  this.validarDatos = function validarDatos( nombre, clave ){
-    var patt = new RegExp( '^[á-úÁ-Úa-zA-Z \t]*$' );
-    //var patt = new RegExp('^[á-úa-z(ñ)]*$', 'i');
-    if( txtNombre.val() ==="" || !patt.test(txtNombre.val()) ){
-      alert('Indique un nombre válido de asignatura');
-      txtNombre.focus();
-      return false;
-    }
-
-    var patt = new RegExp( '^[0-9]*$' );
-    if( !patt.test(txtClave.val()) || txtClave.val().length > 10 ){
-      alert('Indique una clave válida de asignatura');
-      txtClave.focus();
-      return false;
-    }
-    return true;
-  };
+  /**************************************************************************/
+function validarCalificacion(){
+  if ( sltIdentificador.val() === "" || sltIdentificador.val()=== null ){
+    alert('Seleccione un alumno');
+    sltIdentificador.focus();
+    return false;
+  }
+  if ( sltAsignatura.val() === "" || sltAsignatura.val()=== null ){
+    alert('Seleccione un asignatura');
+    sltAsignatura.focus();
+    return false;
+  }
+  if ( sltBimestre.val() === "" || sltBimestre.val()=== null ){
+    alert('Seleccione un bimestre');
+    sltBimestre.focus();
+    return false;
+  }
+  if ( txtCalificacion.val() === "" ){
+    alert('Indique una calificación');
+    txtCalificacion.focus();
+    return false;
+  }
+  if ( sltProfesor.val() === "" || sltProfesor.val()=== null ){
+    alert('Seleccione un profesor');
+    sltProfesor.focus();
+    return false;
+  }
+  return true;
 }
 
 /* Eventos */
-/*btnBuscar.on('click', buscarAsignatura);
+btnBuscar.on('click', buscarCalificacion);
 btnCancelar.on('click', cancelarEdicion);
-btnGuardar.on('click', editarAsignatura);*/
-                       /*(elemento, evento, funcion js) */
-//tblAsignatura.delegate('.glyphicon-trash', 'click', eliminarAsignatura);
-//tblAsignatura.delegate('.glyphicon-edit', 'click', seleccionarAsignatura);
+btnGuardar.on('click', editarCalificacion);
+tblCalificacion.delegate('.glyphicon-edit', 'click', seleccionarCalificacion);
 $('#liEditarCalificacion').addClass('active');
