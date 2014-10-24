@@ -55,6 +55,7 @@ class CalificacionController extends BaseController
       ->where('aluApem', 'like', '%'. $buscar .'%')
       ->orWhere('aluNombre', 'like', '%'. $buscar .'%')
       ->orWhere('aluCurp', 'like', '%'. $buscar .'%')
+      ->orWhere('aluApep', 'like', '%'. $buscar .'%')
       ->orderBy('aluApep')
       ->orderBy('cicGrado')
       ->orderBy('calBimestre')

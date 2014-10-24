@@ -135,7 +135,7 @@ function getProfesores(){
     });
   }else{
     messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
-      'No existen asignaturas registradas');
+      'No existen profesores registrados');
     boxPoster.show().delay(2000).fadeOut();
   }
 }

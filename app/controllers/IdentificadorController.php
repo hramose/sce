@@ -11,6 +11,7 @@ class IdentificadorController extends \BaseController {
       ->where('aluEstado', true)
       ->orderBy('cicGrado')
       ->get(array(
+        'ideId',
         'aluApep',
         'aluApem',
         'aluNombre',
