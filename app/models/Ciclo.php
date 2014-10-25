@@ -9,14 +9,7 @@ class Ciclo extends Eloquent
 		'cicId',
 		'cicCiclo',
 		'cicGrado',
-		'cicGrupo'
+		'cicGrupo',
+		'cicOrientador'
 	);
-
-	public function grupos(){
-    return $this->hasMany('Grupo','cicGrupo');
-		/*hasMany('Modelo con que se relaciona','llave foranea', 'id con el que se relacionan')
-		 funcion para relacion uno a muchos
-		 un ciclo tiene varios grupos
-		*/
-  }
 }

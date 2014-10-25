@@ -14,14 +14,68 @@ Agregar calificación | Sistema de Control Escolar
   Agregar calificación
 </h1>
 
-<!-- Formulario -->
-<div class="row" id="pnlAgregarCal">
+<!-- Formulario Seleccionar Alumnos-->
+<div class="row" id="formSelectAlumno">
   <div class="col-md-10">
     <div class="well">
       <div class="form-horizontal">
         <fieldset>
+          <legend>Seleccionar Grupo</legend>
+
+          <div class="form-group">
+            <label for="sltCiclo" class="col-md-3 control-label">Ciclo</label>
+            <div class="col-md-9">
+              <select id="sltCiclo" class="form-control input-sm">
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sltGrado" class="col-md-3 control-label">Grado</label>
+            <div class="col-md-9">
+              <select id="sltGrado" class="form-control input-sm">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sltGrupo" class="col-md-3 control-label">Grupo</label>
+            <div class="col-md-9">
+              <select id="sltGrupo" class="form-control input-sm">
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-9 col-md-offset-3">
+              <button class="btn btn-info btn-sm" id="btnSeleccionarAlumno">Seleccionar</button>
+            </div>
+          </div>
+
+        </fieldset>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Formulario Agregar-->
+<div class="row hidden" id="pnlAgregarCal">
+  <div class="col-md-10">
+    <div class="well">
+      <div class="form-horizontal">
+        <fieldset>
+          <legend>Agregar Calificación</legend>
           <div id = "secCalificacion">
-            <legend></legend>
+            <div class="form-group">
+              <div class="col-md-4">
+                <input type="text" id="datoGrupo" class="form-control input-sm" disabled>
+              </div>
+            </div>
             <div class="form-group">
               <label for="sltIdentificador" class="col-md-3 control-label">Alumno</label>
               <div class="col-md-9">

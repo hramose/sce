@@ -75,6 +75,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('ciclo/agregarCiclo',array('uses' => 'CicloController@agregarCiclo'));
 	Route::get('ciclo/getGrados',array('uses' => 'GradoController@getGrados'));
 	Route::get('ciclo/getGrupos',array('uses' => 'GrupoController@getGrupos'));
+	Route::get('ciclo/getCiclos',array('uses' => 'CicloController@getCiclos'));
 
 	/* Rutas para escuelas */
 	Route::get('escuela/getEscuelas', array('uses' => 'EscuelaController@getEscuelas'));
@@ -103,7 +104,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('grado/seleccionarGrado', array('uses' => 'GradoController@seleccionarGrado'));
 
 	/*Rutas para identificador*/
-	Route::get('identificador/getIdentificadores', array('uses' => 'IdentificadorController@getIdentificadores'));
+	Route::post('identificador/getAlumnosGrupo', array('uses' => 'IdentificadorController@getAlumnosGrupo'));
 
 	/* Rutas listas */
 	Route::get('lista/agregar', function(){

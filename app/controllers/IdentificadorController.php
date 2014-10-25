@@ -1,22 +1,24 @@
 <?php
 class IdentificadorController extends \BaseController {
 
-  public static function getIdentificadores(){
+  public function getAlumnosGrupo(){
     if ( !Usuario::isAdmin() )
       return Redirect::to('admin/logout');
 
+    $data = Input::all();
     $identificadores = Identificador::
       leftJoin('alumnos', 'identificador.ideAlumno', '=', 'alumnos.aluCurp')
       ->leftJoin('ciclos', 'identificador.ideCiclo', '=', 'ciclos.cicId')
-      ->where('aluEstado', true)
-      ->orderBy('cicGrado')
-      ->get(array(
-        'ideId',
-        'aluApep',
-        'aluApem',
-        'aluNombre',
-        'cicCiclo',
-        'cicGrado',
+        ->where('cicGrupo', $data['grupo'])
+        ->where('cicCiclo', $data['ciclo'])
+        ->where('cicGrado', $data['grado'])
+        ->where('aluEstado', true)
+        ->orderBy('aluApep')
+        ->get(array(
+          'ideId',
+          'aluApep',
+          'aluApem',
+          'aluNombre'
       ))
       ->toArray();
     return $identificadores;

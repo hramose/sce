@@ -47,4 +47,14 @@ class CicloController extends BaseController{
 		return Response::json( $response );
 	}
 
+	public static function getCiclos(){
+	if( !Usuario::isAdmin() )
+				return Redirect::to('admin/logout');
+
+	$ciclos = Ciclo::groupBy('cicCiclo')
+			->get()
+			->toArray();
+		return $ciclos;
+	}
+
 }

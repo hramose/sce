@@ -6,6 +6,13 @@ var btnAgregar = $('#btnAgregar'),
   sltBimestre = $('#sltBimestre'),
   txtCalificacion = $('#txtCalificacion'),
   sltProfesor = $('#sltProfesor');
+var pnlAgregarCal = $('#pnlAgregarCal'),
+  formSelectAlumno = $('#formSelectAlumno'),
+  datoGrupo = $('#datoGrupo');
+var sltCiclo = $('#sltCiclo'),
+  sltGrado = $('#sltGrado'),
+  sltGrupo = $('#sltGrupo'),
+  btnSeleccionarAlumno = $('#btnSeleccionarAlumno');
 
 
 function agregarCalificacion(){
@@ -38,7 +45,11 @@ function agregarCalificacion(){
 
   if ( res.status === 'OK') {
     icon = '<span class="glyphicon glyphicon-ok"></span> ';
-    limpiarCalificacion();
+    sltIdentificador.val("");
+    sltAsignatura.val("");
+    sltBimestre.val("");
+    txtCalificacion.val("");
+    sltProfesor.val("");
   }else
     icon = '<span class="glyphicon glyphicon-remove"></span> ';
 
@@ -46,10 +57,19 @@ function agregarCalificacion(){
   boxPoster.show().delay(3000).fadeOut();
 }
   /*********************************************************************/
-function getIdentificador(){
+function getAlumno(){
+  if (!validarSeleccion())
+    return false;
+
   var datos = $.ajax({
-    url: '../identificador/getIdentificadores',
-    type: 'get',
+    url: '../identificador/getAlumnosGrupo',
+    data:
+      {
+        ciclo : sltCiclo.val(),
+        grado : sltGrado.val(),
+        grupo : sltGrupo.val()
+      },
+    type: 'post',
     async:false
   }).error(function(e){
       alert('Ocurrio un error, intente de nuevo');
@@ -67,12 +87,19 @@ function getIdentificador(){
     sltIdentificador.html('');
     $.each(res, function(k,v){
       sltIdentificador.append(
-        '<option value="'+v.ideId+'">'+v.aluApep+' '+v.aluApem+' '+v.aluNombre+' - '+v.cicGrado+'° '+v.cicCiclo+' </option>'
+        '<option value="'+v.ideId+'">'+v.aluApep+' '+v.aluApem+' '+v.aluNombre+'</option>'
       );
     });
+    getAsignaturas();
+    getProfesores();
+    var sltGrupo2=document.getElementById('sltGrupo');  /*acceder a texto del select*/
+    var grupoString = sltGrupo2.options[sltGrupo2.selectedIndex].text;
+    datoGrupo.val('Grado: '+sltGrado.val()+'  Grupo: '+grupoString+'  Ciclo: '+sltCiclo.val());
+    formSelectAlumno.addClass('hidden');
+    pnlAgregarCal.removeClass('hidden');
   }else{
     messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
-      'No existen alumnos asociados a grupos');
+      'No existen alumnos asociados con dichos parametros');
     boxPoster.show().delay(2000).fadeOut();
   }
 }
@@ -109,6 +136,69 @@ function getAsignaturas(){
   }
 }
   /************************************************************************/
+
+function getCiclos(){
+  var datos = $.ajax({
+    url: '../ciclo/getCiclos',
+    type: 'get',
+    async:false
+  }).error(function(e){
+      alert('Ocurrio un error, intente de nuevo');
+  }).responseText;
+
+  var res;
+  try{
+      res = JSON.parse(datos);
+  }catch (e){
+      messagePoster.html('Error JSON ' + e);
+      boxPoster.show().delay(2000).fadeOut();
+  }
+
+  if ( res.length > 0 ){
+    sltCiclo.html('');
+    $.each(res, function(k,v){
+      sltCiclo.append(
+        '<option value="'+v.cicCiclo+'">'+v.cicCiclo+'</option>'  /* cicCiclo en value, ya que se agrupa y existen muchos cicCiclo*/
+      );
+    });
+  }else{
+    messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
+      'No existen ciclos registrados');
+    boxPoster.show().delay(2000).fadeOut();
+  }
+}
+  /************************************************************************/
+function getGrupos(){
+  var datos = $.ajax({
+    url: '../ciclo/getGrupos',
+    type: 'get',
+    async:false
+  }).error(function(e){
+      alert('Ocurrio un error, intente de nuevo');
+  }).responseText;
+
+  var res;
+  try{
+      res = JSON.parse(datos);
+  }catch (e){
+      messagePoster.html('Error JSON ' + e);
+      boxPoster.show().delay(2000).fadeOut();
+  }
+
+  if ( res.length > 0 ){
+    sltGrupo.html('');
+    $.each(res, function(k,v){
+      sltGrupo.append(
+        '<option value="'+v.grupId+'">'+v.grupNombre+'</option>'
+      );
+    });
+  }else{
+    messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
+      'No existen grupos registrados');
+    boxPoster.show().delay(2000).fadeOut();
+  }
+}
+/*********************************************************************/
 function getProfesores(){
   var datos = $.ajax({
     url: '../profesor/getProfesores',
@@ -142,14 +232,19 @@ function getProfesores(){
 
   /******************************************************************/
 function limpiarCalificacion(){
-  sltIdentificador.val("");
-  sltAsignatura.val("");
+  sltIdentificador.html('');
+  sltAsignatura.html('');
   sltBimestre.val("");
   txtCalificacion.val("");
-  sltProfesor.val("");
+  sltProfesor.html('');
+  sltCiclo.val("");
+  sltGrado.val("");
+  sltGrupo.val("");
+  pnlAgregarCal.addClass('hidden');
+  formSelectAlumno.removeClass('hidden');
 }
-  /*****************************************************************/
 
+  /*****************************************************************/
 function validarCalificacion(){
   if ( sltIdentificador.val() === "" || sltIdentificador.val()=== null ){
     alert('Seleccione un alumno');
@@ -178,14 +273,31 @@ function validarCalificacion(){
   }
   return true;
 }
-
+function validarSeleccion(){
+  if ( sltCiclo.val() === "" || sltCiclo.val()=== null ){
+    alert('Seleccione un ciclo');
+    sltCiclo.focus();
+    return false;
+  }
+  if ( sltGrado.val() === "" || sltGrado.val()=== null ){
+    alert('Seleccione un grado');
+    sltAsignatura.focus();
+    return false;
+  }
+  if ( sltGrupo.val() === "" || sltGrupo.val()=== null ){
+    alert('Seleccione un grupo');
+    sltBimestre.focus();
+    return false;
+  }
+  return true;
+}
 /* Eventos */
 $(document).on('ready', function(){
-  getAsignaturas();
-  getProfesores();
-  getIdentificador();
+  getCiclos();
+  getGrupos();
 });
 
 btnAgregar.on('click', agregarCalificacion);
 btnCancelar.on('click', limpiarCalificacion);
+btnSeleccionarAlumno.on('click', getAlumno);
 $('#liAgregarCalificacion').addClass('active');
