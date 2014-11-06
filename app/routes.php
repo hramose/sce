@@ -87,6 +87,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('escuela/eliminarEscuela', array('uses' => 'EscuelaController@eliminarEscuela'));
 	Route::post('escuela/seleccionarEscuela', array('uses' => 'EscuelaController@seleccionarEscuela'));
 
+	/* Rutas para estadisticas*/
+
+
+
 	/*Rutas para Grupo*/
 	Route::get('grupo/agregar', function(){
 		return View::make('admin.grupo.agregar');
