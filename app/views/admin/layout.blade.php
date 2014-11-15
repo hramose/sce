@@ -182,32 +182,7 @@
       </div>
 
 
-     <!-- Estadísticas -->
-      <ul class="nav nav-sidebar">
-        <li class="header">
-         <h5>
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseEst">
-                Estadísticas
-              </a>
-          </h5>
-        </li>
-      </ul>
-      <div id="collapseEst" class="panel-collapse collapse">
-        <ul class="nav nav-sidebar">
-          <li id="liEstadisticasCiclo">
-            <a href="{{ URL::to('admin/estadisticas/ciclo') }}">
-              <span class="glyphicon glyphicon-chevron-right"></span> Ciclo
-            </a>
-          </li>
-          <li id="liEstadisticasBimestre">
-              <a href="{{ URL::to('admin/estadisticas/bimestre') }}"> 
-              <span class="glyphicon glyphicon-chevron-right"></span> Bimestre
-            </a>
-          </li>
-          <li class="divisor"></li>
-        </ul>
-      </div>
- 
+
 
       <!-- Grupo -->
       <ul class="nav nav-sidebar">

@@ -87,24 +87,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('escuela/eliminarEscuela', array('uses' => 'EscuelaController@eliminarEscuela'));
 	Route::post('escuela/seleccionarEscuela', array('uses' => 'EscuelaController@seleccionarEscuela'));
 
-	/*Rutas para Estadisticas*/
-    Route::get('estadisticas/ciclo', function(){
-		return View::make('admin.estadisticas.ciclo');
-	});
-	Route::get('estadisticas/bimestre', function(){
-		return View::make('admin.estadisticas.bimestre');
-	});
-	Route::get('estadisticas/getCiclos', array('uses' => 'EstadisticasController@getCiclos'));
-	Route::post('estadisticas/getGrados', array('uses' => 'EstadisticasController@getGrados'));
-    Route::post('estadisticas/estadisticasCiclo', array('uses' => 'EstadisticasController@estadisticasCiclo'));
-	Route::post('estadisticas/estadisticasBimestreAsignatura', array('uses' => 'EstadisticasController@estadisticasBimestreAsignatura'));
-	Route::post('estadisticas/getRangosCalificaciones', array('uses' => 'EstadisticasController@getRangosCalificaciones'));
-	Route::post('estadisticas/getTotalAlumnos', array('uses' => 'EstadisticasController@getTotalAlumnos'));
-	Route::post('estadisticas/getAprobReprobGrupo', array('uses' => 'EstadisticasController@getAprobReprobGrupo'));
-	Route::post('estadisticas/getAprobReprobBimestre', array('uses' => 'EstadisticasController@getAprobReprobBimestre'));
-	Route::post('estadisticas/estadisticasBimestre', array('uses' => 'EstadisticasController@estadisticasBimestre'));
-	Route::post('estadisticas/getRangosCalifBimestre', array('uses' => 'EstadisticasController@getRangosCalifBimestre'));
-	
 
 
 	/*Rutas para Grupo*/
