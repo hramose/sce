@@ -199,15 +199,15 @@
             </a>
           </li>
           <li id="liEstadisticasBimestre">
-              <a href="{{ URL::to('admin/estadisticas/bimestre') }}"> 
+              <a href="{{ URL::to('admin/estadisticas/bimestre') }}">
               <span class="glyphicon glyphicon-chevron-right"></span> Bimestre
             </a>
           </li>
           <li class="divisor"></li>
         </ul>
       </div>
- 
- 
+
+
       <!-- Grupo -->
       <ul class="nav nav-sidebar">
         <li class="header">
@@ -273,6 +273,27 @@
             </a>
         </li>
         <li class="divisor"></li>
+        </ul>
+      </div>
+
+      <!-- Profesores Asignar -->
+      <ul class="nav nav-sidebar">
+        <li class="header">
+          <h5>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseDocentes">
+              Docentes
+            </a>
+          </h5>
+        </li>
+      </ul>
+      <div id="collapseDocentes" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
+          <li id="liAsignarProfesor">
+            <a href="{{ URL::to('admin/docente/asignarProfesor') }}">
+              <span class="glyphicon glyphicon-plus"></span> Asignar Profesor
+            </a>
+          </li>
+          <li class="divisor"></li>
         </ul>
       </div>
 

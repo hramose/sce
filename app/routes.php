@@ -77,6 +77,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::get('ciclo/getGrupos',array('uses' => 'GrupoController@getGrupos'));
 	Route::get('ciclo/getCiclos',array('uses' => 'CicloController@getCiclos'));
 
+	/*Para Docentes*/
+	Route::get('docente/asignarProfesor', function(){
+		return View::make('admin.docente.asignarProfesor');
+	});
+
 	/* Rutas para escuelas */
 	Route::get('escuela/getEscuelas', array('uses' => 'EscuelaController@getEscuelas'));
 	Route::get('escuela/editar', function(){
@@ -104,7 +109,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('estadisticas/getAprobReprobBimestre', array('uses' => 'EstadisticasController@getAprobReprobBimestre'));
 	Route::post('estadisticas/estadisticasBimestre', array('uses' => 'EstadisticasController@estadisticasBimestre'));
 	Route::post('estadisticas/getRangosCalifBimestre', array('uses' => 'EstadisticasController@getRangosCalifBimestre'));
-	
+
 	/*Rutas para Grupo*/
 	Route::get('grupo/agregar', function(){
 		return View::make('admin.grupo.agregar');
