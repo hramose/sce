@@ -276,6 +276,32 @@
         </ul>
       </div>
 
+            <!-- Orientador -->
+      <ul class="nav nav-sidebar">
+        <li class="header">
+         <h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOrie">
+                Orientador
+              </a>
+          </h5>
+        </li>
+      </ul>
+      <div id="collapseOrie" class="panel-collapse collapse">
+        <ul class="nav nav-sidebar">
+        <li id="liAsignarOrientador">
+          <a href="{{ URL::to('admin/orientador/asignar') }}">
+              <span class="glyphicon glyphicon-plus"></span> Asignar
+            </a>
+        </li>
+        <li id="liEditarOrientador">
+          <a href="{{ URL::to('admin/orientador/editar') }}">
+              <span class="glyphicon glyphicon-edit"></span> Editar
+            </a>
+        </li>
+        <li class="divisor"></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </div>

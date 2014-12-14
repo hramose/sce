@@ -143,4 +143,18 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
 	Route::get('profesor/getProfesores', array('uses' => 'ProfesorController@getProfesores'));
 
+	/*Rutas para Orietnador*/
+		Route::get('orientador/asignar', function () {
+		return View::make('admin.orientador.asignar');
+	});
+		Route::get('orientador/getGrupos',array('uses' => 'OrientadorController@getGrupos'));
+		Route::get('orientador/buscarProfesor',array('uses' => 'OrientadorController@buscarProfesor'));
+		Route::get('orientador/getCiclos',array('uses' => 'OrientadorController@getCiclos'));
+		Route::post('orientador/asignar',array('uses' => 'OrientadorController@asignar'));
+	//////////////editar orientador	
+		Route::get('orientador/editar', function () {
+		return View::make('admin.orientador.editar');
+	});	
+
+
 });
