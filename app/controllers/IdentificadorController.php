@@ -18,7 +18,8 @@ class IdentificadorController extends \BaseController {
           'ideId',
           'aluApep',
           'aluApem',
-          'aluNombre'
+          'aluNombre',
+          'cicId'
       ))
       ->toArray();
     return $identificadores;

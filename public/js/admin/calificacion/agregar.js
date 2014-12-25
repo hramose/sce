@@ -13,49 +13,84 @@ var sltCiclo = $('#sltCiclo'),
   sltGrado = $('#sltGrado'),
   sltGrupo = $('#sltGrupo'),
   btnSeleccionarAlumno = $('#btnSeleccionarAlumno');
-
+var idCiclos="";
 
 function agregarCalificacion(){
   if ( !validarCalificacion() )
     return false;
-
-  var datos = $.ajax({
-    url: 'agregarCalificacion',
+  //  alert(sltAsignatura.val()+" "+sltProfesor.val()+" "+idCiclos);
+  var idDocente="";   //para optener id para relacionar tabla calificacion y docente
+  var datosD = $.ajax({
+    url: '../docente/getIdDocente',
     data: {
-      calificacion: txtCalificacion.val(),
-      bimestre: sltBimestre.val(),
-      identificador: sltIdentificador.val(),
       asignatura: sltAsignatura.val(),
-      profesor: sltProfesor.val()
+      profesor: sltProfesor.val(),
+      ciclosId: idCiclos
     },
-    type: 'post',
+    type: 'get',
     dataType: 'json',
     async: false
   }).error(function(e){
     alert('Ocurrio un error, intente de nuevo');
   }).responseText;
 
-  var res;
+  var resD;
   try{
-    res = JSON.parse(datos);
+    resD = JSON.parse(datosD);
   }catch(e){
     messagePoster.html('Error JSON' + e);
     boxPoster.show().delay(2000).fadeOut();
   }
 
-  if ( res.status === 'OK') {
-    icon = '<span class="glyphicon glyphicon-ok"></span> ';
-    sltIdentificador.val("");
-    sltAsignatura.val("");
-    sltBimestre.val("");
-    txtCalificacion.val("");
-    sltProfesor.val("");
-  }else
-    icon = '<span class="glyphicon glyphicon-remove"></span> ';
+  if ( resD.length > 0 ){
+    $.each(resD, function(k,v){
+      idDocente = v.docId;
+      //alert(idDocente);
+    });
+  //  alert(txtCalificacion.val()+" "+sltBimestre.val()+" "+sltIdentificador.val()+" "+idDocente);
+    var datos = $.ajax({
+      url: 'agregarCalificacion',
+      data: {
+        calificacion: txtCalificacion.val(),
+        bimestre: sltBimestre.val(),
+        identificador: sltIdentificador.val(),
+        docente: idDocente
+      },
+      type: 'post',
+      dataType: 'json',
+      async: false
+    }).error(function(e){
+      alert('Ocurrio un error, intente de nuevo');
+    }).responseText;
 
-  messagePoster.html(icon+res.message);
-  boxPoster.show().delay(3000).fadeOut();
+    var res;
+    try{
+      res = JSON.parse(datos);
+    }catch(e){
+      messagePoster.html('Error JSON' + e);
+      boxPoster.show().delay(2000).fadeOut();
+    }
+
+    if ( res.status === 'OK') {
+      icon = '<span class="glyphicon glyphicon-ok"></span> ';
+      sltIdentificador.val("");
+      //sltAsignatura.val("");
+      sltBimestre.val("");
+      txtCalificacion.val("");
+      sltProfesor.val("");
+    }else{
+      icon = '<span class="glyphicon glyphicon-remove"></span> ';
+    }
+
+    messagePoster.html(icon+res.message);
+    boxPoster.show().delay(3000).fadeOut();
+  }else{
+    messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
+    'Aun no existen profesores asociados a ese ciclo escolar');
+    boxPoster.show().delay(2000).fadeOut();
+  }
 }
+
   /*********************************************************************/
 function getAlumno(){
   if (!validarSeleccion())
@@ -86,17 +121,17 @@ function getAlumno(){
   if ( res.length > 0 ){
     sltIdentificador.html('');
     $.each(res, function(k,v){
+      idCiclos = v.cicId;             //para seleccionar profesor en tabla cocentes
       sltIdentificador.append(
         '<option value="'+v.ideId+'">'+v.aluApep+' '+v.aluApem+' '+v.aluNombre+'</option>'
       );
     });
-    getAsignaturas();
     getProfesores();
-    var sltGrupo2=document.getElementById('sltGrupo');  /*acceder a texto del select*/
-    var grupoString = sltGrupo2.options[sltGrupo2.selectedIndex].text;
-    datoGrupo.val('Grado: '+sltGrado.val()+'  Grupo: '+grupoString+'  Ciclo: '+sltCiclo.val());
-    formSelectAlumno.addClass('hidden');
-    pnlAgregarCal.removeClass('hidden');
+    //var sltGrupo2=document.getElementById('sltGrupo');  /*acceder a texto del select*/
+    //var grupoString = sltGrupo2.options[sltGrupo2.selectedIndex].text;
+    //datoGrupo.val('Grado: '+sltGrado.val()+'  Grupo: '+grupoString+'  Ciclo: '+sltCiclo.val());
+    //formSelectAlumno.addClass('hidden');
+    //pnlAgregarCal.removeClass('hidden');
   }else{
     messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
       'No existen alumnos asociados con dichos parametros');
@@ -200,8 +235,15 @@ function getGrupos(){
 }
 /*********************************************************************/
 function getProfesores(){
+  var asignatura = sltAsignatura.val();
+  //alert(idCiclos+" "+asignatura);
+
   var datos = $.ajax({
-    url: '../profesor/getProfesores',
+    url: '../profesor/getProfesoresAsignatura',
+    data:{
+      cicloId:idCiclos,
+      asignaturaId:sltAsignatura.val()
+    },
     type: 'get',
     async:false
   }).error(function(e){
@@ -223,17 +265,22 @@ function getProfesores(){
         '<option value="'+v.profCurp+'">'+v.profNombre+'</option>'
       );
     });
+    var sltGrupo2=document.getElementById('sltGrupo');  /*acceder a texto del select*/
+    var grupoString = sltGrupo2.options[sltGrupo2.selectedIndex].text;
+    datoGrupo.val('Grado: '+sltGrado.val()+'  Grupo: '+grupoString+'  Ciclo: '+sltCiclo.val());
+    formSelectAlumno.addClass('hidden');
+    pnlAgregarCal.removeClass('hidden');            //muestra panel agregar calificacion
   }else{
     messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
-      'No existen profesores registrados');
-    boxPoster.show().delay(2000).fadeOut();
+      'No existen profesores registrados a esa asignatura, verifique');
+    boxPoster.show().delay(2500).fadeOut();
   }
 }
 
   /******************************************************************/
 function limpiarCalificacion(){
   sltIdentificador.html('');
-  sltAsignatura.html('');
+  sltAsignatura.val("");
   sltBimestre.val("");
   txtCalificacion.val("");
   sltProfesor.html('');
@@ -281,12 +328,17 @@ function validarSeleccion(){
   }
   if ( sltGrado.val() === "" || sltGrado.val()=== null ){
     alert('Seleccione un grado');
-    sltAsignatura.focus();
+    sltGrado.focus();
     return false;
   }
   if ( sltGrupo.val() === "" || sltGrupo.val()=== null ){
     alert('Seleccione un grupo');
-    sltBimestre.focus();
+    sltGrupo.focus();
+    return false;
+  }
+  if ( sltAsignatura.val() === "" || sltAsignatura.val()=== null ){
+    alert('Seleccione una asignatura');
+    sltAsignatura.focus();
     return false;
   }
   return true;
@@ -295,6 +347,7 @@ function validarSeleccion(){
 $(document).on('ready', function(){
   getCiclos();
   getGrupos();
+  getAsignaturas();
 });
 
 btnAgregar.on('click', agregarCalificacion);

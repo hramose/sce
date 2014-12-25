@@ -76,11 +76,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::get('ciclo/getGrados',array('uses' => 'GradoController@getGrados'));
 	Route::get('ciclo/getGrupos',array('uses' => 'GrupoController@getGrupos'));
 	Route::get('ciclo/getCiclos',array('uses' => 'CicloController@getCiclos'));
+	Route::get('ciclo/getIdCiclo',array('uses' => 'CicloController@getIdCiclo'));
 
 	/*Para Docentes*/
 	Route::get('docente/asignarProfesor', function(){
 		return View::make('admin.docente.asignarProfesor');
 	});
+	Route::post('docente/asignarProfAsig',array('uses' => 'DocenteController@asignarProfAsignatura'));
+	Route::get('docente/getIdDocente',array('uses' => 'DocenteController@getIdDocente'));
 
 	/* Rutas para escuelas */
 	Route::get('escuela/getEscuelas', array('uses' => 'EscuelaController@getEscuelas'));
@@ -147,5 +150,21 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('profesor/eliminarProfesor', array('uses' => 'ProfesorController@eliminarProfesor'));
 	Route::post('profesor/seleccionarProfesor', array('uses' => 'ProfesorController@seleccionarProfesor'));
 	Route::get('profesor/getProfesores', array('uses' => 'ProfesorController@getProfesores'));
+	Route::get('profesor/getProfesoresAsignatura', array('uses' => 'ProfesorController@getProfesoresAsignatura'));
+
+
+	/*Rutas para Orietnador*/
+		Route::get('orientador/asignar', function () {
+		return View::make('admin.orientador.asignar');
+	});
+		Route::get('orientador/getGrupos',array('uses' => 'OrientadorController@getGrupos'));
+		Route::get('orientador/buscarProfesor',array('uses' => 'OrientadorController@buscarProfesor'));
+		Route::get('orientador/getCiclos',array('uses' => 'OrientadorController@getCiclos'));
+		Route::post('orientador/asignar',array('uses' => 'OrientadorController@asignar'));
+	//////////////editar orientador
+		Route::get('orientador/editar', function () {
+		return View::make('admin.orientador.editar');
+	});
+
 
 });

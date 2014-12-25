@@ -8,36 +8,36 @@ class CalificacionController extends BaseController
 
     $data = Input::all();
 
-    $duplicado = CalificacionController::duplicado($data['bimestre'],$data['identificador'],$data['asignatura']);
-    if ( !$duplicado )
-        return Response::json(array(
-        'status' => 'ERROR',
-        'message' => 'Ya existe una calificación asignada al alumno con ese bimestre y asignatura'
-      ));
+ /*$duplicado = CalificacionController::duplicado($data['bimestre'],$data['identificador'],$data['docente']);
+  if ( !$duplicado )
+  return Response::json(array(
+    'status' => 'ERROR',
+    'message' => 'Ya existe una calificación asignada al alumno con ese bimestre y asignatura'
+  ));*/
 
-    $insert = Calificacion::insert(array(
-      'calCalificacion' => trim($data['calificacion']),
-      'calBimestre' => trim($data['bimestre']),
-      'calIdentificador' => trim($data['identificador']),
-      'calAsignatura' => trim($data['asignatura']),
-      'calProfesor' => trim($data['profesor'])
-      ));
+  $insert = Calificacion::insert(array(
+    'calCalificacion' => trim($data['calificacion']),
+    'calBimestre' => trim($data['bimestre']),
+    'calIdentificador' => trim($data['identificador']),
+    'calDocente'=> trim($data['docente'])
+    //'calAsignatura' => trim($data['asignatura']),
+    //'calProfesor' => trim($data['profesor'])
+  ));
+  /* Mensajes en caso de que la consulta halla tenido exito o no*/
+  if ( $insert )
+  $response = array(
+    'status' => 'OK',
+    'message' => 'Calificación se agrego exitosamente'
+  );
+  else
+  $response = array(
+    'status' => 'ERROR',
+    'message' => 'Error al agregar la calificación, intente mas tarde'
+  );
+  return Response::json($response);
+}
 
-    /* Mensajes en caso de que la consulta halla tenido exito o no*/
 
-    if ( $insert )
-      $response = array(
-        'status' => 'OK',
-        'message' => 'Calificación se agrego exitosamente'
-        );
-    else
-      $response = array(
-        'status' => 'ERROR',
-        'message' => 'Error al agregar la calificación, intente mas tarde'
-        );
-
-    return Response::json($response);
-  }
     /*****************************************************************/
   public function buscarCalificacion(){
     if ( !Usuario::isAdmin() )
@@ -50,7 +50,7 @@ class CalificacionController extends BaseController
       leftJoin('alumnos', 'identificador.ideAlumno', '=', 'alumnos.aluCurp')
       ->leftJoin('ciclos', 'identificador.ideCiclo', '=', 'ciclos.cicId')
       ->leftJoin('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')
-      ->leftJoin('asignaturas', 'calificaciones.calAsignatura', '=', 'asignaturas.asigId')
+    //  ->leftJoin('asignaturas', 'calificaciones.calAsignatura', '=', 'asignaturas.asigId')
       ->where('aluEstado', true)
       ->where('aluApem', 'like', '%'. $buscar .'%')
       ->orWhere('aluNombre', 'like', '%'. $buscar .'%')
@@ -63,7 +63,7 @@ class CalificacionController extends BaseController
         'aluApep',
         'aluApem',
         'aluNombre',
-        'asigNombre',
+        //'asigNombre',
         'calBimestre',
         'calId',
         'cicCiclo',
@@ -87,11 +87,11 @@ class CalificacionController extends BaseController
   }
 
     /*****************************************************************/
-  public static final function duplicado( $bimestre, $identificador, $asignatura){
+  public static final function duplicado( $bimestre, $identificador, $docente){
 
     $duplicado = Calificacion::where('calBimestre', $bimestre)
       ->where('calIdentificador', $identificador)
-      ->where('calAsignatura', $asignatura)
+      ->where('calDocente', $docente)
       ->get()
       ->toArray();
 
@@ -128,6 +128,8 @@ public function editarCalificacion(){
 
   return Response::json( $response );
 }
+
+
   /**********************************************************************/
   public function getEditarCal() {
     if ( !Usuario::isAdmin() )

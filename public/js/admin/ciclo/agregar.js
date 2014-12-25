@@ -11,7 +11,7 @@ function agregarCiclo(){
 	var datos = $.ajax({
         url:'agregarCiclo',
         data: {
-        	ciclo: slctCiclo.val(),
+        	        ciclo: slctCiclo.val(),
 					grupo: slctGrupo.val(),
 					grado: slctGrado.val()
         },

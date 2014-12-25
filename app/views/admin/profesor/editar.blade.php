@@ -142,4 +142,7 @@ Editar Profesor | Sistema de Control Escolar
 @section('js')
 {{ HTML::script('js/admin/profesor/editar.js') }}
 {{ HTML::script('js/admin/profesor/ValidarDatos.js') }}	<!-- para acceder a funciones desde editar.js -->
+	<script>
+	$('#collapseProf').addClass('in');
+	</script>
 @stop

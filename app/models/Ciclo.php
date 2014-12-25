@@ -9,7 +9,6 @@ class Ciclo extends Eloquent
 		'cicId',
 		'cicCiclo',
 		'cicGrado',
-		'cicGrupo',
-		'cicOrientador'
+		'cicGrupo'
 	);
 }

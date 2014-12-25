@@ -48,7 +48,13 @@ Agregar calificación | Sistema de Control Escolar
               </select>
             </div>
           </div>
-
+          <div class="form-group">
+            <label for="sltAsignatura" class="col-md-3 control-label">Asignatura</label>
+            <div class="col-md-9">
+              <select id="sltAsignatura" class="form-control input-sm">
+              </select>
+            </div>
+          </div>
           <div class="form-group">
             <div class="col-md-9 col-md-offset-3">
               <button class="btn btn-info btn-sm" id="btnSeleccionarAlumno">Seleccionar</button>
@@ -80,13 +86,6 @@ Agregar calificación | Sistema de Control Escolar
               <label for="sltIdentificador" class="col-md-3 control-label">Alumno</label>
               <div class="col-md-9">
                 <select id="sltIdentificador" class="form-control input-sm">
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="sltAsignatura" class="col-md-3 control-label">Asignatura</label>
-              <div class="col-md-9">
-                <select id="sltAsignatura" class="form-control input-sm">
                 </select>
               </div>
             </div>

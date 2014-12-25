@@ -10,7 +10,6 @@ class Calificacion extends Eloquent{
     'calBimestre',
     'calAutorizado',
     'calIdentificador',
-    'calAsignatura',
-    'calProfesor'
+    'calDocente'
     );
 }

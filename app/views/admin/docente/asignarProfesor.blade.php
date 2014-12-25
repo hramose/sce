@@ -17,7 +17,7 @@ Asignar Profesor | Sistema de Control Escolar
     <div class="well">
       <div class="form-horizontal">
         <fieldset>
-          <legend>Grupo</legend>
+          <legend>Seleccionar grupo</legend>
 
           <div class="form-group">
             <label for="sltCiclo" class="col-md-3 control-label">Ciclo</label>
@@ -56,7 +56,7 @@ Asignar Profesor | Sistema de Control Escolar
 
           <div class="form-group">
             <div class="col-md-9 col-md-offset-3">
-              <button class="btn btn-info btn-sm" id="btnSeleccionarAlumno">Seleccionar</button>
+              <button class="btn btn-info btn-sm" id="btnSeleccionarCiclo">Seleccionar</button>
             </div>
           </div>
 
@@ -68,8 +68,8 @@ Asignar Profesor | Sistema de Control Escolar
 </div>
 
 
-<!-- Formulario Profesor ASignatura-->
-<div class="row" id="pnlProfesorAsignatura" >
+<!-- Formulario Profesor ASignatura---------------------------------- -->
+<div class="row hidden" id="pnlProfesorAsignatura">
   <div class="col-md-10">
     <div class="well">
       <div class="form-horizontal">
@@ -77,6 +77,10 @@ Asignar Profesor | Sistema de Control Escolar
           <legend>Profesor-Asignatura</legend>
           <div class="form-group" id='formSelect' >
 
+          </div>
+          <div class="col-md-3 col-md-offset-3">
+            <button class="btn btn-success btn-sm" id="btnAgregar">Aceptar</button>
+            <button class="btn btn-danger btn-sm" id="btnCancelar">Cancelar</button>
           </div>
         </fieldset>
 

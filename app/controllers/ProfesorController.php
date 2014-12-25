@@ -136,6 +136,27 @@ public function agregarProfesor(){
 		return Response::json( $response );
 	}
 	/*******************************************************************/
+	public static function getProfesoresAsignatura(){
+		if ( !Usuario::isAdmin() )
+		return Redirect::to('admin/logout');
+
+		$data = Input::all();
+
+		$profesores = Profesor::
+			leftJoin('docentes', 'profesores.profCurp', '=', 'docentes.docProfesor')
+			->where('docCiclo', $data['cicloId'])
+			->where('docAsignatura', $data['asignaturaId'])
+			->where('profEstado', true)
+			->orderBy('profNombre')
+			->get(array(			/*datos necesarios por ahora para mostrar en un select*/
+				'profCurp',
+				'profNombre'
+		))
+		->toArray();
+		return $profesores;
+	}
+
+	/*******************************************************************/
 	public static function getProfesores(){
 		if ( !Usuario::isAdmin() )
 			return Redirect::to('admin/logout');
@@ -145,7 +166,7 @@ public function agregarProfesor(){
 			->get(array(			/*datos necesarios por ahora para mostrar en un select*/
 				'profCurp',
 				'profNombre',
-				'profPerfil',
+				'profPerfil'
 			))
 			->toArray();
 		return $profesores;

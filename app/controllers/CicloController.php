@@ -57,4 +57,20 @@ class CicloController extends BaseController{
 		return $ciclos;
 	}
 
+	/*******************************************/
+	public static function getIdCiclo(){
+		if( !Usuario::isAdmin() )
+		return Redirect::to('admin/logout');
+
+		/* Datos recibidos por ajax */
+		$data = Input::all();
+
+		$idCiclo = Ciclo::where('cicCiclo', $data['ciclo'])
+		->where('cicGrado', $data['grado'])
+		->where('cicGrupo', $data['grupo'])
+		->get()
+		->toArray();
+		return $idCiclo;
+	}
+
 }
