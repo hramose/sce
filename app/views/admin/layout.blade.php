@@ -193,14 +193,14 @@
       </ul>
       <div id="collapseEst" class="panel-collapse collapse">
         <ul class="nav nav-sidebar">
-          <li id="liEstadisticasCiclo">
-            <a href="{{ URL::to('admin/estadisticas/ciclo') }}">
-              <span class="glyphicon glyphicon-chevron-right"></span> Ciclo
-            </a>
-          </li>
           <li id="liEstadisticasBimestre">
               <a href="{{ URL::to('admin/estadisticas/bimestre') }}">
               <span class="glyphicon glyphicon-chevron-right"></span> Bimestre
+            </a>
+          </li>
+          <li id="liEstadisticasCiclo">
+            <a href="{{ URL::to('admin/estadisticas/ciclo') }}">
+              <span class="glyphicon glyphicon-chevron-right"></span> Ciclo
             </a>
           </li>
           <li class="divisor"></li>

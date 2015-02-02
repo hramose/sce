@@ -13,7 +13,8 @@ public function estadisticasCiclo(){
 $busqueda = Ciclo::join('grupos', 'ciclos.cicGrupo', '=', 'grupos.grupId')	
 				 ->join('identificador', 'ciclos.cicId', '=', 'identificador.ideCiclo')
 				 ->join('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')	
-				 ->join('asignaturas',  'calificaciones.calAsignatura', '=', 'asignaturas.asigId')	
+				 ->join('docentes', 'calificaciones.calDocente', '=', 'docentes.docId')	
+				 ->join('asignaturas', 'docentes.docAsignatura', '=', 'asignaturas.asigId')		 
 				 ->select(DB::raw('asignaturas.asigClave, asignaturas.asigArea,asigId, asignaturas.asigNombre,
 				   round(avg(if(calificaciones.calBimestre =1,calificaciones.calCalificacion,null)),1) as proB1,
 				   round(avg(if(calificaciones.calBimestre =2,calificaciones.calCalificacion,null)),1) as proB2,
@@ -24,7 +25,7 @@ $busqueda = Ciclo::join('grupos', 'ciclos.cicGrupo', '=', 'grupos.grupId')
 				 ->where('ciclos.cicId', $gradoSel)
 				 ->orderBy('ciclos.cicGrado')
    				 ->orderBy('grupos.grupNombre')
-				 ->groupBy('calificaciones.calAsignatura')
+				 ->groupBy('calificaciones.calDocente')
 				 ->get()
                  ->toArray();
 
@@ -38,7 +39,7 @@ $busqueda = Ciclo::join('grupos', 'ciclos.cicGrupo', '=', 'grupos.grupId')
 		else
 			$response = array(
 				'status' => 'ERROR',
-				'message' => 'No se encontraron resultados'
+				'message' => 'No se encontraron resultados en Estadisticas ciclo'
 				);
 			return Response::json($response);
 	}
@@ -53,21 +54,22 @@ public function getAprobReprobGrupo(){
 
 
 $busqueda = Identificador::join('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')	
-				 ->join('asignaturas',  'calificaciones.calAsignatura', '=', 'asignaturas.asigId')	
+				 ->join('docentes', 'calificaciones.calDocente', '=', 'docentes.docId')	
+				 ->join('asignaturas', 'docentes.docAsignatura', '=', 'asignaturas.asigId')	
 				 ->select(DB::raw('asignaturas.asigClave, asignaturas.asigArea, asignaturas.asigNombre,
-				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =1,calificaciones.calAsignatura,null)) as apr1, 
-				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =1,calificaciones.calAsignatura,null)) as repr1,
-				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =2,calificaciones.calAsignatura,null)) as apr2, 
-				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =2,calificaciones.calAsignatura,null)) as repr2,
-				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =3,calificaciones.calAsignatura,null)) as apr3, 
-				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =3,calificaciones.calAsignatura,null)) as repr3,
-				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =4,calificaciones.calAsignatura,null)) as apr4, 
-				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =4,calificaciones.calAsignatura,null)) as repr4,
-				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =5,calificaciones.calAsignatura,null)) as apr5, 
-				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =5,calificaciones.calAsignatura,null)) as repr5'))
+				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =1,calificaciones.calDocente,null)) as apr1, 
+				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =1,calificaciones.calDocente,null)) as repr1,
+				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =2,calificaciones.calDocente,null)) as apr2, 
+				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =2,calificaciones.calDocente,null)) as repr2,
+				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =3,calificaciones.calDocente,null)) as apr3, 
+				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =3,calificaciones.calDocente,null)) as repr3,
+				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =4,calificaciones.calDocente,null)) as apr4, 
+				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =4,calificaciones.calDocente,null)) as repr4,
+				   count(if(calificaciones.calCalificacion >=6 && calificaciones.calBimestre =5,calificaciones.calDocente,null)) as apr5, 
+				   count(if(calificaciones.calCalificacion <6 && calificaciones.calBimestre =5,calificaciones.calDocente,null)) as repr5'))
 				 ->where('identificador.ideCiclo', $gradoSel)
 				 ->orderBy('asignaturas.asigNombre')
-				 ->groupBy('calificaciones.calAsignatura')
+				 ->groupBy('calificaciones.calDocente')
 				 ->get()
                  ->toArray();
 
@@ -98,7 +100,8 @@ public function getRangosCalificaciones(){
 		$gradoSel = trim($data['grado3']);
 	
 $rangos = Identificador::join('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')	
-					 ->join('asignaturas',  'calificaciones.calAsignatura', '=', 'asignaturas.asigId')	
+			         ->join('docentes', 'calificaciones.calDocente', '=', 'docentes.docId')	
+					 ->join('asignaturas', 'docentes.docAsignatura', '=', 'asignaturas.asigId')	
 					 ->select(DB::raw('asignaturas.asigNombre,
 					   count(if(calificaciones.calCalificacion >=9 && calificaciones.calCalificacion <=10 && calificaciones.calBimestre =1,identificador.ideAlumno,null)) as cal101, 
 					   count(if(calificaciones.calCalificacion >=8 && calificaciones.calCalificacion <9   && calificaciones.calBimestre =1,identificador.ideAlumno,null)) as cal91,
@@ -127,7 +130,7 @@ $rangos = Identificador::join('calificaciones', 'identificador.ideId', '=', 'cal
 					   count(if(calificaciones.calCalificacion >=5 && calificaciones.calCalificacion <6   && calificaciones.calBimestre =5,identificador.ideAlumno,null)) as cal65'))
 					 ->where('identificador.ideCiclo', $gradoSel)
 					 ->orderBy('asignaturas.asigNombre')
-					 ->groupBy('calificaciones.calAsignatura')
+					 ->groupBy('calificaciones.calDocente')
 					 ->get()
 	                 ->toArray();
 
@@ -226,9 +229,10 @@ public function estadisticasBimestreAsignatura(){
 		$asignaturaSel = trim($data['id']);
 		
 $busqueda = Identificador::leftJoin('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')	
-				 ->leftJoin('asignaturas', 'calificaciones.calAsignatura', '=', 'asignaturas.asigId')	
+				 ->leftJoin('docentes', 'calificaciones.calDocente', '=', 'docentes.docId')	
+				 ->leftJoin('asignaturas', 'docentes.docAsignatura', '=', 'asignaturas.asigId')	
+                 ->leftJoin('profesores',  'docentes.docProfesor', '=', 'profesores.profCurp')	
 				 ->leftJoin('alumnos',  'identificador.ideAlumno', '=', 'alumnos.aluCurp')	
-				 ->leftJoin('profesores',  'calificaciones.calProfesor', '=', 'profesores.profCurp')	
 				 ->select(DB::raw('alumnos.aluCurp,alumnos.aluApep,alumnos.aluApem, alumnos.aluNombre, 
 				 	calificaciones.calBimestre, profesores.profNombre,
 				 	round(avg(if(calificaciones.calBimestre =1,calificaciones.calCalificacion,null)),1) as proB1,
@@ -237,7 +241,7 @@ $busqueda = Identificador::leftJoin('calificaciones', 'identificador.ideId', '='
 				    round(avg(if(calificaciones.calBimestre =4,calificaciones.calCalificacion,null)),1) as proB4,
 				    round(avg(if(calificaciones.calBimestre =5,calificaciones.calCalificacion,null)),1) as proB5'))
 				 ->where('identificador.ideCiclo', $gradoSel)
-				 ->where('calificaciones.calAsignatura', $asignaturaSel)
+				 ->where('docentes.docAsignatura', $asignaturaSel)
 				 ->orderBy('alumnos.aluApep')
 				 ->groupBy('calificaciones.calIdentificador')
 				 ->get()
@@ -276,10 +280,11 @@ public function estadisticasBimestre(){
 		$bimestreSel = trim($data['bimestre']);
            
 $busqueda = Identificador::leftJoin('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')	
-				 ->leftJoin('asignaturas', 'calificaciones.calAsignatura', '=', 'asignaturas.asigId')	
-				 ->leftJoin('alumnos',  'identificador.ideAlumno', '=', 'alumnos.aluCurp')		
+				 ->leftJoin('docentes', 'calificaciones.calDocente', '=', 'docentes.docId')	
+				 ->leftJoin('asignaturas', 'docentes.docAsignatura', '=', 'asignaturas.asigId')	
+                 ->leftJoin('alumnos',  'identificador.ideAlumno', '=', 'alumnos.aluCurp')		
 				 ->select(DB::raw('alumnos.aluCurp,alumnos.aluApep,alumnos.aluApem, alumnos.aluNombre,asignaturas.asigArea, asignaturas.asigNombre,
-				   round(if(calificaciones.calAsignatura=(select calificaciones.calAsignatura),calificaciones.calCalificacion,null),1) as proB1'))
+				   round(if(calificaciones.calDocente=(select calificaciones.calDocente),calificaciones.calCalificacion,null),1) as proB1'))
 				 ->where('identificador.ideCiclo', $gradoSel)
 				 ->where('calificaciones.calBimestre', $bimestreSel)
 				 ->orderBy('alumnos.aluApep')
@@ -314,14 +319,15 @@ public function getAprobReprobBimestre(){
 		$bimestreSel = trim($data['bimestreAR']);
 
 $busqueda = Identificador::leftJoin('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')	
-				 ->leftJoin('asignaturas',  'calificaciones.calAsignatura', '=', 'asignaturas.asigId')	
-				 ->select(DB::raw('asignaturas.asigClave, asignaturas.asigArea, asignaturas.asigNombre,
-				   count(if(calificaciones.calCalificacion >=6 ,calificaciones.calAsignatura,null)) as apr1, 
-				   count(if(calificaciones.calCalificacion <6 ,calificaciones.calAsignatura,null)) as repr1'))
+				 ->leftJoin('docentes', 'calificaciones.calDocente', '=', 'docentes.docId')	
+				 ->leftJoin('asignaturas', 'docentes.docAsignatura', '=', 'asignaturas.asigId')	
+                 ->select(DB::raw('asignaturas.asigClave, asignaturas.asigArea, asignaturas.asigNombre,
+				   count(if(calificaciones.calCalificacion >=6 ,calificaciones.calDocente,null)) as apr1, 
+				   count(if(calificaciones.calCalificacion <6 ,calificaciones.calDocente,null)) as repr1'))
 				 ->where('identificador.ideCiclo', $gradoSel)
 				 ->where('calificaciones.calBimestre', $bimestreSel)
    				 ->orderBy('asignaturas.asigNombre')
-				 ->groupBy('calificaciones.calAsignatura')
+				 ->groupBy('calificaciones.calDocente')
 				 ->get()
                  ->toArray();
 
@@ -350,8 +356,9 @@ public function getRangosCalifBimestre(){
 		$bimestreSel = trim($data['bimestreRangos']);
 	
 $rangos = Identificador::leftJoin('calificaciones', 'identificador.ideId', '=', 'calificaciones.calIdentificador')	
-				 ->leftJoin('asignaturas', 'calificaciones.calAsignatura', '=', 'asignaturas.asigId')	
-				 ->select(DB::raw('asignaturas.asigArea, asignaturas.asigNombre,
+				 ->leftJoin('docentes', 'calificaciones.calDocente', '=', 'docentes.docId')	
+				 ->leftJoin('asignaturas', 'docentes.docAsignatura', '=', 'asignaturas.asigId')	
+                 ->select(DB::raw('asignaturas.asigArea, asignaturas.asigNombre,
 				   count(if(calificaciones.calCalificacion >=9 && calificaciones.calCalificacion <=10 ,identificador.ideAlumno,null)) as cal10, 
 				   count(if(calificaciones.calCalificacion >=8 && calificaciones.calCalificacion <9   ,identificador.ideAlumno,null)) as cal9,
 				   count(if(calificaciones.calCalificacion >=7 && calificaciones.calCalificacion <8   ,identificador.ideAlumno,null)) as cal8, 
@@ -360,7 +367,7 @@ $rangos = Identificador::leftJoin('calificaciones', 'identificador.ideId', '=', 
 				 ->where('identificador.ideCiclo', $gradoSel)
 				 ->where('calificaciones.calBimestre', $bimestreSel)
    				 ->orderBy('asignaturas.asigNombre')
-				 ->groupBy('calificaciones.calAsignatura')
+				 ->groupBy('calificaciones.calDocente')
 				 ->get()
                  ->toArray();
 

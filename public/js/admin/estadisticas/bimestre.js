@@ -111,7 +111,7 @@ var datosAR = $.ajax({
      var bimestre = opBim.text; 
 
 
- legendTable.html(" ["+ slctCiclo.val()+"] "+ " GRUPO: "+ grupo);
+ legendTable.html("CICLO: "+ slctCiclo.val()+ " GRUPO: "+ grupo);
  labelBime.html("<h4>"+"CALIFICACIONES BIMESTRE: "+bimestre+"</h4>");
    
     tbodyEstadisticas.html('');
@@ -180,7 +180,7 @@ function getCiclos(){
                       type: 'get',
                       async:false
                      }).error(function(e){ 
-                      alert('Ocurrio un error, intente de nuevo');
+                      alert('Ocurrio un error (obtener Ciclos), intente de nuevo');
                      }).responseText;
 
   var res;
@@ -218,7 +218,7 @@ function getGrados(){
         dataType:'json',
         async:false
     }).error(function(e){
-        alert('Ocurrio un error, intente de nuevo');
+        alert('Ocurrio un error (obtener Grupos), intente de nuevo');
     }).responseText;
 
   var res;
@@ -240,7 +240,7 @@ function getGrados(){
        }
     else{
     messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
-      'No existen grados registrados');
+      'No existen grupos registrados');
     boxPoster.show().delay(2000).fadeOut();
   }
 }
@@ -248,17 +248,17 @@ function getGrados(){
 
 function validarSelectores(){
 if ( slctCiclo.val() === "" || slctCiclo.val() == null ){
-		alert('Seleccione un ciclo a obtener estadísticas');
+		alert('Seleccione un ciclo para obtener estadísticas');
 		slctCiclo.focus();
 		return false;
 	}
 if ( slctGrado.val() === "" || slctGrado.val() == null ){
-    alert('Seleccione un grado y grupo a obtener estadísticas');
+    alert('Seleccione un grado y grupo para obtener estadísticas');
     slctGrado.focus();
     return false;
   }
 if ( slctBimestre.val() === "" || slctBimestre.val() == null ){
-    alert('Seleccione bimestre a obtener estadísticas');
+    alert('Seleccione bimestre para obtener estadísticas');
     slctBimestre.focus();
     return false;
   }  

@@ -76,7 +76,6 @@ function estadisticasCiclo(){
     }).error(function(e){
         alert('Ocurrio un error, intente de nuevo');
     }).responseText;
-
   
   
   
@@ -112,7 +111,7 @@ function estadisticasCiclo(){
   indice = grupos.selectedIndex;
   opcion = grupos.options[indice];
   grupo = opcion.text; 
-  legendTable.html(" ["+ slctCiclo.val()+"] "+ " Grupo: "+ grupo);
+  legendTable.html("CICLO: " + slctCiclo.val() + "  GRUPO: "+ grupo);
  
  var promb1,promb2,promb3,promb4,promb5;
     tbodyEstadisticas.html('');
@@ -225,7 +224,7 @@ function getCiclos(){
                       type: 'get',
                       async:false
                      }).error(function(e){ 
-                      alert('Ocurrio un error, intente de nuevo');
+                      alert('Ocurrio un error (obtener ciclos), intente de nuevo');
                      }).responseText;
 
   var res;
@@ -262,7 +261,7 @@ function getGrados(){
         dataType:'json',
         async:false
     }).error(function(e){
-        alert('Ocurrio un error, intente de nuevo');
+        alert('Ocurrio un error (obtener grados), intente de nuevo');
     }).responseText;
 
   var res;
@@ -284,7 +283,7 @@ function getGrados(){
        }
     else{
     messagePoster.html('<span class="glyphicon glyphicon-remove"></span> ' +
-      'No existen grados registrados');
+      'No existen grupos registrados');
     boxPoster.show().delay(2000).fadeOut();
   }
 }
@@ -320,7 +319,7 @@ function estadisticasBimestreAsignatura(){
       var mat = res.data.materia,
       dat = res.data.busqueda;
   
-       legendTableMateria.html(" ["+ slctCiclo.val()+"] "+ " Grupo: "+ grupo);
+       legendTableMateria.html("CICLO: "+ slctCiclo.val()+ " GRUPO: "+ grupo);
        labelAsig.html("<h4>"+"Clave: "+mat.asigClave+" "+mat.asigArea+" "+mat.asigNombre+"</h4>"); 
      
         $.each(dat , function(k,o){
@@ -361,12 +360,12 @@ function estadisticasBimestreAsignatura(){
 
 function validarSelectores(){
 if ( slctCiclo.val() === "" || slctCiclo.val() == null ){
-		alert('Seleccione un ciclo a obtener estadísticas');
+		alert('Seleccione un ciclo para obtener estadísticas');
 		slctCiclo.focus();
 		return false;
 	}
 if ( slctGrado.val() === "" || slctGrado.val() == null ){
-    alert('Seleccione un grado y grupo a obtener estadísticas');
+    alert('Seleccione un grado y grupo para obtener estadísticas');
     slctGrado.focus();
     return false;
   }
