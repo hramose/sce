@@ -23,7 +23,7 @@ Estadísticas Ciclo | Sistema de Control Escolar
 					<div class="form-group">
 						<label for="slctCiclo" class="col-md-3 control-label">Ciclo
 						</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<select  id="slctCiclo" class="form-control input-sm">
 							</select>
 						</div>
@@ -31,7 +31,7 @@ Estadísticas Ciclo | Sistema de Control Escolar
 					<div class="form-group">
 						<label for="slctGrado" class="col-md-3 control-label">Grupo
 						</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<select  id="slctGrado" class="form-control input-sm">
 							</select>
 						</div>	

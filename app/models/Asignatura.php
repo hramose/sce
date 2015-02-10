@@ -10,6 +10,7 @@ class Asignatura extends Eloquent
 		'asigId',
 		'asigClave',
 		'asigNombre',
+		'asigIdNom',
 		'asigArea',
 		'asigEstado'
 		);

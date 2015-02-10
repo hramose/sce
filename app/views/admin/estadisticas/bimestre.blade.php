@@ -24,7 +24,7 @@ Estadísticas Bimestrales | Sistema de Control Escolar
 					<div class="form-group">
 						<label for="slctCiclo" class="col-md-3 control-label">Ciclo
 						</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<select  id="slctCiclo" class="form-control input-sm">
 							</select>
 						</div>
@@ -32,14 +32,14 @@ Estadísticas Bimestrales | Sistema de Control Escolar
 					<div class="form-group">
 						<label for="slctGrado" class="col-md-3 control-label">Grupo
 						</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<select  id="slctGrado" class="form-control input-sm">
 							</select>
 						</div>	
 					</div>
 					<div class="form-group">
 			            <label for="slctBimestre" class="col-md-3 control-label">Bimestre</label>
-			            <div class="col-md-8">
+			            <div class="col-md-6">
 			                <select id="slctBimestre" class="form-control input-sm">
 				                  <option value="1">I</option>
 				                  <option value="2">II</option>
@@ -71,15 +71,18 @@ Estadísticas Bimestrales | Sistema de Control Escolar
 				 	<div class="col-md-12">
 						<div  class= "well" class="form-horizontal">
 							<div class="form-group">
-								<label id="labelBime"></label>
-						 		<div class="table-responsive" id="tblEstadisticas">
+								<legend id="labelBime" align="center"></legend>
+								<div class="table-responsive" id="tblEstadisticas">
 									<table class="table table-striped table-hover">
 										<thead>
 											<tr>
-												<th>CURP Alumno</th>
-												<th>Nombre Alumno</th>
-												<th>Asignatura</th>
-												<th class="center">Calificacion Bimestre</th>
+												<th id="th1"></th><th id="th2"></th>
+												<th id="th3"></th><th id="th4"></th>
+												<th id="th5"></th><th id="th6"></th>
+												<th id="th7"></th><th id="th8"></th>
+												<th id="th9"></th><th id="th10"></th>
+												<th id="th11"></th><th id="th12"></th>
+												<th id="thPromedio"></th>
 											</tr>
 										</thead>
 										<tbody id="tbodyEstadisticas"></tbody>
@@ -97,7 +100,7 @@ Estadísticas Bimestrales | Sistema de Control Escolar
 							<div class= "well">
 								<div class="form-horizontal">
 									<div class="form-group">
-				           			 	<legend><h4>Número de alumnos aprobados/reprobados: </h4></legend>
+				           			 	<legend align="center"><h4>Número de alumnos aprobados/reprobados: </h4></legend>
 										<div  id="tblEstadistGrupo">
 											<table class="table table-striped table-hover">
 												<thead>
@@ -119,7 +122,7 @@ Estadísticas Bimestrales | Sistema de Control Escolar
 						<div class="col-md-12">
 							<div class= "well">
 							<div class="form-group">
-								<legend><h4>Alumnos con calificación de: </h4></legend>
+								<legend align="center"><h4>Alumnos con calificación de: </h4></legend>
 								<div id="tblEstadistAlu">
 									<table class="table table-striped table-hover">
 										<thead>

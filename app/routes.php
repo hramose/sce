@@ -110,7 +110,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
 	Route::post('estadisticas/getTotalAlumnos', array('uses' => 'EstadisticasController@getTotalAlumnos'));
 	Route::post('estadisticas/getAprobReprobGrupo', array('uses' => 'EstadisticasController@getAprobReprobGrupo'));
 	Route::post('estadisticas/getAprobReprobBimestre', array('uses' => 'EstadisticasController@getAprobReprobBimestre'));
-	Route::post('estadisticas/estadisticasBimestre', array('uses' => 'EstadisticasController@estadisticasBimestre'));
+	Route::post('estadisticas/cadenaMateriasBimestre', array('uses' => 'EstadisticasController@cadenaMateriasBimestre'));
+	Route::post('estadisticas/materiasBimestre', array('uses' => 'EstadisticasController@materiasBimestre'));
+	Route::post('estadisticas/calificacionesBimestre', array('uses' => 'EstadisticasController@calificacionesBimestre'));
 	Route::post('estadisticas/getRangosCalifBimestre', array('uses' => 'EstadisticasController@getRangosCalifBimestre'));
 
 	/*Rutas para Grupo*/

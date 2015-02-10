@@ -26,9 +26,11 @@ class AsignaturaController extends BaseController
 		$insert = Asignatura::insert(array(
 			'asigClave' => trim($data['clave']),
 			'asigNombre' => trim($data['nombre']),
+			'asigIdNom' => trim($data['idNombre']),
 			'asigArea' => trim($data['area']),
 			'asigEstado' => true
 			));
+
 
 		/* Mensajes en caso de que la consulta halla tenido exito o no */
 
@@ -92,6 +94,7 @@ class AsignaturaController extends BaseController
 		->update(array(
 			'asigClave' => trim($data['clave']),
 			'asigNombre' => trim($data['nombre']),
+			'asigIdNom' => trim($data['idNombre']),
 			'asigArea' =>trim($data['area']),
 			'asigEstado' => trim($data['estado'])
 			));

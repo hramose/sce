@@ -12,11 +12,15 @@ function agregarAsignatura(){
 	if ( !validarAsignatura ) 
 		return false;
 
+	var validNombre = txtNombre.val();
+ 	var idNombreSinEI = validNombre.replace(/\s/g,''); //se utiliza en obtencion de estadísticas para obtener el nombre de materias sin espacio alguno
+        
 	var datos = $.ajax({
 		url: 'agregarAsignatura',
 		data: {
 			clave: txtClave.val(),
 			nombre: txtNombre.val(),
+			idNombre: idNombreSinEI,
 			area: sltArea.val()
 		},
 		type: 'post',
